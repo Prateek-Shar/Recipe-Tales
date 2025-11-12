@@ -33,8 +33,6 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     const [randomMealTwo , setRandomMealTwo] = useState<MealInfo[]>([])
     const [randomMealThree , setRandomMealThree] = useState<MealInfo[]>([])
 
-    const [copyDiv , setCopyDiv] = useState(false)
-
 
     const [recipeOne , setRecipeOne] = useState(false)
     const [skeletonOne , setSkeletonOne] = useState(true)
@@ -104,7 +102,6 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     }
 
     const handleCopy = (Meal_name : string) => {
-        setCopyDiv(true);
         const req_url = `http://localhost:3000/recipe/recipeName?Meal_name=${Meal_name}`
         navigator.clipboard.writeText(req_url)
     }   

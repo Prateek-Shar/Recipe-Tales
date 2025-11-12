@@ -7,16 +7,12 @@ import Catagory_Cards from "@/components/Catagory/catagoryCards";
 import RecipeCards from "@/components/recipeCards/cards";
 import email from "@/public/Images/email.png";
 import arrow from "@/public/Images/arrow.png"
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Check from "@/public/Images/check.png"
 
 
 
 export default function Home() {
-
-  const path = usePathname()
-  console.log(`Path name : ${path}`)
 
   const [renderMsgDiv , setRenderMsgDiv] = useState(false)
 
