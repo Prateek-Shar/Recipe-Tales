@@ -50,11 +50,24 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
         const data = await res.json()
         setRandomMeal(data.meals)
 
-    }
+        
 
-    const handleAPI2 = async() => {
 
-        const res = await fetch(`${Random_meal}` , {
+        const response2 = await fetch(`${Random_meal}` , {
+        method : "GET"
+        })
+
+        if(!response2.ok) {
+        console.log("Api response failed")
+        }
+    
+        const data2 = await response2.json()
+        setRandomMealTwo(data2.meals)
+
+        
+
+
+        const response3 = await fetch(`${Random_meal}` , {
         method : "GET"
         })
 
@@ -62,32 +75,14 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
         console.log("Api response failed")
         }
     
-        const data = await res.json()
-        setRandomMealTwo(data.meals)
-
-    }
-
-
-    const handleAPI3 = async() => {
-
-        const res = await fetch(`${Random_meal}` , {
-        method : "GET"
-        })
-
-        if(!res.ok) {
-        console.log("Api response failed")
-        }
-    
-        const data = await res.json()
-        setRandomMealThree(data.meals)
+        const data3 = await response3.json()
+        setRandomMealThree(data3.meals)
 
     }
 
 
     useEffect(() => {
         handleAPI()
-        handleAPI2()
-        handleAPI3()
     } , [])    
 
 
@@ -100,6 +95,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     const handleToRecipe = (Meal_name : string , id : string) => {
         router.push(`/recipe/recipeName?Meal_name=${Meal_name}&id=${id}`)
     }
+    
 
     const handleCopy = (Meal_name : string) => {
         const req_url = `http://localhost:3000/recipe/recipeName?Meal_name=${Meal_name}`
