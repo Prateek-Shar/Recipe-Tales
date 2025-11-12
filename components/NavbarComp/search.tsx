@@ -18,7 +18,7 @@ const SearchBar = () => {
     const recipeName = useRef<HTMLInputElement>(null)
     const searchBoxDiv =  useRef<HTMLInputElement>(null)
 
-    const api_db = process.env.NEXT_PUBLIC_API;
+    const api_db = process.env.NEXT_PUBLIC_SEARCH_API;
     
     const [searchPlaceholder , setSearchPlaceholder] = useState<string>("Search Recipes...")
 
@@ -79,10 +79,6 @@ const SearchBar = () => {
 
     }
 
-
-    const handleRecipe = (value : string) => {
-        console.log("Recipe name : " , value)
-    }
 
     const ResetSearch = () => {
         if (searchBoxDiv.current) {
