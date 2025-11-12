@@ -25,7 +25,7 @@ const Recipe = () => {
     const name = searchParams.get("Meal_name")
     const id = searchParams.get("id")
 
-    const api_db = process.env.NEXT_PUBLIC_API
+    const api_db = process.env.NEXT_PUBLIC_SEARCH_API
     const formatted_api = `${api_db}${name}`
 
     const [mealDetails, setMealDetails] = useState<Meal_Det[]>([])
