@@ -1,65 +1,135 @@
+"use client"
+
 import Image from "next/image";
+import Main_Heading from "@/components/BannerComp/heading";
+import Buttons from "@/components/BannerComp/buttons";
+import Catagory_Cards from "@/components/Catagory/catagoryCards";
+import RecipeCards from "@/components/recipeCards/cards";
+import email from "@/public/Images/email.png";
+import arrow from "@/public/Images/arrow.png"
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Check from "@/public/Images/check.png"
+
+
 
 export default function Home() {
+
+  const path = usePathname()
+  console.log(`Path name : ${path}`)
+
+  const [renderMsgDiv , setRenderMsgDiv] = useState(false)
+
+  const handleAlert = () => {
+    setRenderMsgDiv(true)
+
+    setTimeout(() => {
+      setRenderMsgDiv(false)
+    } , 2000)
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <>
+
+    <div className="w-full" style={{backgroundImage : `url("/Images/banner_img.png")` , height : "600px" , backgroundSize : "cover" , backgroundPosition: "center" , paddingTop: "1px" }}>
+
+      <Main_Heading />
+
+      <Buttons />
+
     </div>
+
+    <div className="w-full flex flex-col justify-center items-center">
+
+      <div className="w-[30%] flex items-center justify-center mt-10">
+          <h2 className="p-2 text-4xl font-Capra">Browse By Catagory</h2>
+      </div>
+
+      <div className="w-[60%] flex justify-center items-center mt-4">
+          <p className="p-2 text-[18px] font-Poppins">Explore our wide varity of recipes organized by meal type , cuisine and dietary preferences</p>
+      </div>
+
+      <div className="w-full flex justify-evenly items-center mt-10 mb-10">
+        <Catagory_Cards />
+      </div>
+
+    </div>
+
+    <div className="w-full flex flex-col">
+
+      <div className="w-full flex justify-between items-center mt-20">
+        <div className="w-[40%] ml-3">
+          <div className="w-full">
+            <p className="p-1 text-3xl font-Capra">Featured Recipes</p>
+          </div>
+
+          <div className="w-full">
+            <p className="p-1 font-Poppins">Our most popular and trending recipes</p>
+          </div>
+        </div>
+
+        {renderMsgDiv && (
+          <div className="w-[8%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
+              <div className="w-[10%] flex items-center">
+                  <Image src={Check} width={50} height={50} alt="Check Image"/>
+              </div>
+
+              <div className="w-full flex items-center ml-2">
+                  <p className="font-Poppins text-blue-400">Link Coppied</p>
+              </div>
+          </div>
+        )}
+
+        <div className="w-[40%] flex flex-row-reverse">
+          <div className="w-[15%] flex">
+            <p className="p-1 font-Poppins">View all</p>
+
+            <div className="w-[25%] p-1 flex justify-center">
+              <Image src={arrow} alt="view all" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full flex justify-evenly items-center mt-20 mb-10">
+        <RecipeCards setMsgDiv={handleAlert}/>
+      </div>
+
+    </div>
+
+    <div className="w-full bg-[#f2f1ff] flex flex-col mt-10">
+      <div className="w-full flex justify-center mt-10 mb-5">
+        <div className="w-[2%]">
+          <Image src={email} alt="email" />
+        </div>
+      </div>
+
+      <div className="w-full flex justify-center">
+        <p className="p-2 text-3xl font-Capra">Get Weekly Recipe Inspiration</p>
+      </div>
+
+      <div className="w-full flex justify-center">
+        <div className="w-[25%] flex justify-center">
+          <p className="font-Poppins p-1">Subscripe to our newsletter and recieve delicious recipes</p>
+        </div>
+      </div>
+
+      <div className="w-full flex justify-center mt-5 mb-10">
+        <div className="w-[30%] flex justify-between items-center">
+          <div className="w-[70%]">
+            <input type="text" className="w-full border-2 border-[#ebebf0] text-[#5820d7] p-3 rounded-2xl outline-0 bg-white font-Poppins text-[14px]" placeholder="Enter Email Address . . . . ."/>
+          </div>
+
+          <div className="w-[20%] bg-[#641bff] rounded-full flex justify-center">
+            <button type="button" className="text-white text-[15px] p-2 font-Poppins">Subscribe</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </>
+
   );
+
 }
