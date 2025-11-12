@@ -28,9 +28,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     const router = useRouter()
 
     const Random_meal = process.env.NEXT_PUBLIC_RANDOM_MEAL_API
-    console.log(`Meal query : ${Random_meal}`)
 
-    
     const [randomMeal , setRandomMeal] = useState<MealInfo[]>([])
     const [randomMealTwo , setRandomMealTwo] = useState<MealInfo[]>([])
     const [randomMealThree , setRandomMealThree] = useState<MealInfo[]>([])
@@ -100,7 +98,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
 
 
     const handleCopy = (Meal_name : string) => {
-        const req_url = `http://localhost:3000/recipe/recipeName?Meal_name=${Meal_name}`
+        const req_url = `https://recipe-tales/recipe/recipeName?Meal_name=${Meal_name}`
         navigator.clipboard.writeText(req_url)
     }   
 
