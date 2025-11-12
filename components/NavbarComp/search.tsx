@@ -19,6 +19,7 @@ const SearchBar = () => {
     const searchBoxDiv =  useRef<HTMLInputElement>(null)
 
     const api_db = process.env.NEXT_PUBLIC_SEARCH_API;
+    console.log("api db : " , api_db)
     
     const [searchPlaceholder , setSearchPlaceholder] = useState<string>("Search Recipes...")
 
