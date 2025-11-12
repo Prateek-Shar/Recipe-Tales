@@ -98,7 +98,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
 
 
     const handleCopy = (Meal_name : string) => {
-        const req_url = `https://recipe-tales/recipe/recipeName?Meal_name=${Meal_name}`
+        const req_url = `https://recipe-tales.vercel.app/recipe/recipeName?Meal_name=${Meal_name}`
         navigator.clipboard.writeText(req_url)
     }   
 
