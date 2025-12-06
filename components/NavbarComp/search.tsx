@@ -19,7 +19,6 @@ const SearchBar = () => {
     const searchBoxDiv =  useRef<HTMLInputElement>(null)
 
     const api_db = process.env.NEXT_PUBLIC_SEARCH_API;
-    console.log("api db : " , api_db)
     
     const [searchPlaceholder , setSearchPlaceholder] = useState<string>("Search Recipes...")
 
@@ -115,7 +114,7 @@ const SearchBar = () => {
 
 
             {SearchDiv && (
-            <div className="w-full bg-white border-2 border-[#f5f5f4] border-t-0 rounded-b-2xl absolute top-10 flex flex-col z-50">
+            <div className="w-full h-50 overflow-auto overflow-x-hidden bg-white border-2 border-[#f5f5f4] border-t-0 rounded-b-2xl absolute top-10 flex flex-col z-50 no-scrollbar">
                 {MealDet.map((md) => (
                     <div key={md.idMeal} className="p-2 hover:bg-gray-100 cursor-pointer border-2 border-t-0 border-l-0 border-r-0 border-[#f5f5f4] nth-last-[1]:hover:rounded-b-2xl ml-1 mr-1">
                         <p className="font-Poppins text-[13px]" ref={recipeName} onClick={ ()=>{ setSearchDiv(false); ResetSearch(); handleClickToRecipeDet(md.strMeal , md.idMeal)}} >{md.strMeal}</p>

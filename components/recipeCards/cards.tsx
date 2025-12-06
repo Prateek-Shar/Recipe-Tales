@@ -2,10 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import clock from "@/public/Images/clock.png"
-import cut from "@/public/Images/cutlery.png"
-import rating from "@/public/Images/star.png"
-import next from "@/public/Images/next.png";
+import next from "@/public/Images/next.png";    
 import share from "@/public/Images/share.png";
 import { useState , useEffect } from "react";
 import { Skeleton } from "antd"

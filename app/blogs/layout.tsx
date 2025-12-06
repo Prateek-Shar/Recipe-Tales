@@ -13,7 +13,7 @@ const Layout = ({children , cards , cardsTwo} : {children:React.ReactNode , card
                         {cards}
                     </div>
 
-                    <div className="w-[85%] mt-5 mb-40">
+                    <div className="w-[85%] mt-5 mb-35">
                         {cardsTwo}
                     </div>
                 </div>

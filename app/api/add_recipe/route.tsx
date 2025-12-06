@@ -2,7 +2,8 @@ import Recipe_Details from "@/Schema/recipeDet";
 import Connect from "@/db/connect";
 
 
-export async function POST(request: Request)  {
+export const POST = async(request: Request) => {
+
   try {
 
     await Connect()
@@ -14,17 +15,18 @@ export async function POST(request: Request)  {
       return;
     }
 
-    const { Recipe_name , Recipe_short_desc , Tags , Blog , Instructions , Prep_Time , Cook_Time , Servings , Ingredient } = body
+    const { Author_name , Recipe_name , Recipe_short_desc , Tags , Blog , Instructions , Prep_Time , Cook_Time , Servings , Ingredient } = body
 
-    console.log(body)
-
-    if(!Recipe_name || !Recipe_short_desc || !Tags || !Blog || !Instructions || !Prep_Time || !Cook_Time || !Servings || !Ingredient) {
+    
+    if(!Recipe_name || !Recipe_short_desc || !Tags || !Blog || !Instructions || !Prep_Time || !Cook_Time || !Servings || !Ingredient || !Author_name) {
       return new Response(JSON.stringify({message  : "Missing Fields"}) , {
         status : 401
       })
     }
     
-    await Recipe_Details.create({Recipe_name : Recipe_name , 
+
+    await Recipe_Details.create({ Author_name : Author_name,
+    Recipe_name : Recipe_name , 
     Recipe_short_desc :  Recipe_short_desc , 
     Tags : Tags , 
     Blog : Blog ,

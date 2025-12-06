@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 
 const Details = new mongoose.Schema({
+    Author_name : {type : String , required : true},
     Recipe_name : {type : String , required : true },
     Recipe_short_desc : {type : String , required : true}, 
     Tags : {type : String , required : true},

@@ -1,7 +1,7 @@
 const Layout  = ({children} : {children : React.ReactNode}) => {
 
     return (
-        <html lang="eng">
+        <html lang="en">
             <body>
 
             <div className="w-full flex flex-col">

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antd": "^5.27.6",
+    "baseline-browser-mapping": "^2.9.2",
     "mongodb": "^7.0.0",
     "mongoose": "^8.19.3",
     "next": "16.0.0",

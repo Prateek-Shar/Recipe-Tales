@@ -6,6 +6,9 @@ import Image from 'next/image'
 import ing from "@/public/Images/ingredients.png"
 import uten from "@/public/Images/utensils.png"
 import cook from "@/public/Images/cooking.png"
+import heart from "@/public/Images/heart.png"
+import heart_filled from "@/public/Images/heart_filled.png";
+
 
 
 interface Meal_Det {
@@ -19,14 +22,19 @@ interface Meal_Det {
 
 
 
+
 const Recipe = () => {
 
     const searchParams = useSearchParams()
     const name = searchParams.get("Meal_name")
     const id = searchParams.get("id")
 
+    const [filledHeart , setFilledHeart] = useState(false)
+    const [rawHeart , setRawHeart] = useState(true);
+    const [rating , setRating] = useState<number>(0)
+
     const api_db = process.env.NEXT_PUBLIC_SEARCH_API
-    const formatted_api = `${api_db}${name}`
+    const formatted_api = `${api_db}${name}`    
 
     const [mealDetails, setMealDetails] = useState<Meal_Det[]>([])
 
@@ -42,8 +50,54 @@ const Recipe = () => {
     }
 
     useEffect(() => {
-        handleAPI()
+        handleAPI();
     } , [id])
+
+
+    const handleLike = async(value : string | null) => {
+        
+        const res = await fetch(`api/add_rating` , {
+            method : "POST",
+            headers : {
+                "Content-type" : "application/json" 
+            }, 
+            body : JSON.stringify({"Recipe_name" : value})
+        })
+
+        if(!res.ok) {
+            console.log("Response failed");
+        }
+
+        const data = res.json()
+    }
+
+
+    const get_rating = async() => {
+        
+        const res = await fetch(`api/get_rating?Recipe_name=${name}` , {
+            method : "GET"
+        })
+
+        if(!res.ok) {
+            console.log(`API not working on frontend`)
+        }
+
+        const data = await res.json()
+        setRating(data.result.Counter)
+        
+    }
+
+
+    const Like = (value : string | null) => {
+
+        setFilledHeart(true)
+        setRawHeart(false)
+
+        console.log(`Recipe name is ${value}`);
+
+        handleLike(value);
+
+    }
 
     const currentMeal = mealDetails[0]
 
@@ -66,25 +120,59 @@ const Recipe = () => {
     }
 
 
+    useEffect(() => {
+        get_rating();
+    } , [rating])
+
+
+    useEffect(() => {
+
+        if(rating > 0) {
+            setFilledHeart(true)
+            setRawHeart(false)
+        }
+
+        else {
+            setRawHeart(true)
+            setFilledHeart(false)
+        }
+
+    } , [rating])
+
+
+
     return (
 
     <div className="w-full flex justify-center flex-col items-center mt-20 mb-20">
         <div className="w-[80%] bg-white p-10 flex rounded-xl">
             {/* Left Section */}
             <div className="w-[40%] flex flex-col">
-                <p className="text-5xl font-Capra">{name}</p>
+                <div className='w-full flex justify-between items-center'>
+                    <p className="text-5xl font-Capra">{name}</p>
+
+                    {rawHeart && (
+                        <Image src={heart} alt='Raw heart' className='w-[4%] h-7 hover:cursor-pointer' onClick={() => { Like(name); }} />
+                    )}
+
+                    {filledHeart && (
+                        <Image src={heart_filled} alt='Filled Heart' className='w-[4%] h-7 hover:cursor-pointer' onClick={ ()=> { Like(name); }} />
+                    )}
+
+                </div>
 
                 <div className="w-[60%] mt-12 flex">
                     {mealDetails.map((md) => (
-                        <Image key={md.idMeal} src={md.strMealThumb} alt="Meal" width={300} height={300} />
+                        <Image key={md.idMeal} src={md.strMealThumb} alt="Meal" width={300} height={300} loading='eager' />
                     ))}
                 </div>
             </div>
+            
 
             {/* Divider */}
             <div className="w-[5%] flex items-center ml-5 justify-center">
                 <div className="h-90 bg-amber-500 p-0.5 rounded-full" />
             </div>
+
 
             {/* Ingredients Section */}
             <div className="w-[50%] flex flex-col">

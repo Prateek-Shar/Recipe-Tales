@@ -11,6 +11,7 @@ import "@/app/globals.css"
 
 
 const form_data = {
+    Author_name : "",
     Recipe_name : "",
     Recipe_short_desc : "",
     Prep_Time : "",
@@ -25,7 +26,7 @@ const form_data = {
 
 const Page = () =>  {
 
-    const [count , setCount] =  useState<number[]>([1]);
+    const [count , setCount] = useState<number[]>([1]);
 
     const [ingCount , setIngCount] = useState<number[]>([1]);
     const [insCount , setInsCount] = useState<number[]>([1]);
@@ -48,7 +49,7 @@ const Page = () =>  {
 
         try {
 
-            const res = await fetch("/api/add_recipe" , {
+            const res = await fetch("api/add_recipe" , {
                 method : "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -57,7 +58,7 @@ const Page = () =>  {
             })
 
             if(!res.ok) {
-                console.log("Data Not available");
+                console.log("Data Not Sent");
                 setForm(form_data)
                 setErrorDiv(true)
 
@@ -137,7 +138,7 @@ const Page = () =>  {
 
     useEffect(() => {
         setForm(prev => ({...prev , Instructions : instructions}))
-    } , [ingredient])
+    } , [instructions])
 
 
     const reload = () => {
@@ -147,7 +148,10 @@ const Page = () =>  {
         setInsCount([1]);
         setInstructions([""]);
 
-        setForm(default_form)
+        setForm(default_form);
+
+        setBlogContentPlaceholder("Share the story behind your recipe, cooking tips, or any interesting anecdotes related to the dish.");
+        setTagsPlaceholder("E.g., Italian, Dessert, Quick Meals, Vegan");
     }
 
 
@@ -164,6 +168,14 @@ const Page = () =>  {
                 <div className="w-[60%] bg-white border-2 px-10 py-5 border-[#e7e1da] mt-10 rounded-[10px]">
                     <div className="w-full mt-5">
                         <h2 className="font-Mogra p-2 pl-1 text-3xl">Basic Information</h2>
+                    </div>
+
+                    <div className="w-full mt-5">
+                        <h2 className="font-Mogra p-2">Author</h2>
+                    </div>
+                    
+                    <div className="w-full bg-[#f9f8f5] border-2 border-[#e7e1da] mb-5 rounded-[5px]">
+                        <input type="text" placeholder="Author Name" value={form.Author_name} onChange={handleChange} name="Author_name" className="w-full p-2 font-Poppins outline-0 text-[#847062] text-[15px]" autoComplete="off"/>
                     </div>
 
                     <div className="w-full mt-2">
