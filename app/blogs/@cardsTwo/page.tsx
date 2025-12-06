@@ -23,7 +23,7 @@ const CardsTwo = () => {
 
     const handleAPI = async() => {
 
-        const res = await fetch(`http://localhost:3000/api/get_recipe` , {
+        const res = await fetch(`api/get_recipe` , {
             method : "GET"
         })
 
