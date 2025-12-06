@@ -56,7 +56,7 @@ const Recipe = () => {
 
     const handleLike = async(value : string | null) => {
         
-        const res = await fetch(`api/add_rating` , {
+        const res = await fetch(`/api/add_rating` , {
             method : "POST",
             headers : {
                 "Content-type" : "application/json" 
@@ -74,7 +74,7 @@ const Recipe = () => {
 
     const get_rating = async() => {
         
-        const res = await fetch(`api/get_rating?Recipe_name=${name}` , {
+        const res = await fetch(`/api/get_rating?Recipe_name=${name}` , {
             method : "GET"
         })
 
@@ -89,11 +89,6 @@ const Recipe = () => {
 
 
     const Like = (value : string | null) => {
-
-        setFilledHeart(true)
-        setRawHeart(false)
-
-        console.log(`Recipe name is ${value}`);
 
         handleLike(value);
 

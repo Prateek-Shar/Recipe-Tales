@@ -22,7 +22,7 @@ const Cards = () => {
 
     const handleAPI = async() => {
 
-        const res = await fetch(`api/get_recipe` , {
+        const res = await fetch(`/api/get_recipe` , {
             method : "GET"
         })
 
