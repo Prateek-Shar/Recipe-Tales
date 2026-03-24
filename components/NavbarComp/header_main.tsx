@@ -6,7 +6,7 @@ const Header = () => {
 
     return (
 
-        <div className="w-full bg-[#1a212d] flex justify-between items-center p-2">
+        <div className="w-full bg-[#f8f5f2] flex justify-between items-center p-2 border-b-[#2d2d2d]">
 
             <NavbarHeading />
 
@@ -15,6 +15,7 @@ const Header = () => {
             <SearchBar />
 
         </div>
+        
     )   
 }
 

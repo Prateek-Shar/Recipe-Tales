@@ -37,17 +37,16 @@ const SearchBar = () => {
         const sv = searchBox.current?.value;    
         
         if(!sv) {
-            console.log("Text not found")
             setSearchPlaceholder("Search Recipes...")
             setSearchDiv(false)
 
             if (searchBoxDiv.current) {
-                searchBoxDiv.current.style.borderBottom = "2px solid #f5f5f4";
+                searchBoxDiv.current.style.border = "2px solid #f5f5f4";
                 searchBoxDiv.current.style.borderBottomLeftRadius = "15px";
                 searchBoxDiv.current.style.borderBottomRightRadius = "15px";
             }
             
-            return
+            return;
         }
 
         setSearchPlaceholder("Search Recipes...")
@@ -103,7 +102,7 @@ const SearchBar = () => {
 
     return (
 
-        <div className="w-[15%] bg-white flex border-2 border-[#f5f5f4] rounded-2xl relative mr-10" ref={searchBoxDiv}>
+        <div className="w-[15%] bg-white flex border-2 border-gray-200 rounded-2xl relative mr-10" ref={searchBoxDiv}>
             <div className="w-[8%] p-1 flex justify-center items-center ml-2">
                 <Image src={search} alt="Serach Icon" />
             </div>
@@ -116,7 +115,7 @@ const SearchBar = () => {
             {SearchDiv && (
             <div className="w-full h-50 overflow-auto overflow-x-hidden bg-white border-2 border-[#f5f5f4] border-t-0 rounded-b-2xl absolute top-10 flex flex-col z-50 no-scrollbar">
                 {MealDet.map((md) => (
-                    <div key={md.idMeal} className="p-2 hover:bg-gray-100 cursor-pointer border-2 border-t-0 border-l-0 border-r-0 border-[#f5f5f4] nth-last-[1]:hover:rounded-b-2xl ml-1 mr-1">
+                    <div key={md.idMeal} className="p-2 hover:bg-gray-100 cursor-pointer border-2 border-t-0 border-l-2 border-r-2 border-[#f5f5f4] nth-last-[1]:hover:rounded-b-2xl">
                         <p className="font-Poppins text-[13px]" ref={recipeName} onClick={ ()=>{ setSearchDiv(false); ResetSearch(); handleClickToRecipeDet(md.strMeal , md.idMeal)}} >{md.strMeal}</p>
                     </div>
                 ))}

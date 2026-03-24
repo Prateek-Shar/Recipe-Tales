@@ -7,14 +7,18 @@ import Catagory_Cards from "@/components/Catagory/catagoryCards";
 import RecipeCards from "@/components/recipeCards/cards";
 import email from "@/public/Images/email.png";
 import arrow from "@/public/Images/arrow.png"
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Check from "@/public/Images/check.png"
+import prohib from "@/public/Images/prohibition.png";
 
 
 
 export default function Home() {
 
   const [renderMsgDiv , setRenderMsgDiv] = useState(false)
+  const [renderErrorDiv , setRenderErrorDiv] = useState(false)
+
+  const subscribeText = useRef<HTMLInputElement>(null)
 
   const handleAlert = () => {
     setRenderMsgDiv(true)
@@ -22,7 +26,38 @@ export default function Home() {
     setTimeout(() => {
       setRenderMsgDiv(false)
     } , 2000)
+
   }
+
+  const [successSubscribe , setSuccessSubscribe] = useState(false)
+
+  const RenderSuccessSubsribe = () => {
+
+    const text = subscribeText.current?.value;
+    console.log("text : " , text);
+
+    if(!text) {
+      setRenderErrorDiv(true);
+
+      setTimeout(() => {
+        setRenderErrorDiv(false)
+      } , 2000);
+
+      if(subscribeText.current) {
+       subscribeText.current.value = ""
+      }
+
+      return;
+    }
+
+    
+    setSuccessSubscribe(true);
+    setTimeout(() => {
+      setSuccessSubscribe(false)
+    } , 2000)
+
+  }
+
 
   return (
     <>
@@ -113,14 +148,45 @@ export default function Home() {
       <div className="w-full flex justify-center mt-5 mb-10">
         <div className="w-[30%] flex justify-between items-center">
           <div className="w-[70%]">
-            <input type="text" className="w-full border-2 border-[#ebebf0] text-[#5820d7] p-3 rounded-2xl outline-0 bg-white font-Poppins text-[14px]" placeholder="Enter Email Address . . . . ."/>
+            <input type="email" className="w-full border-2 border-[#ebebf0] text-[#5820d7] p-3 rounded-2xl outline-0 bg-white font-Poppins text-[14px]" placeholder="Enter Email Address . . . . ." ref={subscribeText}/>
           </div>
 
           <div className="w-[20%] bg-[#641bff] rounded-full flex justify-center">
-            <button type="button" className="text-white text-[15px] p-2 font-Poppins">Subscribe</button>
+            <button type="button" className="text-white text-[15px] p-2 font-Poppins" onClick={RenderSuccessSubsribe}>Subscribe</button>
           </div>
         </div>
       </div>
+
+      {successSubscribe && (
+        <div className="w-full flex justify-center items-center mb-6">
+          <div className="w-[14%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
+              <div className="w-[6%] flex items-center">
+                  <Image src={Check} width={50} height={50} alt="Check Image"/>
+              </div>
+
+              <div className="w-full flex items-center ml-2">
+                  <p className="font-Poppins text-blue-400 pl-2">Subscribed Successfully</p>
+              </div>
+          </div>
+        </div>
+      )}
+
+      {renderErrorDiv && (
+        <div className="w-full flex justify-center items-center mb-6">
+          <div className="w-[7%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
+              <div className="w-[13%] flex items-center">
+                  <Image src={prohib} width={50} height={50} alt="Prohibited Image"/>
+              </div>
+
+              <div className="flex items-center ml-2">
+                  <p className="font-Poppins text-blue-400 pl-2">No Text</p>
+              </div>
+          </div>
+        </div>
+      )}
+
+
+      
 
     </div>
 
