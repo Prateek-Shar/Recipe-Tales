@@ -5,6 +5,7 @@ import person from "@/public/Images/person.png";
 import clock from "@/public/Images/blog_clock.png";
 import { useEffect, useState } from "react";
 import no_img from "@/public/Images/no_img.jpg"
+import { Skeleton } from "antd";
 
 
 interface ing_det {
@@ -30,6 +31,9 @@ const Cards = () => {
             console.log("Something Broke Up");
         }
 
+        setShowSkeleton(false)
+        setShowStats(true)
+        setShowStats2(true) 
         const data = await res.json()
         setRecipeDetails(data.det)
     
@@ -39,62 +43,79 @@ const Cards = () => {
         handleAPI()
     }, [])
 
+    const [showStats , setShowStats] = useState<boolean>(false)
+    const [showStats2 , setShowStats2] = useState<boolean>(false);
+    const [showSkeleton , setShowSkeleton] = useState<boolean>(true);
 
 
     return (
         <div className="w-full flex justify-between items-center">
             
-            {recipeDetails[0] ? (
-            <div className="w-[55%] bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] pb-15 hover:cursor-pointer">
-                <div className="w-full h-140 bg-[url(/Images/no_img.jpg)] bg-contain rounded-t-2xl" />
-                
-                <div className="w-full mt-8">
-                    <p className="font-Poppins text-2xl pl-3">{recipeDetails[0].Recipe_name || `NA`}  </p>
+            {showSkeleton && (
+                <div className="w-[90%]">
+                    <Skeleton paragraph={{rows : 5  }} active />
                 </div>
-
-                <div className="w-full mt-5">
-                    <p className="font-Poppins text-[#a2706a] pl-3">{recipeDetails[0].Recipe_short_desc}</p>
-                </div>
-
-                <div className="w-full mt-3">
-                    <div className="w-[60%] flex">
-                        <div className="w-[45%] flex ml-3">
-                            <div className="w-[10%]">
-                                <Image src={person} alt="person" />
-                            </div>
-
-                            <div className="w-full">
-                                <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[0].Author_name}</p>
-                            </div>
-                        </div>
-
-                        <div className="w-[45%] flex items-center">
-                            <div className="w-[8%]">
-                                <Image src={clock} alt="person" />
-                            </div>
-
-                            <div className="w-full">
-                                <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[0].Cook_Time} min</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            ) : (
-
-                <div className="w-[40%] bg-white border-2 border-[#e5e0dc] rounded-2xl">
-
-                    <Image src={no_img} alt="No Image Placeholder" className="rounded-t-2xl" />
-                    
-                    <div className="w-full flex justify-center">
-                        <p className="font-Mogra p-4">No Data Available</p>
-                    </div>
-
-                </div>  
             )}
 
+            {showStats && (
+                recipeDetails[0] ? (
+                <div className="w-[55%] bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] pb-15 hover:cursor-pointer">
+                    <div className="w-full h-140 bg-[url(/Images/no_img.jpg)] bg-contain rounded-t-2xl" />
+                    
+                    <div className="w-full mt-8">
+                        <p className="font-Poppins text-2xl pl-3">{recipeDetails[0].Recipe_name || `NA`}  </p>
+                    </div>
 
+                    <div className="w-full mt-5">
+                        <p className="font-Poppins text-[#a2706a] pl-3">{recipeDetails[0].Recipe_short_desc}</p>
+                    </div>
+
+                    <div className="w-full mt-3">
+                        <div className="w-[60%] flex">
+                            <div className="w-[45%] flex ml-3">
+                                <div className="w-[10%]">
+                                    <Image src={person} alt="person" />
+                                </div>
+
+                                <div className="w-full">
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[0].Author_name}</p>
+                                </div>
+                            </div>
+
+                            <div className="w-[45%] flex items-center">
+                                <div className="w-[8%]">
+                                    <Image src={clock} alt="person" />
+                                </div>
+
+                                <div className="w-full">
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[0].Cook_Time} min</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                ) : (
+
+                    <div className="w-[40%] bg-white border-2 border-[#e5e0dc] rounded-2xl">
+
+                        <Image src={no_img} alt="No Image Placeholder" className="rounded-t-2xl" />
+                        
+                        <div className="w-full flex justify-center">
+                            <p className="font-Mogra p-4">No Data Available</p>
+                        </div>
+
+                    </div>  
+                )
+            )}
+
+            {showSkeleton && (
+                <div className="w-full ml-10">
+                    <Skeleton paragraph={{rows : 5}} active />
+                </div>
+            )}
+
+            {showStats2 && (
             <div className="w-[40%] flex flex-col justify-between">
 
                 {recipeDetails[1] ? (
@@ -199,7 +220,7 @@ const Cards = () => {
                 )}
 
             </div>
-
+            )}
         </div>
     )
 }

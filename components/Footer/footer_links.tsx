@@ -27,9 +27,9 @@ const Footer_Links:React.FC<links> = ({Home , Recipes}) => {
                     <Link className="p-1 font-Poppins text-[#6a7282] hover:text-white" href="/blogs">Blogs</Link>
                 </div>
 
-                <div className="w-[30%] mt-3 hover:cursor-pointer">
+                {/* <div className="w-[30%] mt-3 hover:cursor-pointer">
                     <Link className="p-1 font-Poppins text-[#6a7282] hover:text-white" href="/">Recipes</Link>
-                </div>
+                </div> */}
             </div>
         </div>
     )

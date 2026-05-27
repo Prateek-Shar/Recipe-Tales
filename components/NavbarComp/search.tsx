@@ -4,6 +4,8 @@ import Image from "next/image"
 import search from "@/public/Images/search.png"
 import { useRef, useState } from "react"
 import { useRouter } from "next/navigation";
+import { Spin } from "antd"
+import { LoadingOutlined } from '@ant-design/icons';
 
 
 interface meals_det {
@@ -24,8 +26,18 @@ const SearchBar = () => {
 
     const [MealDet , setMealDet] = useState<meals_det[]>([])
     const [SearchDiv , setSearchDiv] = useState(false)
+    const [Loader , setLoader] = useState<boolean>(false)
+
+    const loaderDiv = useRef<HTMLDivElement>(null);
 
     const handleSearch = async() => {
+
+        if(loaderDiv.current) {
+            loaderDiv.current.style.borderBottomLeftRadius = "10px"
+            loaderDiv.current.style.borderBottomRightRadius = "10px"
+        } 
+
+        setLoader(true);
 
         if(searchBoxDiv.current) {
             searchBoxDiv.current.style.borderBottom = "none"
@@ -39,12 +51,13 @@ const SearchBar = () => {
         if(!sv) {
             setSearchPlaceholder("Search Recipes...")
             setSearchDiv(false)
+            setLoader(false)
 
             if (searchBoxDiv.current) {
                 searchBoxDiv.current.style.border = "2px solid #f5f5f4";
                 searchBoxDiv.current.style.borderBottomLeftRadius = "15px";
                 searchBoxDiv.current.style.borderBottomRightRadius = "15px";
-            }
+            } 
             
             return;
         }
@@ -66,8 +79,9 @@ const SearchBar = () => {
             const data = await response.json()
 
             if(data.meals) {
-                setMealDet(data.meals)
-                setSearchDiv(true)
+                setMealDet(data.meals);
+                setSearchDiv(true);
+                setLoader(false);
             }
 
         }
@@ -102,24 +116,38 @@ const SearchBar = () => {
 
     return (
 
-        <div className="w-[15%] bg-white flex border-2 border-gray-200 rounded-2xl relative mr-10" ref={searchBoxDiv}>
-            <div className="w-[8%] p-1 flex justify-center items-center ml-2">
-                <Image src={search} alt="Serach Icon" />
+        <div className="w-[15%] bg-white flex flex-col border-2 border-[#f5f5f4] rounded-2xl relative mr-10" ref={searchBoxDiv}>
+
+            <div className="flex">
+                <div className="w-[8%] p-1 flex justify-center items-center ml-2">
+                    <Image src={search} alt="Serach Icon" />
+                </div>
+
+                <div className="w-[90%] border-0 flex items-center" >
+                    <input type="text" placeholder={searchPlaceholder} className=" w-full p-2 outline-0 font-Poppins" ref={searchBox} onChange={handleSearch}/>
+                </div>
             </div>
 
-            <div className="w-[90%] border-0 flex items-center" >
-                <input type="text" placeholder={searchPlaceholder} className=" w-full p-2 outline-0 font-Poppins" ref={searchBox} onChange={handleSearch}/>
-            </div>
-
+            {Loader && (
+                <div className="w-full flex justify-center z-10 absolute top-10 bg-white py-2 border-b-2 border-l-2 border-r-2 border-[#f5f5f4]" ref={loaderDiv}>
+                    <Spin indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />} className="" />
+                </div>
+            )}
 
             {SearchDiv && (
-            <div className="w-full h-50 overflow-auto overflow-x-hidden bg-white border-2 border-[#f5f5f4] border-t-0 rounded-b-2xl absolute top-10 flex flex-col z-50 no-scrollbar">
-                {MealDet.map((md) => (
-                    <div key={md.idMeal} className="p-2 hover:bg-gray-100 cursor-pointer border-2 border-t-0 border-l-2 border-r-2 border-[#f5f5f4] nth-last-[1]:hover:rounded-b-2xl">
-                        <p className="font-Poppins text-[13px]" ref={recipeName} onClick={ ()=>{ setSearchDiv(false); ResetSearch(); handleClickToRecipeDet(md.strMeal , md.idMeal)}} >{md.strMeal}</p>
+                MealDet.length > 0 ? (
+                <div className="w-full h-50 overflow-auto overflow-x-hidden bg-white rounded-b-2xl absolute border-b-2 border-b-[#f5f5f4] top-10 flex flex-col z-50 no-scrollbar">
+                    {MealDet.map((md) => (
+                        <div key={md.idMeal} className="p-2 hover:bg-gray-100 cursor-pointer nth-last-[1]:hover:rounded-b-2xl">
+                            <p className="font-Poppins text-[13px]" ref={recipeName} onClick={ ()=>{ setSearchDiv(false); ResetSearch(); handleClickToRecipeDet(md.strMeal , md.idMeal)}} >{md.strMeal}</p>
+                        </div>
+                    ))}
+                </div>
+                )  : (
+                    <div className="w-full">
+                        <p>No Results Found</p>
                     </div>
-                ))}
-            </div>
+                )
             )}
 
         </div>
