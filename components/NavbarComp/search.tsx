@@ -112,6 +112,8 @@ const SearchBar = () => {
         router.push(`/recipe/recipeName?Meal_name=${value}&id=${id}`)
     }
 
+    console.log(`Meal lenght : ${MealDet.length}`)
+
 
 
     return (

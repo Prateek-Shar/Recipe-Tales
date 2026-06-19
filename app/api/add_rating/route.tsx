@@ -1,5 +1,5 @@
 import sch from '@/Schema/likedRecipe'
-import Connect from '@/db/connect'
+import Connect from '@/middleware/mongo_connect'
 
 
 export const POST = async(request : Request) => {
@@ -11,6 +11,8 @@ export const POST = async(request : Request) => {
         const body = await request.json()
 
         const { Recipe_name } = body
+
+        console.log("Recipe_name : " , Recipe_name)
 
         if(!Recipe_name) {
             return new Response(JSON.stringify({message : `Body is null`}) , {
@@ -29,13 +31,13 @@ export const POST = async(request : Request) => {
             })
         }
 
-        if(check) {
-            const data = await sch.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})
+        
+        const data = await sch.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})
 
-            return new Response(JSON.stringify({message : "Updated counter" , result : data}) , {
-                status : 200
-            })
-        }
+        return new Response(JSON.stringify({message : "Updated counter" , result : data}) , {
+            status : 200
+        })
+    
 
     }
 

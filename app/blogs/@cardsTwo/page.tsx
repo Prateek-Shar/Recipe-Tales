@@ -64,15 +64,15 @@ const CardsTwo = () => {
                 {recipeDetails[3] ? (
                 <div className="w-[25%] flex flex-col rounded-2xl border-2 border-[#e5e0dc]">
                     <div className="w-full h-100 flex">
-                        <div className="w-full h-full bg-[url(/Images/recipe_desert.jpg)] bg-cover rounded-t-2xl" />
+                        <div className="w-full h-full bg-center bg-cover rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
                     
                     <div className="w-full pl-2  mt-5">
-                        <p className="font-Poppins text-2xl">Decadent Chocolate Tart with Fresh Berries</p>
+                        <p className="font-Poppins text-2xl">{recipeDetails[3].Recipe_name}</p>
                     </div>
 
                     <div className="w-full pl-2  mt-5">
-                        <p className="font-Poppins text-[#a2706a]">Indulge in this elegant chocolate tart with a buttery crust and rich ganache filling, topped with fresh seasonal berries.</p>
+                        <p className="font-Poppins text-[#a2706a]">{recipeDetails[3].Recipe_short_desc}</p>
                     </div>
 
                     <div className="w-full mt-6 mb-4 flex">
@@ -82,7 +82,7 @@ const CardsTwo = () => {
                             </div>
 
                             <div className="w-full">
-                                <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">Maria Romano</p>
+                                <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[3].Author_name}</p>
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@ const CardsTwo = () => {
                             </div>
 
                             <div className="w-full">
-                                <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">12 min read</p>
+                                <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[3].Cook_Time} min</p>
                             </div>
                         </div>
                     </div>
@@ -118,15 +118,15 @@ const CardsTwo = () => {
                     <div className="w-full flex flex-col border-2 border-[#e5e0dc] rounded-2xl">
 
                         <div className="w-full h-100 flex">
-                            <div className="w-full h-full bg-[url(/Images/recipe_salad.jpg)] bg-cover rounded-t-2xl" />
+                            <div className="w-full h-full bg-cover bg-center rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                         </div>
                         
                         <div className="w-full pl-2  mt-5">
-                            <p className="font-Poppins text-2xl">Mediterranean Summer Salad</p>
+                            <p className="font-Poppins text-2xl">{recipeDetails[4].Recipe_name}</p>
                         </div>
 
                         <div className="w-full pl-2  mt-5">
-                            <p className="font-Poppins text-[#a2706a]">A refreshing combination of crisp greens, juicy tomatoes, cucumber, and creamy feta cheese with a zesty lemon.</p>
+                            <p className="font-Poppins text-[#a2706a]">{recipeDetails[4].Recipe_short_desc}</p>
                         </div>
 
                         <div className="w-full mt-6 mb-4 flex">
@@ -136,7 +136,7 @@ const CardsTwo = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">Maria Romano</p>
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[4].Author_name}</p>
                                 </div>
                             </div>
 
@@ -146,7 +146,7 @@ const CardsTwo = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">5 min read</p>
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[4].Cook_Time} min</p>
                                 </div>
                             </div>
                         </div>
@@ -175,15 +175,15 @@ const CardsTwo = () => {
                     {recipeDetails[5] ? ( 
                     <div className="w-full flex flex-col rounded-2xl border-2 border-[#e5e0dc]">
                         <div className="w-full h-100 flex">
-                            <div className="w-full h-full bg-[url(/Images/recipe_soup.jpg)] bg-cover rounded-t-2xl" />
+                            <div className="w-full h-full bg-cover bg-center rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                         </div>
                         
                         <div className="w-full pl-2  mt-5">
-                            <p className="font-Poppins text-2xl">Cozy Autumn Vegetable Soup</p>
+                            <p className="font-Poppins text-2xl">{recipeDetails[5].Recipe_name}</p>
                         </div>
 
                         <div className="w-full pl-2  mt-5">
-                            <p className="font-Poppins text-[#a2706a]">Warm up with this hearty vegetable soup packed with seasonal produce and aromatic herbs. Perfect for chilly.</p>
+                            <p className="font-Poppins text-[#a2706a]">{recipeDetails[5].Recipe_short_desc}</p>
                         </div>
 
                         <div className="w-full mt-6 mb-4 flex">
@@ -193,7 +193,7 @@ const CardsTwo = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">Maria Romano</p>
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[5].Author_name}</p>
                                 </div>
                             </div>
 
@@ -203,7 +203,7 @@ const CardsTwo = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">20 min read</p>
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[5].Cook_Time} min</p>
                                 </div>
                             </div>
                         </div>

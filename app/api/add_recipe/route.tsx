@@ -1,12 +1,13 @@
 import Recipe_Details from "@/Schema/recipeDet";
-import Connect from "@/db/connect";
+import Connect from "@/middleware/mongo_connect";
+import cloudinary from "@/middleware/cloudinary_connect";
 
 
 export const POST = async(request: Request) => {
 
   try {
 
-    await Connect()
+    await Connect();
 
     const body = await request.json();
 

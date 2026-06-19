@@ -60,7 +60,7 @@ const Cards = () => {
             {showStats && (
                 recipeDetails[0] ? (
                 <div className="w-[55%] bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] pb-15 hover:cursor-pointer">
-                    <div className="w-full h-140 bg-[url(/Images/no_img.jpg)] bg-contain rounded-t-2xl" />
+                    <div className="w-full h-140 bg-[url(/Images/no_img.jpg)] bg-cover bg-center rounded-t-2xl" />
                     
                     <div className="w-full mt-8">
                         <p className="font-Poppins text-2xl pl-3">{recipeDetails[0].Recipe_name || `NA`}  </p>
@@ -121,7 +121,7 @@ const Cards = () => {
                 {recipeDetails[1] ? (
                 <div className="w-full border-2 border-[#e5e0dc] rounded-2xl pb-5 hover:cursor-pointer">
                     <div className="w-full flex h-50">
-                        <div className="w-full h-full bg-cover bg-no-repeat rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
+                        <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
 
                     <div className="w-full pl-2  mt-5">
@@ -170,9 +170,9 @@ const Cards = () => {
 
 
                 {recipeDetails[2] ? (
-                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl pb-5 hover:cursor-pointer">
+                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl pb-5 hover:cursor-pointer mt-5">
                     <div className="w-full flex flex-col h-50">
-                        <div className="w-full h-full bg-cover rounded-t-2xl" style={{backgroundImage : "url('/Images/recipe_bread.jpg')"}} />
+                        <div className="w-full h-full bg-cover bg-center rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
 
                     <div className="w-full pl-2 mt-5">
@@ -201,7 +201,7 @@ const Cards = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[2].Cook_Time}</p>
+                                    <p className="font-Poppins text-[#a2706a] text-[14px] pl-2">{recipeDetails[2].Cook_Time} min</p>
                                 </div>
                             </div>
                         </div>

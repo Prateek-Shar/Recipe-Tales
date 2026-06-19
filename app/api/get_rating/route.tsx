@@ -1,4 +1,4 @@
-import Connect from "@/db/connect";
+import Connect from "@/middleware/mongo_connect";
 import sch from "@/Schema/likedRecipe";
 
 
@@ -10,6 +10,8 @@ export const GET = async(req : Request) => {
 
         const { searchParams } = new URL(req.url);
         const Recipe_name = searchParams.get("Recipe_name");
+
+        console.log("Recipe name : " , Recipe_name)
 
         if(!Recipe_name) {
             return new Response(JSON.stringify({message : `Body is null`}) , {

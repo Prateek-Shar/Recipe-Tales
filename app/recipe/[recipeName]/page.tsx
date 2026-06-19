@@ -68,7 +68,7 @@ const Recipe = () => {
             console.log("Response failed");
         }
 
-        const data = res.json()
+        console.log("Recipe counter updated successfully")
     }
 
 
@@ -80,10 +80,11 @@ const Recipe = () => {
 
         if(!res.ok) {
             console.log(`API not working on frontend`)
+            return;
         }
 
         const data = await res.json()
-        setRating(data.result.Counter)
+        setRating(data.result)
         
     }
 

@@ -8,6 +8,10 @@ import close from "@/public/Images/close.png";
 import add from "@/public/Images/add.png";
 import { useState , useEffect } from "react";
 import "@/app/globals.css"
+import { InboxOutlined } from '@ant-design/icons';
+import cloudinary from "@/middleware/cloudinary_connect";
+import type { UploadProps } from 'antd';
+import { message, Upload } from 'antd';
 
 
 const form_data = {
@@ -39,6 +43,8 @@ const Page = () =>  {
 
     const [blogContentPlaceholder , setBlogContentPlaceholder] = useState<string>("Share the story behind your recipe, cooking tips, or any interesting anecdotes related to the dish.");
     const [tagsPlaceholder , setTagsPlaceholder] = useState<string>("E.g., Italian, Dessert, Quick Meals, Vegan");
+
+    const url = process.env.NEXT_PUBLIC_CLOUDINARY_URL
 
     const [form , setForm] = useState(form_data)
 
@@ -154,6 +160,29 @@ const Page = () =>  {
         setTagsPlaceholder("E.g., Italian, Dessert, Quick Meals, Vegan");
     }
 
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const props: UploadProps = {
+        name: 'file',
+        multiple: false,
+        action: url,
+        onChange(info) {
+          const { status } = info.file;
+          if (status !== 'uploading') {
+            console.log(info.file, info.fileList);
+          }
+          if (status === 'done') {
+            messageApi.success(`${info.file.name} file uploaded successfully.`);
+          } else if (status === 'error') {
+            messageApi.error(`${info.file.name} file upload failed.`);
+          }
+        },
+        onDrop(e) {
+            console.log('Dropped files', e.dataTransfer.files);
+        },
+    };
+
+    const { Dragger } = Upload;
 
     return (
 
@@ -252,41 +281,7 @@ const Page = () =>  {
                         </div>
                     </div>
 
-                </div>
-
-                <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
-                    
-                    <div className="w-full">
-                        <p className="font-Mogra text-3xl">Cooking Instructions</p>
-                    </div>
-
-                    <div className="w-full flex flex-col mt-5">
-                        {insCount.map((idx) => (
-                        <div className="w-full flex flex-row items-center py-2" key={idx}>
-                            {/* <div className="w-[4%]">
-                                <div className="w-full h-10 rounded-full bg-amber-500 flex justify-center items-center">
-                                    <p>{idx}</p>
-                                </div>
-                            </div> */}
-
-                            <div className="w-[90%] flex border-2 border-[#e7e1da] rounded-[5px] items-center">
-                                <textarea placeholder={`Step ${idx}`} className="w-full p-1 pl-3 font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px]" name="Instructions" value={instructions[idx - 1] || ""} onChange={(e)=> {handleChangeForTextareaIntructions(e , idx - 1)}}/>
-                            </div>
-
-                            <div className="w-[3%] flex items-center justify-center bg-[#fcfbfa] ml-2 border-2 border-[#f3f0ec] rounded-[5px]" onClick={ () => {CloseDiv(idx)} }>
-                                <Image src={close} alt="Close Div" className="p-1 my-1" height={20} width={20} />
-                            </div>
-                        </div>
-                        ))}
-                    </div>
-
-                    <div className="w-full bg-[#f9f8f5] flex justify-center items-center p-2 border-2 border-[#e7e1da] mt-5 rounded-[10px] hover:bg-green-400 hover:cursor-pointer" onClick={RenderNewInstructionsDiv}>
-                        <Image src={add} alt="Add Steps" height={10} width={10} />
-                        <p className="font-Poppins pl-5">Add Step</p>
-                    </div>
-
-                </div>
-                
+                </div>                
 
 
                 <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
@@ -325,6 +320,59 @@ const Page = () =>  {
 
                 </div>
 
+
+                <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
+                    
+                    <div className="w-full">
+                        <p className="font-Mogra text-3xl">Cooking Instructions</p>
+                    </div>
+
+                    <div className="w-full flex flex-col mt-5">
+                        {insCount.map((idx) => (
+                        <div className="w-full flex flex-row items-center py-2" key={idx}>
+                            {/* <div className="w-[4%]">
+                                <div className="w-full h-10 rounded-full bg-amber-500 flex justify-center items-center">
+                                    <p>{idx}</p>
+                                </div>
+                            </div> */}
+
+                            <div className="w-[90%] flex border-2 border-[#e7e1da] rounded-[5px] items-center">
+                                <textarea placeholder={`Step ${idx}`} className="w-full p-1 pl-3 font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px]" name="Instructions" value={instructions[idx - 1] || ""} onChange={(e)=> {handleChangeForTextareaIntructions(e , idx - 1)}}/>
+                            </div>
+
+                            <div className="w-[3%] flex items-center justify-center bg-[#fcfbfa] ml-2 border-2 border-[#f3f0ec] rounded-[5px]" onClick={ () => {CloseDiv(idx)} }>
+                                <Image src={close} alt="Close Div" className="p-1 my-1" height={20} width={20} />
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+
+                    <div className="w-full bg-[#f9f8f5] flex justify-center items-center p-2 border-2 border-[#e7e1da] mt-5 rounded-[10px] hover:bg-green-400 hover:cursor-pointer" onClick={RenderNewInstructionsDiv}>
+                        <Image src={add} alt="Add Steps" height={10} width={10} />
+                        <p className="font-Poppins pl-5">Add Step</p>
+                    </div>
+
+                </div>
+
+                    
+                <div className="w-[60%] border-[#e7e1da] border-2 flex flex-col justify-center items-center rounded-2xl mt-10">
+                    <div className="w-full py-2 pl-11 mt-2">
+                        <p className="font-Mogra text-3xl">Snaps</p>
+                    </div>
+
+                    <div className="w-[70%] py-5 flex justify-center">
+                        <Dragger {...props} >
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                            <p className="ant-upload-hint">
+                                Support for a single or bulk upload. Strictly prohibited from uploading company data or
+                                other banned files.
+                            </p>
+                        </Dragger>  
+                    </div>
+                </div>
 
 
                 <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
