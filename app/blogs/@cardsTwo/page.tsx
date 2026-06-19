@@ -62,7 +62,7 @@ const CardsTwo = () => {
         {showStats && (
             <div className="w-full flex justify-evenly items-center">
                 {recipeDetails[3] ? (
-                <div className="w-[25%] flex flex-col rounded-2xl border-2 border-[#e5e0dc]">
+                <div className="w-[30%] flex flex-col rounded-2xl border-2 border-[#e5e0dc]">
                     <div className="w-full h-100 flex">
                         <div className="w-full h-full bg-center bg-cover rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
