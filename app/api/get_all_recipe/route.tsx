@@ -12,8 +12,6 @@ export const GET = async() => {
 
             const details = await Recipe_Details.find().select("Recipe_name Tags Author_name _id")
 
-            console.log("Details : " , details);
-
             return new Response(JSON.stringify({det : details}) , {status : 200})
         }
 

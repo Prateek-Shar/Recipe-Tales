@@ -10,7 +10,6 @@ import arrow from "@/public/Images/arrow.png"
 import { useRef, useState } from "react";
 import Check from "@/public/Images/check.png"
 import prohib from "@/public/Images/prohibition.png";
-import { useRouter } from "next/navigation";
 
 
 
@@ -19,8 +18,6 @@ export default function Home() {
   const [renderMsgDiv , setRenderMsgDiv] = useState(false)
   const [renderErrorDiv , setRenderErrorDiv] = useState(false)
   const [successSubscribe , setSuccessSubscribe] = useState(false)  
-
-  const router = useRouter();
 
   const subscribeText = useRef<HTMLInputElement>(null)
 
@@ -36,7 +33,6 @@ export default function Home() {
   const RenderSuccessSubsribe = () => {
 
     const text = subscribeText.current?.value;
-    console.log("text : " , text);
 
     if(!text) {
       setRenderErrorDiv(true);
@@ -61,9 +57,6 @@ export default function Home() {
 
   }
 
-  const render_all_recipe = () => {
-    router.push("/all_recipe")
-  }
 
 
   return (
@@ -118,16 +111,6 @@ export default function Home() {
               </div>
           </div>
         )}
-
-        <div className="w-[40%] flex flex-row-reverse">
-          <button className="w-[15%] flex cursor-pointer" onClick={render_all_recipe} >
-            <p className="p-1 font-Poppins">View all</p>
-
-            <div className="w-[25%] p-1 flex justify-center">
-              <Image src={arrow} alt="view all" />
-            </div>
-          </button>
-        </div>
         
       </div>
 

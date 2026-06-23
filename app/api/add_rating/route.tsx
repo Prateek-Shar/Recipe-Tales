@@ -12,8 +12,6 @@ export const POST = async(request : Request) => {
 
         const { Recipe_name } = body
 
-        console.log("Recipe_name : " , Recipe_name)
-
         if(!Recipe_name) {
             return new Response(JSON.stringify({message : `Body is null`}) , {
                 status : 401

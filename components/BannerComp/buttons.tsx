@@ -1,21 +1,29 @@
+import { useRouter } from "next/navigation";
+
 const Buttons = () => {
 
-    return (
-        <div className="w-[20%] flex justify-evenly items-center bg-amber-8060 ml-115 mt-10">
+    const router = useRouter();
 
-            <div className="w-[40%] relative">
+    const render_all_recipe = () => {
+        router.push("/all_recipe")
+    }
+
+    return (
+        <div className="w-[20%] flex items-center bg-amber-8060 ml-115 mt-10">
+
+            <button className="w-[40%] relative ml-6 cursor-pointer" onClick={render_all_recipe}>
                 <div className="w-full border-2 border-[#16a34a] rounded-full bg-white  p-5" />
                 <div className="w-[94%] absolute bg-[#16a34a] rounded-full top-1 left-1 p-1.5 flex justify-center">
-                    <button type="button" className="text-white font-Poppins">Browse</button>
+                    <p className="text-white font-Poppins cursor-pointer">Browse</p>  
                 </div>
-            </div>
+            </button>
 
-            <div className="w-[40%] relative">
+            {/* <div className="w-[40%] relative">
                 <div className="w-full border-2 border-[#16a34a] rounded-full bg-white p-5" />
                 <div className="w-[95%] absolute bg-[#16a34a] rounded-full top-1 left-1 p-1.5 flex justify-center">
                     <button type="button" className="text-white font-Poppins">Tutorials</button>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

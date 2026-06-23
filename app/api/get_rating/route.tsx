@@ -19,8 +19,6 @@ export const GET = async(req : Request) => {
 
         const check = await sch.findOne({"Recipe_name" : Recipe_name}).select("Counter");
 
-        console.log("Check : " , check)
-
         return new Response(JSON.stringify({result : check , message : "Fetched rating successfully"}) , {
             status : 200
         })
