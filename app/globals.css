@@ -27,6 +27,23 @@ body {
     --font-Mogra : Mogra;
 }
 
+.addAnim {
+  animation: fade-in 2s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(5px);
+  }
+}
+
+
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;

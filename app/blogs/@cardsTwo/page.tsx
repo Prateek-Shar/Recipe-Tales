@@ -7,6 +7,7 @@ import { useEffect , useState } from "react";
 import no_img from "@/public/Images/no_img.jpg"
 import exp_recipe from "@/public/Images/explore_recipe.png"
 import { Skeleton } from "antd";
+import { useRouter } from "next/navigation";
 
 
 interface ing_det {
@@ -20,7 +21,11 @@ interface ing_det {
 
 const CardsTwo = () => {
 
+    const route = useRouter()
+
     const [recipeDetails , setRecipeDetails] = useState<ing_det[]>([])
+    const [showStats , setShowStats] = useState<boolean>(false);
+    const [showSkeleton , setShowSkeleton] = useState<boolean>(true);
 
     const handleAPI = async() => {
 
@@ -40,8 +45,9 @@ const CardsTwo = () => {
     
     }
 
-    const [showStats , setShowStats] = useState<boolean>(false);
-    const [showSkeleton , setShowSkeleton] = useState<boolean>(true);
+    const handleClickToMoreRecipes = () => {
+        route.push("/all_recipe")
+    }
 
     useEffect(() => {
         handleAPI()
@@ -233,7 +239,7 @@ const CardsTwo = () => {
 
         <div className="w-full flex justify-center mt-30">
 
-            <div className="w-[15%] bg-[#ca6441] rounded-2xl flex">
+            <button className="w-[15%] bg-[#ca6441] rounded-2xl flex" onClick={handleClickToMoreRecipes}>
                 <div className="w-[10%] ml-2 flex justify-center items-center">
                     <Image src={exp_recipe} alt="Explore Recipe" width={100} height={100} />
                 </div>
@@ -241,7 +247,7 @@ const CardsTwo = () => {
                 <div className="w-[88%] ml-2 p-3">
                     <button type="button" className="text-[16px] font-Poppins text-white">Explore More Recipes</button>
                 </div>
-            </div>
+            </button>
 
         </div>
             

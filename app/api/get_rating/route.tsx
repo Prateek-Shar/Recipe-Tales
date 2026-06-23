@@ -11,8 +11,6 @@ export const GET = async(req : Request) => {
         const { searchParams } = new URL(req.url);
         const Recipe_name = searchParams.get("Recipe_name");
 
-        console.log("Recipe name : " , Recipe_name)
-
         if(!Recipe_name) {
             return new Response(JSON.stringify({message : `Body is null`}) , {
                 status : 401
@@ -20,6 +18,8 @@ export const GET = async(req : Request) => {
         }
 
         const check = await sch.findOne({"Recipe_name" : Recipe_name}).select("Counter");
+
+        console.log("Check : " , check)
 
         return new Response(JSON.stringify({result : check , message : "Fetched rating successfully"}) , {
             status : 200

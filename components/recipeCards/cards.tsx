@@ -124,37 +124,6 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                         <p className="font-Mogra text-[24px]">{rm.strMeal}</p>
                     </div>
 
-                    {/* <div className="w-full flex mt-3">
-                        <div className="w-[20%] flex">
-                            <div className="w-[30%] flex items-center">
-                                <Image src={clock} alt="clock" className="p-1"/>
-                            </div>
-
-                            <div className="w-[70%] flex items-center">
-                                <p className="text-[12px] font-Poppins">30 mins</p>
-                            </div>
-                        </div>
-
-                        <div className="w-[20%] flex ml-2">
-                            <div className="w-[30%]">
-                                <Image src={cut} alt="clock" className="p-1"/>
-                            </div>
-
-                            <div className="w-[70%] flex items-center">
-                                <p className="text-[12px]  font-Poppins">Easy</p>
-                            </div>
-                        </div>
-
-                        <div className="w-[20%] flex">
-                            <div className="w-[30%]">
-                                <Image src={rating} alt="clock" className="p-1"/>
-                            </div>
-
-                            <div className="w-[70%] flex items-center">
-                                <p className="text-[12px] font-Poppins">4.5</p>
-                            </div>
-                        </div>
-                    </div> */}
 
                     <div className="w-[98%] flex justify-between mt-8 mb-0.5 ml-0.5">
                         <div className="w-[30%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ () => {handleToRecipe(rm.strMeal , rm.idMeal); } }>

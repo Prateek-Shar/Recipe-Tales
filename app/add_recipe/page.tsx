@@ -21,8 +21,6 @@ const form_data = {
     Prep_Time : "",
     Cook_Time : "",
     Servings : "",
-    // Instructions : "",
-    // Ingredient : "",
     Blog : "",
     Tags : ""
 }
@@ -160,29 +158,29 @@ const Page = () =>  {
         setTagsPlaceholder("E.g., Italian, Dessert, Quick Meals, Vegan");
     }
 
-    const [messageApi, contextHolder] = message.useMessage();
+    // const [messageApi, contextHolder] = message.useMessage();
 
-    const props: UploadProps = {
-        name: 'file',
-        multiple: false,
-        action: url,
-        onChange(info) {
-          const { status } = info.file;
-          if (status !== 'uploading') {
-            console.log(info.file, info.fileList);
-          }
-          if (status === 'done') {
-            messageApi.success(`${info.file.name} file uploaded successfully.`);
-          } else if (status === 'error') {
-            messageApi.error(`${info.file.name} file upload failed.`);
-          }
-        },
-        onDrop(e) {
-            console.log('Dropped files', e.dataTransfer.files);
-        },
-    };
+    // const props: UploadProps = {
+    //     name: 'file',
+    //     multiple: false,
+    //     action: url,
+    //     onChange(info) {
+    //       const { status } = info.file;
+    //       if (status !== 'uploading') {
+    //         console.log(info.file, info.fileList);
+    //       }
+    //       if (status === 'done') {
+    //         messageApi.success(`${info.file.name} file uploaded successfully.`);
+    //       } else if (status === 'error') {
+    //         messageApi.error(`${info.file.name} file upload failed.`);
+    //       }
+    //     },
+    //     onDrop(e) {
+    //         console.log('Dropped files', e.dataTransfer.files);
+    //     },
+    // };
 
-    const { Dragger } = Upload;
+    // const { Dragger } = Upload;
 
     return (
 
@@ -355,7 +353,7 @@ const Page = () =>  {
                 </div>
 
                     
-                <div className="w-[60%] border-[#e7e1da] border-2 flex flex-col justify-center items-center rounded-2xl mt-10">
+                {/* <div className="w-[60%] border-[#e7e1da] border-2 flex flex-col justify-center items-center rounded-2xl mt-10">
                     <div className="w-full py-2 pl-11 mt-2">
                         <p className="font-Mogra text-3xl">Snaps</p>
                     </div>
@@ -372,7 +370,7 @@ const Page = () =>  {
                             </p>
                         </Dragger>  
                     </div>
-                </div>
+                </div> */}
 
 
                 <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">

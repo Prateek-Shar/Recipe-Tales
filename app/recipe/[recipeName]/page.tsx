@@ -1,7 +1,7 @@
 "use client"
 
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import ing from "@/public/Images/ingredients.png"
 import uten from "@/public/Images/utensils.png"
@@ -37,6 +37,8 @@ const Recipe = () => {
     const formatted_api = `${api_db}${name}`    
 
     const [mealDetails, setMealDetails] = useState<Meal_Det[]>([])
+
+    const ratingDiv = useRef<HTMLDivElement>(null)
 
     const handleAPI = async () => {
         const res = await fetch(`${formatted_api}`)
@@ -84,7 +86,7 @@ const Recipe = () => {
         }
 
         const data = await res.json()
-        setRating(data.result)
+        setRating(data.result.Counter)
         
     }
 
@@ -113,6 +115,21 @@ const Recipe = () => {
 
     const handleClickToLink = (value : string) => {
         window.open(value)
+    }
+
+    const showRating = () => {
+        if (ratingDiv.current) {
+            ratingDiv.current.style.display = "flex"
+            ratingDiv.current.classList.add("addAnim")
+        }
+
+        
+    }
+
+    const disableRating = () => {
+        if (ratingDiv.current) {
+            ratingDiv.current.style.display = "none"
+        }
     }
 
 
@@ -144,14 +161,19 @@ const Recipe = () => {
             {/* Left Section */}
             <div className="w-[40%] flex flex-col">
                 <div className='w-full flex justify-between items-center'>
-                    <p className="text-5xl font-Capra">{name}</p>
+                    <div className='w-[65%]'>
+                        <p className="text-5xl font-Capra">{name}</p>
+                    </div>
 
                     {rawHeart && (
-                        <Image src={heart} alt='Raw heart' className='w-[4%] h-7 hover:cursor-pointer' onClick={() => { Like(name); }} />
+                        <Image src={heart} alt='Raw heart' className='w-[4.5%] h-7 hover:cursor-pointer' onClick={() => { Like(name); }} />
                     )}
 
                     {filledHeart && (
-                        <Image src={heart_filled} alt='Filled Heart' className='w-[4%] h-7 hover:cursor-pointer' onClick={ ()=> { Like(name); }} />
+                        <div className='w-[10%] flex justify-center items-center'>
+                            <Image src={heart_filled} alt='Filled Heart' className='w-[45%] h-7 hover:cursor-pointer' onClick={ ()=> { Like(name); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
+                            <p className='font-Poppins text-[20px] p-2 hidden bg-amber-50 rounded-4xl' ref={ratingDiv}>{rating}</p>
+                        </div>
                     )}
 
                 </div>
@@ -207,10 +229,22 @@ const Recipe = () => {
 
             <div className="w-full flex justify-center">
                 <div className='w-[97%] mt-2 mb-5'> 
-                    {mealDetails.map((meal) => ( <p key={meal.idMeal} className='font-Poppins p-2 pl-0'>{meal.strInstructions.split(/\d+\.\s*/g)}</p> ))} 
+                    {mealDetails.map((meal) => (  
+                    <p key={meal.idMeal} className="font-Poppins p-2 pl-0">
+                        {meal.strInstructions
+                        .split(/(?<=\.)\s+(?=[A-Z])/)
+                        .map((sentence, index) => (
+                            <span key={index}>
+                            {sentence}
+                            <br />
+                            </span>
+                        ))}
+                        </p>
+                    ))}
                 </div> 
             </div>
         </div>
+
 
         <div className='w-[80%] bg-white mt-10 rounded-xl'>
             <div className='w-full p-2 mt-4'>

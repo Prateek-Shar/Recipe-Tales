@@ -10,7 +10,9 @@ export const GET = async() => {
 
         try {
 
-            const details = await Recipe_Details.find().sort({_id : -1}).limit(6)
+            const details = await Recipe_Details.find().select("Recipe_name Tags Author_name _id")
+
+            console.log("Details : " , details);
 
             return new Response(JSON.stringify({det : details}) , {status : 200})
         }

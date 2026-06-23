@@ -10,6 +10,7 @@ import arrow from "@/public/Images/arrow.png"
 import { useRef, useState } from "react";
 import Check from "@/public/Images/check.png"
 import prohib from "@/public/Images/prohibition.png";
+import { useRouter } from "next/navigation";
 
 
 
@@ -17,6 +18,9 @@ export default function Home() {
 
   const [renderMsgDiv , setRenderMsgDiv] = useState(false)
   const [renderErrorDiv , setRenderErrorDiv] = useState(false)
+  const [successSubscribe , setSuccessSubscribe] = useState(false)  
+
+  const router = useRouter();
 
   const subscribeText = useRef<HTMLInputElement>(null)
 
@@ -26,10 +30,8 @@ export default function Home() {
     setTimeout(() => {
       setRenderMsgDiv(false)
     } , 2000)
-
   }
 
-  const [successSubscribe , setSuccessSubscribe] = useState(false)
 
   const RenderSuccessSubsribe = () => {
 
@@ -56,10 +58,16 @@ export default function Home() {
       setSuccessSubscribe(false)
     } , 2000)
 
+
+  }
+
+  const render_all_recipe = () => {
+    router.push("/all_recipe")
   }
 
 
   return (
+
     <>
 
     <div className="w-full" style={{backgroundImage : `url("/Images/banner_img.png")` , height : "600px" , backgroundSize : "cover" , backgroundPosition: "center" , paddingTop: "1px" }}>
@@ -112,14 +120,15 @@ export default function Home() {
         )}
 
         <div className="w-[40%] flex flex-row-reverse">
-          <div className="w-[15%] flex">
+          <button className="w-[15%] flex cursor-pointer" onClick={render_all_recipe} >
             <p className="p-1 font-Poppins">View all</p>
 
             <div className="w-[25%] p-1 flex justify-center">
               <Image src={arrow} alt="view all" />
             </div>
-          </div>
+          </button>
         </div>
+        
       </div>
 
       <div className="w-full flex justify-evenly items-center mt-20 mb-10">
@@ -185,9 +194,6 @@ export default function Home() {
         </div>
       )}
 
-
-      
-
     </div>
 
     </>
@@ -195,3 +201,4 @@ export default function Home() {
   );
 
 }
+
