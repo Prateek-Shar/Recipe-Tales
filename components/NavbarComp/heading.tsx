@@ -14,7 +14,7 @@ const NavbarHeading = () => {
             </div>
 
             <div className="w-[75%] flex items-center">
-                <p className="pl-2 font-Capra text-2xl">TastyTales</p>
+                <p className="pl-2 font-Capra text-2xl cursor-pointer">TastyTales</p>
             </div>
         </div>
 
