@@ -252,9 +252,16 @@ const Recipe = () => {
             </div>
 
             <div className='w-full p-2 mt-10 pl-4 flex'>
-                <p className='font-Mogra text-2xl'>Catagory     -</p>
+                <p className='font-Mogra text-2xl'>Category     -</p>
                 {mealDetails.map((meal) => (
                     <p key={meal.idMeal} className='font-Poppins text-[20px] ml-5'>{meal.strCategory}</p>
+                ))}
+            </div>
+
+            <div className='w-full p-2 mt-5 pl-4 flex'>
+                <p className='font-Mogra text-2xl'>Area     -</p>
+                {mealDetails.map((meal) => (
+                    <p key={meal.idMeal} className='font-Poppins text-[20px] ml-5'>{meal.strArea}</p>
                 ))}
             </div>
 

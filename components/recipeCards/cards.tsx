@@ -11,7 +11,8 @@ import { Skeleton } from "antd"
 interface MealInfo {
     [key: string]: any;
     idMeal : string;
-    strMeal : string
+    strMeal : string,
+    catagory : string
 }
 
 interface info {
@@ -117,7 +118,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                 {randomMeal.map((rm) => (
                 <div className="w-full flex flex-col" key={rm.idMeal} >
                     <div className="w-full bg-[#e4e9ec] flex justify-center rounded-tl-[22px] rounded-tr-[22px] border-0 border-b-2 border-[#eeeeee]">
-                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={300} height={300} />
+                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full" />
                     </div>
 
                     <div className="w-full mt-4 ml-1.5">
@@ -162,45 +163,12 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                 {randomMealTwo.map((rm) => (
                 <div className="w-full flex flex-col" key={rm.idMeal}>
                     <div className="w-full bg-[#e4e9ec] flex justify-center rounded-tl-[22px] rounded-tr-[22px] border-0 border-b-2 border-[#eeeeee]">
-                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={300} height={300} />
+                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full" />
                     </div>
                         
                     <div className="w-full mt-4 ml-1.5">
                         <p className="font-Mogra text-[24px]">{rm.strMeal}</p>
                     </div>
-
-                    {/* <div className="w-full flex mt-3">
-                        <div className="w-[20%] flex">
-                            <div className="w-[30%] flex items-center">
-                                <Image src={clock} alt="clock" className="p-1"/>
-                            </div>
-
-                            <div className="w-[70%] flex items-center">
-                                <p className="text-[12px] font-Poppins">30 mins</p>
-                            </div>
-                        </div>
-
-                        <div className="w-[20%] flex ml-2">
-                            <div className="w-[30%]">
-                                <Image src={cut} alt="clock" className="p-1"/>
-                            </div>
-
-                            <div className="w-[70%] flex items-center">
-                                <p className="text-[12px] font-Poppins">Easy</p>
-                            </div>
-                        </div>
-
-                        <div className="w-[20%] flex">
-                            <div className="w-[30%]">
-                                <Image src={rating} alt="clock" className="p-1"/>
-                            </div>
-
-                            <div className="w-[70%] flex items-center">
-                                <p className="text-[12px] font-Poppins">4.5</p>
-                            </div>
-                        </div>
-                    </div> */}
-
 
                     <div className="w-[98%] flex justify-between mt-8 mb-0.5 ml-0.5" >
                         <div className="w-[30%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ ()=>{handleToRecipe(rm.strMeal , rm.idMeal)} }>
@@ -238,7 +206,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                         <div className="w-full flex flex-col" key={rm.idMeal}>
 
                             <div className="w-full bg-[#e4e9ec] flex justify-center rounded-tl-[22px] rounded-tr-[22px] border-0 border-b-2 border-[#eeeeee]">
-                                <Image src={rm.strMealThumb} alt="paav bhaaji image" width={300} height={300}/> 
+                                <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full" /> 
                             </div>
 
                             <div className="w-full mt-4 ml-1.5">
@@ -246,38 +214,6 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                                     {rm.strMeal}
                                 </p>
                             </div>
-
-                            {/* <div className="w-full flex mt-3">
-                                <div className="w-[20%] flex">
-                                    <div className="w-[30%] flex items-center">
-                                        <Image src={clock} alt="clock" className="p-1"/>
-                                    </div>
-
-                                    <div className="w-[70%] flex items-center">
-                                        <p className="text-[12px] font-Poppins">30 mins</p>
-                                    </div>
-                                </div>
-
-                                <div className="w-[20%] flex ml-2">
-                                    <div className="w-[30%]">
-                                        <Image src={cut} alt="clock" className="p-1"/>
-                                    </div>
-
-                                    <div className="w-[70%] flex items-center">
-                                        <p className="text-[12px] font-Poppins">Easy</p>
-                                    </div>
-                                </div>
-
-                                <div className="w-[20%] flex">
-                                    <div className="w-[30%]">
-                                        <Image src={rating} alt="clock" className="p-1"/>
-                                    </div>
-
-                                    <div className="w-[70%] flex items-center">
-                                        <p className="text-[12px] font-Poppins">4.5</p>
-                                    </div>
-                                </div>
-                            </div> */}
 
                             <div className="w-[98%] flex justify-between mt-8 mb-0.5 ml-0.5">
                                 <div className="w-[30%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ ()=> {handleToRecipe(rm.strMeal , rm.idMeal)} }>
