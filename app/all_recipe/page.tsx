@@ -8,15 +8,15 @@ const all_recipe = () => {
 
         <div className="w-full">
 
-            <div className="w-full flex flex-col items-center justify-evenly backdrop-blur-lg"  style={{backgroundImage : 'url(/Images/all_recipe.png)' , backgroundRepeat : "no-repeat" , backgroundSize : "cover" , backgroundPosition : "center" , height : 500}}>
+            <div className="w-full flex flex-col items-center justify-evenly backdrop-blur-lg bg-[url(/Images/all_recipe.png)] bg-no-repeat bg-cover">
                 
-                <div className="w-[30%] mt-10">
-                    <p className="font-Capra text-4xl text-stone-200 text-shadow-lg text-center">Discover Every Recipe in One Place</p>
+                <div className="xl:w-[30%] mm:w-[90%] xl:mt-25 mm:mt-20">
+                    <p className="font-Capra xl:text-4xl mm:text-3xl text-stone-200 text-shadow-lg text-center">Discover Every Recipe in One Place</p>
                 </div>
 
-                <div className="w-[60%] flex items-center flex-col">
-                    <p className="font-Capra text-3xl text-stone-200 text-shadow-lg text-center">Explore our complete collection of delicious recipes, from quick snacks and comforting meals to desserts and refreshing beverages. Find the perfect dish for every occasion.</p>
-                    <Image src={arr} alt="scroll down" className="animate-bounce mt-8" height={30} width={30} />
+                <div className="xl:w-[60%] mm:w-[90%] flex items-center flex-col xl:my-10 mm:my-10">
+                    <p className="font-Capra xl:text-3xl text-stone-200 mm:text-[18px] text-shadow-lg text-center">Explore our complete collection of delicious recipes, from quick snacks and comforting meals to desserts and refreshing beverages. Find the perfect dish for every occasion.</p>
+                    <Image src={arr} alt="scroll down" className="animate-bounce mt-8 mm:w-5 mm:h-5 xl:w-10 xl:h-10" />
                 </div>
 
             </div>

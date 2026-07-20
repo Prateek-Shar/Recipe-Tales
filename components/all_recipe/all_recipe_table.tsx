@@ -57,37 +57,26 @@ const all_recipe_table = () => {
 
         {showStats && (
             mealDet.length > 0 ? (
-                <table className="border-gray-200 border-2 w-[75%] rounded-2xl flex flex-col border-collapse" bgcolor="#f2f1ff">
+                <table className="border-gray-200 border-2 xl:w-[75%] mm:w-[90%] rounded-2xl flex flex-col border-collapse" bgcolor="#f2f1ff">
 
-                <tr className="flex border-b-2 border-gray-200">
-                    <div className="w-[30%] flex justify-center">
-                        <th className="p-2 text-2xl text-amber-700">Recipe name</th>
-                    </div>
+                <tr className="flex border-b-2 border-gray-200 justify-between items-center">
+                    <th className="w-[30%] text-amber-700 p-2 xl:text-2xl mm:text-[12px]">Recipe name</th>
+                    
                     {/* <th className="p-2">Likes</th> */}
     
-                    <div className="w-[30%] flex justify-center">
-                        <th className="p-2 text-2xl text-amber-700">Tag</th>
-                    </div>
+                    <th className="w-[30%] text-amber-700 p-2 xl:text-2xl mm:text-[16px]">Tag</th>
     
-                    <div className="w-[30%] flex justify-center">
-                        <th className="p-2 text-2xl text-amber-700">Submitted By</th>
-                    </div>
+                    <th className="w-[30%] text-amber-700 p-2 xl:text-2xl mm:text-[12px]">Submitted By</th>
                 </tr>
     
                 {mealDet.map((md) => { 
                     return (
-                    <tr key={md._id} className="flex nth-last-[]:border-b-0">
-                        <div className="w-[30%] flex justify-center">
-                            <td className="font-Poppins p-4 text-stone-700 hover:cursor-pointer" onClick={ () => {renderRecipe(md.Recipe_name)} }>{md.Recipe_name || "NA"}</td>
-                        </div>
+                    <tr key={md._id} className="flex nth-last-[]:border-b-0 justify-between items-center">
+                        <td className="w-[30%] font-Poppins p-4 hover:cursor-pointer text-center" onClick={ () => {renderRecipe(md.Recipe_name)} }>{md.Recipe_name || "NA"}</td>
     
-                        <div className="w-[30%] flex justify-center border-white">
-                            <td className="font-Poppins p-4 text-stone-700">{md.Tags || "NA"}</td>
-                        </div>
+                        <td className="w-[30%] font-Poppins p-4 text-center">{md.Tags || "NA"}</td>
     
-                        <div className="w-[30%] flex justify-center border-white">
-                            <td className="font-Poppins p-4 text-stone-700">{md.Author_name || "NA"}</td>
-                        </div>
+                        <td className="w-[30%] font-Poppins p-4 text-center">{md.Author_name || "NA"}</td>
                     </tr>
                     );
                 })}
