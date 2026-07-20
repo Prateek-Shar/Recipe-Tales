@@ -7,7 +7,7 @@ const Footer = () => {
 
     return (
         
-        <div className="w-full bg-[#1a212d] flex xl:flex-row mm:flex-col justify-evenly xl:p-15 mm:p-10">
+        <div className="w-full bg-[#1a212d] flex xl:flex-row mm:flex-col justify-evenly xl:p-15 mm:p-5">
 
           <Footer_Intro />
 

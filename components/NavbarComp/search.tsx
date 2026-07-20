@@ -118,12 +118,12 @@ const SearchBar = () => {
         <div className="xl:w-[15%] mm:w-[30%] bg-white flex flex-col border-2 border-[#f5f5f4] rounded-2xl relative xl:mr-10 mm:mr-0" ref={searchBoxDiv}>
 
             <div className="flex">
-                <div className="w-[8%] p-1 flex justify-center items-center ml-2">
+                <div className="xl:w-[8%] mm:hidden p-1 flex justify-center items-center ml-2">
                     <Image src={search} alt="Serach Icon" />
                 </div>
 
                 <div className="w-[90%] border-0 flex items-center">
-                    <input type="text" placeholder={searchPlaceholder} className=" w-full p-2 outline-0 font-Poppins xl:text-[16px] mm:text-[13px]" ref={searchBox} onChange={handleSearch}/>
+                    <input type="text" placeholder={searchPlaceholder} className=" w-full p-2 outline-0 font-Poppins xl:text-[16px] mm:text-[13px] placeholder:text-[10px]" ref={searchBox} onChange={handleSearch}/>
                 </div>
             </div>
 
