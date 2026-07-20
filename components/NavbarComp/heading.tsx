@@ -8,13 +8,13 @@ const NavbarHeading = () => {
 
         <>
 
-        <div className="w-[10%] flex ml-10">
-            <div className="w-[25%] p-1" >
+        <div className="xl:w-[10%] mm:w-[12%] flex xl:ml-10 mm:ml-0">
+            <div className="xl:w-[25%] mm:w-full p-1" >
                 <Image src={navbar_logo} alt="Logo Image" />
             </div>
 
-            <div className="w-[75%] flex items-center">
-                <p className="pl-2 font-Capra text-2xl cursor-default">TastyTales</p>
+            <div className="w-[75%] xl:flex mm:hidden items-center">
+                <p className="pl-2 font-Capra xl:text-2xl mm:text-[16px] cursor-default">TastyTales</p>
             </div>
         </div>
 

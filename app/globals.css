@@ -4,6 +4,10 @@ body {
     background-color: #f8f8fa;
 }
 
+@theme {
+  --breakpoint-mm : 375px;
+}
+
 @font-face {
     font-family: Caprasimo;
     src: url("/fonts/Caprasimo-Regular.ttf");

@@ -63,21 +63,21 @@ export default function Home() {
 
     <>
 
-    <div className="w-full" style={{backgroundImage : `url("/Images/banner_img.png")` , height : "600px" , backgroundSize : "cover" , backgroundPosition: "center" , paddingTop: "1px" }}>
+    <div className="xl:w-full mm:w-screen bg-[url(/Images/banner_img.png)] xl:h-[600px] bg-cover bg-no-repeat py-1">
 
-      <Main_Heading />
+      <Main_Heading />  
 
       <Buttons />
 
     </div>
 
-    <div className="w-full flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col xl:justify-center items-center">
 
-      <div className="w-[30%] flex items-center justify-center mt-10">
-          <h2 className="p-2 text-4xl font-Capra">Browse By Catagory</h2>
+      <div className="xl:w-[30%] mm:w-full flex items-center xl:justify-center mm:justify-normal mt-10">
+          <h2 className="p-2 xl:text-4xl mm:text-2xl font-Capra">Browse By Catagory</h2>
       </div>
 
-      <div className="w-[60%] flex justify-center items-center mt-4">
+      <div className="xl:w-[60%] mm:w-full flex justify-center items-center mt-4">
           <p className="p-2 text-[18px] font-Poppins">Explore our wide varity of recipes organized by meal type , cuisine and dietary preferences</p>
       </div>
 
@@ -90,9 +90,9 @@ export default function Home() {
     <div className="w-full flex flex-col">
 
       <div className="w-full flex justify-between items-center mt-20">
-        <div className="w-[40%] ml-3">
+        <div className="xl:w-[40%] mm:w-full ml-3">
           <div className="w-full">
-            <p className="p-1 text-3xl font-Capra">Featured Recipes</p>
+            <p className="p-1 xl:text-3xl mm:text-2xl font-Capra">Featured Recipes</p>
           </div>
 
           <div className="w-full">
@@ -114,37 +114,37 @@ export default function Home() {
         
       </div>
 
-      <div className="w-full flex justify-evenly items-center mt-20 mb-10">
+      <div className="w-full flex xl:flex-row mm:flex-col justify-evenly items-center my-10">
         <RecipeCards setMsgDiv={handleAlert}/>
       </div>
 
     </div>
 
     <div className="w-full bg-[#f2f1ff] flex flex-col mt-10">
-      <div className="w-full flex justify-center mt-10 mb-5">
-        <div className="w-[2%]">
+      <div className="w-full flex justify-center xl:mt-10 xl:mb-5 mm:my-5">
+        <div className="xl:w-[2%] mm:w-[6%]">
           <Image src={email} alt="email" />
         </div>
       </div>
 
-      <div className="w-full flex justify-center">
-        <p className="p-2 text-3xl font-Capra">Get Weekly Recipe Inspiration</p>
+      <div className="w-full flex justify-center mm:items-center">
+        <p className="p-2 xl:text-3xl mm:text-[20px] font-Capra">Get Weekly Recipe Inspiration</p>
       </div>
 
       <div className="w-full flex justify-center">
-        <div className="w-[25%] flex justify-center">
-          <p className="font-Poppins p-1">Subscripe to our newsletter and recieve delicious recipes</p>
+        <div className="xl:w-[25%] mm:w-[90%] flex justify-center">
+          <p className="font-Poppins p-1 text-center">Subscripe to our newsletter and recieve delicious recipes</p>
         </div>
       </div>
 
       <div className="w-full flex justify-center mt-5 mb-10">
-        <div className="w-[30%] flex justify-between items-center">
+        <div className="xl:w-[30%] mm:w-[70%] flex justify-between items-center">
           <div className="w-[70%]">
             <input type="email" className="w-full border-2 border-[#ebebf0] text-[#5820d7] p-3 rounded-2xl outline-0 bg-white font-Poppins text-[14px]" placeholder="Enter Email Address . . . . ." ref={subscribeText}/>
           </div>
 
-          <div className="w-[20%] bg-[#641bff] rounded-full flex justify-center">
-            <button type="button" className="text-white text-[15px] p-2 font-Poppins" onClick={RenderSuccessSubsribe}>Subscribe</button>
+          <div className="xl:w-[20%] mm:w-[25%] bg-[#641bff] rounded-full flex justify-center">
+            <button type="button" className="text-white xl:text-[15px] mm:text-[10px] p-2 font-Poppins" onClick={RenderSuccessSubsribe}>Subscribe</button>
           </div>
         </div>
       </div>

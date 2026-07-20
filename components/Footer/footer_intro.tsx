@@ -9,14 +9,14 @@ const Footer_Intro = () => {
     
     return (
         
-        <div className="w-[30%] flex flex-col">
+        <div className="xl:w-[30%] mm:w-full flex flex-col">
 
             <div className="w-full flex">
-                <div className="w-[8%] p-1">
+                <div className="xl:w-[8%] mm:w-[15%] xl:p-1 mm:p-2">
                     <Image src={navbar_logo} alt="Logo Image" />
                 </div>
 
-                <div className="w-[70%] flex items-center">
+                <div className="xl:w-[70%] mm:w-[80%] flex items-center">
                     <p className="pl-2 font-Capra text-[#d9d9d9] text-2xl">TastyTales</p>
                 </div>
             </div>

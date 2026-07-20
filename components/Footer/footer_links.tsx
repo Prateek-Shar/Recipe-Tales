@@ -13,7 +13,7 @@ const Footer_Links:React.FC<links> = ({Home , Recipes}) => {
 
     return (
         
-        <div className="w-[25%] flex flex-col">
+        <div className="xl:w-[25%] mm:w-full flex flex-col xl:my-0 mm:my-10">
             <div className="w-full">
                 <p className="p-1 font-Capra text-[#d9d9d9] text-2xl">Quick Links</p>
             </div>

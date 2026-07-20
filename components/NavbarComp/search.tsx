@@ -16,6 +16,8 @@ interface meals_det {
 
 const SearchBar = () => {
 
+    const router = useRouter()
+
     const searchBox =  useRef<HTMLInputElement>(null)
     const recipeName = useRef<HTMLInputElement>(null)
     const searchBoxDiv =  useRef<HTMLInputElement>(null)
@@ -106,27 +108,22 @@ const SearchBar = () => {
     }
 
 
-    const router = useRouter()
-
     const handleClickToRecipeDet = (value : string , id : string) => {
         router.push(`/recipe/recipeName?Meal_name=${value}&id=${id}`)
     }
 
-    console.log(`Meal lenght : ${MealDet.length}`)
-
-
 
     return (
 
-        <div className="w-[15%] bg-white flex flex-col border-2 border-[#f5f5f4] rounded-2xl relative mr-10" ref={searchBoxDiv}>
+        <div className="xl:w-[15%] mm:w-[30%] bg-white flex flex-col border-2 border-[#f5f5f4] rounded-2xl relative xl:mr-10 mm:mr-0" ref={searchBoxDiv}>
 
             <div className="flex">
                 <div className="w-[8%] p-1 flex justify-center items-center ml-2">
                     <Image src={search} alt="Serach Icon" />
                 </div>
 
-                <div className="w-[90%] border-0 flex items-center" >
-                    <input type="text" placeholder={searchPlaceholder} className=" w-full p-2 outline-0 font-Poppins" ref={searchBox} onChange={handleSearch}/>
+                <div className="w-[90%] border-0 flex items-center">
+                    <input type="text" placeholder={searchPlaceholder} className=" w-full p-2 outline-0 font-Poppins xl:text-[16px] mm:text-[13px]" ref={searchBox} onChange={handleSearch}/>
                 </div>
             </div>
 

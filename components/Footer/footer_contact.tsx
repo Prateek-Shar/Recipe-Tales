@@ -5,14 +5,14 @@ import Image from "next/image";
 const Footer_Contact = () => {
 
     return (
-        <div className="w-[25%]">
+        <div className="xl:w-[25%] mm:w-full">
 
             <div className="w-full flex items-center">
                 <p className="p-1 font-Capra text-[#d9d9d9] text-2xl">Contact Us</p>
             </div>
 
             <div className="w-full flex flex-col mt-6">
-                <div className="w-[40%] flex items-center">
+                <div className="xl:w-[40%] mm:w-[60%] flex items-center">
                     <div className="w-[15%] flex items-center">
                         <Image src={email} alt="Email" className="p-1" />
                     </div>
@@ -22,7 +22,7 @@ const Footer_Contact = () => {
                     </div>
                 </div>
 
-                <div className="w-[40%] flex  mt-2">
+                <div className="xl:w-[40%] mm:w-[60%] flex mt-2">
                     <div className="w-[15%] flex items-center">
                         <Image src={contact} alt="Email" className="p-1"/>
                     </div>

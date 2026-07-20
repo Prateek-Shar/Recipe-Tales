@@ -7,17 +7,18 @@ const Footer = () => {
 
     return (
         
-        <div className="w-full bg-[#1a212d] flex justify-evenly p-15">
+        <div className="w-full bg-[#1a212d] flex xl:flex-row mm:flex-col justify-evenly xl:p-15 mm:p-10">
 
           <Footer_Intro />
 
-          <div className="xl:flex xl:items-center">
+          <div className="xl:flex mm:hidden xl:items-center">
               <div className="w-0.5 h-25 bg-[#d9d9d9]" />
+              {/* <hr className="xl:hidden w-full h-[3px] bg-[#d9d9d9] my-10" /> */}
           </div>
 
           <Footer_Links />
 
-          <div className="xl:flex xl:items-center">
+          <div className="xl:flex mm:hidden xl:items-center">
               <div className="w-0.5 h-25 bg-[#d9d9d9]" />
           </div>
 

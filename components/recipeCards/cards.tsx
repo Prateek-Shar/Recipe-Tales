@@ -105,7 +105,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
         <>
 
             {/* Recipe 1 */}
-            <div className="w-[25%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee]">
+            <div className="xl:w-[25%] mm:w-[90%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee]">
 
                 {skeletonOne && (
                     <div className="w-full p-10">
@@ -118,16 +118,16 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                 {randomMeal.map((rm) => (
                 <div className="w-full flex flex-col" key={rm.idMeal} >
                     <div className="w-full bg-[#e4e9ec] flex justify-center rounded-tl-[22px] rounded-tr-[22px] border-0 border-b-2 border-[#eeeeee]">
-                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full" />
+                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full rounded-t-3xl" />
                     </div>
 
                     <div className="w-full mt-4 ml-1.5">
-                        <p className="font-Mogra text-[24px]">{rm.strMeal}</p>
+                        <p className="font-Mogra xl:text-[24px] mm:text-[16px]">{rm.strMeal}</p>
                     </div>
 
 
                     <div className="w-[98%] flex justify-between mt-8 mb-0.5 ml-0.5">
-                        <div className="w-[30%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ () => {handleToRecipe(rm.strMeal , rm.idMeal); } }>
+                        <div className="xl:w-[30%] mm:w-[42%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ () => {handleToRecipe(rm.strMeal , rm.idMeal); } }>
                             <div className="w-[70%] flex items-center ml-2">
                                 <p className="text-[14px] font-Poppins">View Recipe</p>
                             </div>
@@ -137,7 +137,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                             </div>
                         </div>
 
-                        <div className="w-[8%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
+                        <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
                             <Image src={share} alt="share" />
                         </div>
                     </div>
@@ -151,7 +151,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
 
 
             {/* Recipe 2 */}
-            <div className="w-[25%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee]">
+            <div className="xl:w-[25%] mm:w-[90%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee] my-10">
                 {skeletonOne && (
                     <div className="w-full p-10">
                         <Skeleton active />
@@ -163,15 +163,15 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                 {randomMealTwo.map((rm) => (
                 <div className="w-full flex flex-col" key={rm.idMeal}>
                     <div className="w-full bg-[#e4e9ec] flex justify-center rounded-tl-[22px] rounded-tr-[22px] border-0 border-b-2 border-[#eeeeee]">
-                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full" />
+                        <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full rounded-t-3xl" />
                     </div>
                         
                     <div className="w-full mt-4 ml-1.5">
-                        <p className="font-Mogra text-[24px]">{rm.strMeal}</p>
+                        <p className="font-Mogra xl:text-[24px] mm:text-[16px]">{rm.strMeal}</p>
                     </div>
 
                     <div className="w-[98%] flex justify-between mt-8 mb-0.5 ml-0.5" >
-                        <div className="w-[30%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ ()=>{handleToRecipe(rm.strMeal , rm.idMeal)} }>
+                        <div className="xl:w-[30%] mm:w-[42%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ ()=>{handleToRecipe(rm.strMeal , rm.idMeal)} }>
                             <div className="w-[70%] flex items-center ml-2">
                                 <p className="text-[14px] font-Poppins">View Recipe</p>
                             </div>
@@ -181,7 +181,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                             </div>
                         </div>
 
-                        <div className="w-[8%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
+                        <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
                             <Image src={share} alt="share" />
                         </div>
                     </div>
@@ -192,7 +192,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
             </div>
 
             {/* Recipe 3 */}
-            <div className="w-[25%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee]">
+            <div className="xl:w-[25%] mm:w-[90%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee]">
 
                 {skeletonOne && (
                     <div className="w-full p-10">
@@ -206,17 +206,17 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                         <div className="w-full flex flex-col" key={rm.idMeal}>
 
                             <div className="w-full bg-[#e4e9ec] flex justify-center rounded-tl-[22px] rounded-tr-[22px] border-0 border-b-2 border-[#eeeeee]">
-                                <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full" /> 
+                                <Image src={rm.strMealThumb} alt="paav bhaaji image" width={200} height={200} className="w-full rounded-t-3xl" /> 
                             </div>
 
                             <div className="w-full mt-4 ml-1.5">
-                                <p className="font-Mogra text-[24px]">
+                                <p className="font-Mogra xl:text-[24px] mm:text-[16px]">
                                     {rm.strMeal}
                                 </p>
                             </div>
 
                             <div className="w-[98%] flex justify-between mt-8 mb-0.5 ml-0.5">
-                                <div className="w-[30%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ ()=> {handleToRecipe(rm.strMeal , rm.idMeal)} }>
+                                <div className="xl:w-[30%] mm:w-[42%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px]" onClick={ ()=> {handleToRecipe(rm.strMeal , rm.idMeal)} }>
                                     <div className="w-[70%] flex items-center ml-2">
                                         <p className="text-[14px] font-Poppins">View Recipe</p>
                                     </div>
@@ -226,7 +226,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                                     </div>
                                 </div>
 
-                                <div className="w-[8%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
+                                <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
                                     <Image src={share} alt="share" />
                                 </div>
                             </div>
