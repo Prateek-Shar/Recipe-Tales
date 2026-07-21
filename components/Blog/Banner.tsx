@@ -8,29 +8,29 @@ const Banner = () => {
 
 
     return (
-        <div className="w-full bg-[url(/Images/blog_banner.jpg)] bg-cover p-1 opacity-90">
+        <div className="w-full bg-[url(/Images/blog_banner.jpg)] bg-cover p-1 opacity-90 bg-center">
 
             <div className="w-full flex justify-center mt-50 animate-bounce">
                 <Image src={cap} alt="Chef Cap" width={50} height={50} />
             </div>
 
             <div className="w-full flex justify-center">
-                <p className="font-Capra text-7xl text-white">Recipe Tales</p>
+                <p className="font-Capra xl:text-7xl mm:text-4xl text-white">Recipe Tales</p>
             </div>
 
             <div className="w-full flex justify-center items-center mt-5">
-                <div className="w-[40%] flex items-start justify-center text-center">
+                <div className="xl:w-[40%] mm:w-[90%] flex items-start justify-center text-center">
                     <p className="font-Mogra text-2xl text-white">Discover delicious recipes, cooking tips, and culinary inspiration from around the world</p>
                 </div>
             </div>
 
             <div className="w-full flex justify-center items-center mt-10 mb-20">
 
-                <div className="w-[10%] flex bg-[#ca6441] rounded-2xl ml-8">
+                <div className="xl:w-[10%] mm:w-[40%] flex bg-[#ca6441] rounded-2xl xl:ml-8 mm:ml-0">
                     <div className="w-[10%] ml-2 flex justify-center items-center">
                         <Image src={exp_recipe} alt="Explore Recipe" width={100} height={100} />
                     </div>
-                    <div className="w-[90%] ml-2 p-3">
+                    <div className="w-[90%] flex justify-center items-center p-3">
                         <Link href="/add_recipe" className="text-[16px] font-Poppins text-white">Add Recipes</Link>
                     </div>
                 </div>

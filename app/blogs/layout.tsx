@@ -1,21 +1,61 @@
+"use client"
+
+import { useEffect, useRef, useState } from "react";
+import Cards from "./@cards/page";
+import CardsTwo from "./@cardsTwo/page";
+
 const Layout = ({children , cards , cardsTwo} : {children:React.ReactNode , cards:React.ReactNode , cardsTwo:React.ReactNode}) => {
+
+    const [stepNum , setStepNum] = useState<number>(1)
+    const [firstDiv , setFirstDiv] = useState<boolean>(true)
+
+    const Second_card = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if(stepNum == 2) {
+            setFirstDiv(false)
+
+            if(Second_card.current) {
+                Second_card.current.classList.add("flex")
+                Second_card.current.classList.remove("hidden")
+            }
+            
+        }
+    } , [stepNum])
 
     return (
         <>
+            {/* <div className="w-full xl:flex mm:hidden">
+                {children}
+            </div>
+
+            <div className="w-full xl:flex xl:flex-col mm:hidden justify-center items-center flex-col">
+                <div className="w-[75%] mt-15 mb-20">
+                    {cards}
+                </div>
+
+                <div className="xl:flex xl:flex-col mm:hidden w-[85%] mt-5 mb-35">
+                    {cardsTwo}
+                </div>
+            </div> */}
+        
             <div className="w-full">
                 {children}
             </div>
 
             <div className="w-full flex justify-center items-center flex-col">
-                <div className="w-[75%] mt-15 mb-20">
-                    {cards}
-                </div>
+                {firstDiv && (
+                    <div className="w-[75%] xl:flex mt-15 mb-20">
+                        <Cards stepCount={stepNum} setStepCount={setStepNum} />
+                    </div>
+                )}
 
-                <div className="w-[85%] mt-5 mb-35">
-                    {cardsTwo}
+                <div className="w-[85%] hidden mt-5 mb-35" ref={Second_card}>
+                    <CardsTwo />
                 </div>
             </div>
         </>
+           
         
     )
 }

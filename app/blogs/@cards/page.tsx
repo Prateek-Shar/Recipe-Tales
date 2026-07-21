@@ -3,8 +3,9 @@
 import Image from "next/image"
 import person from "@/public/Images/person.png";
 import clock from "@/public/Images/blog_clock.png";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import no_img from "@/public/Images/no_img.jpg"
+import next from "@/public/Images/next.png";
 import { Skeleton } from "antd";
 
 
@@ -16,8 +17,13 @@ interface ing_det {
     Cook_Time : number | null
 }
 
+interface step {
+    stepCount : number | null
+    setStepCount : React.Dispatch<React.SetStateAction<number>>
+}
 
-const Cards = () => {
+
+const Cards = ({stepCount , setStepCount} : step) => {
 
     const [recipeDetails , setRecipeDetails] = useState<ing_det[]>([])
 
@@ -41,15 +47,22 @@ const Cards = () => {
 
     useEffect(() => {
         handleAPI()
-    }, [])
+        showStepCount()
+    }, [stepCount])
 
     const [showStats , setShowStats] = useState<boolean>(false)
     const [showStats2 , setShowStats2] = useState<boolean>(false);
     const [showSkeleton , setShowSkeleton] = useState<boolean>(true);
 
+    const showStepCount = () => {
+        console.log(`Step count : ${stepCount}`)
+    }
+    
+
 
     return (
-        <div className="w-full flex justify-between items-center">
+
+        <div className="w-full flex xl:flex-row mm:flex-col justify-between items-center">
             
             {showSkeleton && (
                 <div className="w-[90%]">
@@ -59,21 +72,21 @@ const Cards = () => {
 
             {showStats && (
                 recipeDetails[0] ? (
-                <div className="w-[55%] bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] pb-15 hover:cursor-pointer">
-                    <div className="w-full h-140 bg-[url(/Images/no_img.jpg)] bg-cover bg-center rounded-t-2xl" />
+                <div className="xl:w-[55%] mm:w-full bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] xl:pb-15 mm:pb-0 hover:cursor-pointer">
+                    <div className="w-full xl:h-140 mm:h-100 bg-[url(/Images/no_img.jpg)] bg-cover bg-center rounded-t-2xl" />
                     
                     <div className="w-full mt-8">
-                        <p className="font-Poppins text-2xl pl-3">{recipeDetails[0].Recipe_name || `NA`}  </p>
+                        <p className="font-Poppins xl:text-2xl mm:text-[17px] pl-3">{recipeDetails[0].Recipe_name || `NA`}  </p>
                     </div>
 
                     <div className="w-full mt-5">
-                        <p className="font-Poppins text-[#a2706a] pl-3">{recipeDetails[0].Recipe_short_desc}</p>
+                        <p className="font-Poppins text-[#a2706a] xl:text-[16px] mm:text-[14px] pl-3">{recipeDetails[0].Recipe_short_desc}</p>
                     </div>
 
-                    <div className="w-full mt-3">
-                        <div className="w-[60%] flex">
+                    <div className="w-full xl:mt-3 mm:my-5">
+                        <div className="xl:w-[60%] mm:w-full flex">
                             <div className="w-[45%] flex ml-3">
-                                <div className="w-[10%]">
+                                <div className="xl:w-[10%] mm:w-[18%] flex items-center justify-center">
                                     <Image src={person} alt="person" />
                                 </div>
 
@@ -82,8 +95,8 @@ const Cards = () => {
                                 </div>
                             </div>
 
-                            <div className="w-[45%] flex items-center">
-                                <div className="w-[8%]">
+                            <div className="w-[45%] flex justify-center items-center">
+                                <div className="xl:w-[8%] mm:w-[10%]">
                                     <Image src={clock} alt="person" />
                                 </div>
 
@@ -116,26 +129,26 @@ const Cards = () => {
             )}
 
             {showStats2 && (
-            <div className="w-[40%] flex flex-col justify-between">
+            <div className="xl:w-[40%] mm:w-full flex flex-col justify-between xl:mt-0 mm:mt-5">
 
                 {recipeDetails[1] ? (
-                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl pb-5 hover:cursor-pointer">
+                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl xl:pb-5 mm:pb-0 hover:cursor-pointer">
                     <div className="w-full flex h-50">
                         <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
 
-                    <div className="w-full pl-2  mt-5">
-                        <p className="font-Poppins text-2xl">{recipeDetails[1].Recipe_name}</p> 
+                    <div className="w-full pl-2 mt-5">
+                        <p className="font-Poppins xl:text-2xl mm:text-[17px]">{recipeDetails[1].Recipe_name}</p> 
                     </div>
 
                     <div className="w-full px-2 py-1 mt-5">
-                        <p className="font-Poppins text-[#a2706a]">{recipeDetails[1].Recipe_short_desc}</p>
+                        <p className="font-Poppins xl:text-[16px] mm:text-[14px] text-[#a2706a]">{recipeDetails[1].Recipe_short_desc}</p>
                     </div>
 
-                    <div className="w-full mt-3">
-                        <div className="w-[60%] flex">
+                    <div className="w-full xl:mt-3 mm:my-5">
+                        <div className="xl:w-[60%] mm:w-full flex">
                             <div className="w-[45%] flex ml-2">
-                                <div className="w-[15%] flex items-center">
+                                <div className="xl:w-[15%] mm:w-[18%] flex items-center">
                                     <Image src={person} alt="person" />
                                 </div>
 
@@ -145,7 +158,7 @@ const Cards = () => {
                             </div>
 
                             <div className="w-[45%] flex items-center ml-8">
-                                <div className="w-[8%]">
+                                <div className="xl:w-[8%] mm:w-[10%]">
                                     <Image src={clock} alt="person" />
                                 </div>
 
@@ -170,23 +183,23 @@ const Cards = () => {
 
 
                 {recipeDetails[2] ? (
-                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl pb-5 hover:cursor-pointer mt-5">
+                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl xl:pb-5 mm:pb-0 hover:cursor-pointer mt-5">
                     <div className="w-full flex flex-col h-50">
                         <div className="w-full h-full bg-cover bg-center rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
 
                     <div className="w-full pl-2 mt-5">
-                        <p className="font-Poppins text-2xl">{recipeDetails[2].Recipe_name}</p>
+                        <p className="font-Poppins xl:text-2xl mm:text-[17px]">{recipeDetails[2].Recipe_name}</p>
                     </div>
 
                     <div className="w-full pl-2 mt-5">
-                        <p className="font-Poppins text-[#a2706a]">{recipeDetails[2].Recipe_short_desc}</p>
+                        <p className="font-Poppins text-[#a2706a] xl:text-[16px] mm:text-[14px]">{recipeDetails[2].Recipe_short_desc}</p>
                     </div>
 
-                    <div className="w-full mt-3">
-                        <div className="w-[60%] flex">
+                    <div className="w-full xl:mt-3 mm:my-5">
+                        <div className="xl:w-[60%] mm:w-full flex">
                             <div className="w-[45%] flex ml-2">
-                                <div className="w-[15%] flex items-center">
+                                <div className="xl:w-[15%] mm:w-[18%] flex items-center">
                                     <Image src={person} alt="person" />
                                 </div>
 
@@ -196,7 +209,7 @@ const Cards = () => {
                             </div>
 
                             <div className="w-[45%] flex items-center ml-8">
-                                <div className="w-[8%]">
+                                <div className="xl:w-[8%] mm:w-[10%]">
                                     <Image src={clock} alt="person" />
                                 </div>
 
@@ -221,6 +234,12 @@ const Cards = () => {
 
             </div>
             )}
+
+            <div className="xl:hidden mm:flex mm:w-[10%] mt-6">
+                <Image src={next} className="" alt="Next BT" onClick={ () => setStepCount(prev => prev + 1)} />
+            </div>
+
+            
         </div>
     )
 }
