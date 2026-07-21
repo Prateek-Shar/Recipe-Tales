@@ -192,9 +192,9 @@ const Page = () =>  {
 
             <form onSubmit={EnterRecipe} className="w-full flex flex-col justify-center items-center relative">
 
-                <div className="w-[60%] bg-white border-2 px-10 py-5 border-[#e7e1da] mt-10 rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] bg-white border-2 px-10 py-5 border-[#e7e1da] mt-10 rounded-[10px]">
                     <div className="w-full mt-5">
-                        <h2 className="font-Mogra p-2 pl-1 text-3xl">Basic Information</h2>
+                        <h2 className="font-Mogra p-2 pl-1 xl:text-3xl mm:text-2xl">Basic Information</h2>
                     </div>
 
                     <div className="w-full mt-5">
@@ -223,14 +223,14 @@ const Page = () =>  {
                 </div>
 
 
-                <div className="w-[60%] flex flex-col bg-white border-2 px-10 py-5 border-[#e7e1da] mt-10 rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] flex flex-col bg-white border-2 px-10 py-5 border-[#e7e1da] mt-10 rounded-[10px]">
 
                     <div className="w-full">
-                        <p className="font-Mogra text-3xl">Recipe Details</p>
+                        <p className="font-Mogra xl:text-3xl mm:text-2xl">Recipe Details</p>
                     </div>
 
-                    <div className="w-full flex justify-between items-center">
-                        <div className="w-[30%] flex flex-col mt-5">
+                    <div className="w-full flex xl:flex-row mm:flex-col justify-between items-center">
+                        <div className="xl:w-[30%] mm:w-full flex flex-col xl:mt-5 mm:mt-8">
                             <div className="w-full flex justify-center mt-2">
                                 <div className="w-[10%] flex items-center justify-center">
                                     <Image src={Clock} alt="Preview Image" height={20} width={20} />
@@ -246,7 +246,7 @@ const Page = () =>  {
                             </div>
                         </div>
 
-                        <div className="w-[30%] flex flex-col mt-5">
+                        <div className="xl:w-[30%] mm:w-full flex flex-col mt-5">
                             <div className="w-full flex justify-center mt-2">
                                 <div className="w-[10%] flex items-center justify-center">
                                     <Image src={Clock} alt="Preview Image" height={20} width={20} />
@@ -262,7 +262,7 @@ const Page = () =>  {
                             </div>
                         </div>
 
-                        <div className="w-[30%] flex flex-col mt-5">
+                        <div className="xl:w-[30%] mm:w-full flex flex-col mt-5">
                             <div className="w-full flex justify-center mt-2">
                                 <div className="w-[10%] flex items-center justify-center">
                                     <Image src={serve} alt="Preview Image" height={20} width={20} />
@@ -282,10 +282,10 @@ const Page = () =>  {
                 </div>                
 
 
-                <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
                     
                     <div className="w-full">
-                        <p className="font-Mogra text-3xl">Ingredients</p>
+                        <p className="font-Mogra xl:text-3xl mm:text-2xl">Ingredients</p>
                     </div>
 
                     <div className="w-full flex flex-col mt-5">
@@ -302,7 +302,7 @@ const Page = () =>  {
                                 </div>
 
                                 <div
-                                    className="w-[3%] flex items-center justify-center bg-[#fcfbfa] ml-2 border-2 border-[#f3f0ec] rounded-[5px]"
+                                    className="xl:w-[3%] mm:w-[10%] flex items-center justify-center bg-[#fcfbfa] ml-2 border-2 border-[#f3f0ec] rounded-[5px]"
                                     onClick={() => CloseIngredientDiv(idx)}
                                 >
                                     <Image src={close} alt="Close Div" className="p-1 my-1" height={20} width={20} />
@@ -319,10 +319,10 @@ const Page = () =>  {
                 </div>
 
 
-                <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
                     
                     <div className="w-full">
-                        <p className="font-Mogra text-3xl">Cooking Instructions</p>
+                        <p className="font-Mogra xl:text-3xl mm:text-2xl">Cooking Instructions</p>
                     </div>
 
                     <div className="w-full flex flex-col mt-5">
@@ -338,7 +338,7 @@ const Page = () =>  {
                                 <textarea placeholder={`Step ${idx}`} className="w-full p-1 pl-3 font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px]" name="Instructions" value={instructions[idx - 1] || ""} onChange={(e)=> {handleChangeForTextareaIntructions(e , idx - 1)}}/>
                             </div>
 
-                            <div className="w-[3%] flex items-center justify-center bg-[#fcfbfa] ml-2 border-2 border-[#f3f0ec] rounded-[5px]" onClick={ () => {CloseDiv(idx)} }>
+                            <div className="xl:w-[3%] mm:w-[10%] flex items-center justify-center bg-[#fcfbfa] ml-2 border-2 border-[#f3f0ec] rounded-[5px]" onClick={ () => {CloseDiv(idx)} }>
                                 <Image src={close} alt="Close Div" className="p-1 my-1" height={20} width={20} />
                             </div>
                         </div>
@@ -373,7 +373,7 @@ const Page = () =>  {
                 </div> */}
 
 
-                <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
                     
                     <div className="w-full">
                         <p className="font-Mogra text-3xl">Blog Content</p>
@@ -388,10 +388,10 @@ const Page = () =>  {
                 </div>
 
 
-                <div className="w-[60%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] bg-white flex flex-col mt-10 border-2 px-10 py-5 border-[#e7e1da] rounded-[10px]">
                     
                     <div className="w-full">
-                        <p className="font-Mogra text-3xl">Tags and Catagories</p>
+                        <p className="font-Mogra xl:text-3xl mm:text-2xl">Tags and Catagories</p>
                     </div>
 
                     <div className="w-full flex mt-5">
@@ -403,23 +403,23 @@ const Page = () =>  {
                 </div>
 
 
-                <div className="w-[60%] bg-white flex justify-between items-center mt-10 mb-10 py-4 px-4 border-2 border-[#e7e1da] sticky bottom-0 opacity-90 rounded-[10px]">
+                <div className="xl:w-[60%] mm:w-[90%] bg-white flex justify-between items-center mt-10 mb-10 py-4 px-4 border-2 border-[#e7e1da] sticky bottom-0 opacity-90 rounded-[10px]">
 
                     {successDiv && (
-                        <div className="w-[24%] flex justify-center">
-                            <p className="font-Poppins text-green-400 py-2">Data Entered Successfully !!</p>
+                        <div className="xl:w-[24%] mm:w-[45%] flex justify-center">
+                            <p className="font-Poppins text-green-400 py-2 mm:text-[10px]">Data Entered Successfully !!</p>
                         </div>
                     )}  
 
                     {errorDiv && (
-                        <div className="w-[24%] flex justify-center">
-                            <p className="font-Poppins text-red-600 py-2">Something Went Wrong !!</p>
+                        <div className="xl:w-[24%] mm:w-[45%] flex justify-center bg-amber-400">
+                            <p className="font-Poppins text-red-600 py-2 xl:text-[16px] mm:text-[10px]">Something Went Wrong !!</p>
                         </div>
                     )} 
 
 
-                    <div className="w-[13%] hover:cursor-context-menu">
-                        <button type="submit" className="w-full bg-amber-600 py-2 mr-10 font-Poppins rounded-[10px] hover:cursor-pointer">Publish</button>
+                    <div className="xl:w-[13%] mm:w-[20%] hover:cursor-context-menu bg-amber-600 mr-10 rounded-[10px]">
+                        <button type="submit" className="w-full py-2 font-Poppins hover:cursor-pointer xl:text-[16px] mm:text-[12px]">Publish</button>
                     </div>
                 </div>
 

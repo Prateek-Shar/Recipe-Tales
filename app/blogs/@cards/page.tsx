@@ -47,17 +47,13 @@ const Cards = ({stepCount , setStepCount} : step) => {
 
     useEffect(() => {
         handleAPI()
-        showStepCount()
     }, [stepCount])
 
     const [showStats , setShowStats] = useState<boolean>(false)
     const [showStats2 , setShowStats2] = useState<boolean>(false);
     const [showSkeleton , setShowSkeleton] = useState<boolean>(true);
 
-    const showStepCount = () => {
-        console.log(`Step count : ${stepCount}`)
-    }
-    
+
 
 
     return (
