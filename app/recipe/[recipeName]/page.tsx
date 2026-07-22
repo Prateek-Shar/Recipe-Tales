@@ -130,7 +130,7 @@ const Recipe = () => {
     useEffect(() => {
         get_rating();
         handleAPI();
-    } , [])
+    } , [rating])
 
 
     useEffect(() => {
@@ -174,8 +174,8 @@ const Recipe = () => {
                     )}
 
                     {filledHeart && (
-                        <div className='xl:w-[10%] mm:w-[7%] flex justify-center items-center'>
-                            <Image src={heart_filled} alt='Filled Heart' className='hover:cursor-pointer' onClick={ ()=> { Like(name); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
+                        <div className='xl:w-[7%] mm:w-[10%] mm:h-8 flex justify-center items-center relative'>
+                            <Image src={heart_filled} alt='Filled Heart' className='hover:cursor-pointer object-cover xl:p-0' fill  onClick={ ()=> { Like(name); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
                             <p className='font-Poppins text-[20px] p-2 hidden bg-amber-50 rounded-4xl' ref={ratingDiv}>{rating}</p>
                         </div>
                     )}

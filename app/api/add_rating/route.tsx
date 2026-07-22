@@ -19,10 +19,10 @@ export const POST = async(request : Request) => {
             })
         }
 
-        const check = await Liked.find({"Recipe_name" : Recipe_name});
+        const check = await Liked.findOne({"Recipe_name" : Recipe_name});
 
         if(!check) {
-            await Liked.create({"Recipe_name" : Recipe_name , "Counter" : 1})
+            const data = await Liked.create({"Recipe_name" : Recipe_name , "Counter" : 1})
             return new Response(JSON.stringify({"message" : "New Entry"}) , {status : 200})
         }
       
@@ -33,7 +33,7 @@ export const POST = async(request : Request) => {
 
     catch(err) {
 
-        console.log(err);
+        console.error(err);
         return new Response(JSON.stringify({message : "Internal Server Error"}) , {
             status : 500
         })

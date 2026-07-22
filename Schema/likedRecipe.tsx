@@ -5,8 +5,8 @@ const Liked_Schema = new mongoose.Schema({
     Counter : {type : Number , required : true}
 })
 
-if(mongoose.models.Liked_Schema) {
-    delete mongoose.models.Liked_Schema
+if(mongoose.models.Liked_Recipes) {
+    delete mongoose.models.Liked_Recipes
 }
 
 const Liked = mongoose.model("Liked_Recipes", Liked_Schema);
