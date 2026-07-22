@@ -18,7 +18,7 @@ if(mongoose.models.Details) {
     delete mongoose.models.Details;
 }
 
-const Recipe_Details = /*mongoose.models.Details || */ mongoose.model("Details", Details);
+const Recipe = mongoose.model("User_Recipes", Details);
 
 
-export default Recipe_Details;
+export default Recipe;

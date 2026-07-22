@@ -58,11 +58,11 @@ const CardsTwo = () => {
         <div className="flex flex-col">
 
             {showSkeleton && (
-            <div className="w-full flex justify-center items-center">
-                <div className="w-[88%]">
-                    <Skeleton paragraph={{rows : 5}} active />
+                <div className="w-full flex justify-center items-center">
+                    <div className="w-[88%]">
+                        <Skeleton paragraph={{rows : 5}} active />
+                    </div>
                 </div>
-            </div>
             )}
 
             {showStats && (
@@ -106,7 +106,7 @@ const CardsTwo = () => {
 
                     ) : (
 
-                        <div className="w-[30%] bg-white border-2 border-[#e5e0dc] rounded-2xl">
+                        <div className="xl:w-[30%] mm:w-[90%] mm:mb-5 xl:mb-0 bg-white border-2 border-[#e5e0dc] rounded-2xl">
 
                             <Image src={no_img} alt="No Image Placeholder" className="rounded-t-2xl" />
                             
@@ -245,8 +245,8 @@ const CardsTwo = () => {
                     </div>
 
                     <div className="w-[88%] ml-2 p-3">
-                        <button type="button" className="text-[16px] font-Poppins text-white">Explore More Recipes</button>
-                    </div>
+                        <div className="text-[16px] font-Poppins text-white">Explore More Recipes</div>
+                    </div>  
                 </button>
 
             </div>

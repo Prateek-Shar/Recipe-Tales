@@ -1,4 +1,4 @@
-import sch from '@/Schema/likedRecipe'
+import Liked from '@/Schema/likedRecipe'
 import Connect from '@/middleware/mongo_connect'
 
 
@@ -18,11 +18,11 @@ export const POST = async(request : Request) => {
             })
         }
 
-        const check = await sch.findOne({"Recipe_name" : Recipe_name})
+        const check = await Liked.findOne({"Recipe_name" : Recipe_name})
 
         if(!check) {
 
-            const data = await sch.create({"Recipe_name" : Recipe_name , Counter : 1})
+            const data = await Liked.create({"Recipe_name" : Recipe_name , Counter : 1})
 
             return new Response(JSON.stringify({message : "Created Field Updated counter" , result : data}) , {
                 status : 200
@@ -30,13 +30,12 @@ export const POST = async(request : Request) => {
         }
 
         
-        const data = await sch.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})
+        const data = await Liked.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})
 
         return new Response(JSON.stringify({message : "Updated counter" , result : data}) , {
             status : 200
         })
     
-
     }
 
     catch(err) {

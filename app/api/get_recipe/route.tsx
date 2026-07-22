@@ -1,5 +1,5 @@
 import Connect from "@/middleware/mongo_connect";
-import Recipe_Details from "@/Schema/recipeDet";
+import Recipe from "@/Schema/recipeDet";
 
 
 export const GET = async() => {
@@ -10,7 +10,7 @@ export const GET = async() => {
 
         try {
 
-            const details = await Recipe_Details.find().sort({_id : -1}).limit(6)
+            const details = await Recipe.find().sort({_id : -1}).limit(6)
 
             return new Response(JSON.stringify({det : details}) , {status : 200})
         }

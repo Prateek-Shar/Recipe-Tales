@@ -1,6 +1,5 @@
-import Recipe_Details from "@/Schema/recipeDet";
+import Recipe from "@/Schema/recipeDet";
 import Connect from "@/middleware/mongo_connect";
-import cloudinary from "@/middleware/cloudinary_connect";
 
 
 export const POST = async(request: Request) => {
@@ -26,7 +25,7 @@ export const POST = async(request: Request) => {
     }
     
 
-    await Recipe_Details.create({ Author_name : Author_name,
+    await Recipe.create({ Author_name : Author_name,
     Recipe_name : Recipe_name , 
     Recipe_short_desc :  Recipe_short_desc , 
     Tags : Tags , 

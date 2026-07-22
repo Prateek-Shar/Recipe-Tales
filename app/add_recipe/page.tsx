@@ -412,7 +412,7 @@ const Page = () =>  {
                     )}  
 
                     {errorDiv && (
-                        <div className="xl:w-[24%] mm:w-[45%] flex justify-center bg-amber-400">
+                        <div className="xl:w-[24%] mm:w-[45%] flex justify-center">
                             <p className="font-Poppins text-red-600 py-2 xl:text-[16px] mm:text-[10px]">Something Went Wrong !!</p>
                         </div>
                     )} 

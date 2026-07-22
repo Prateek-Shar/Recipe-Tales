@@ -9,6 +9,7 @@ import cook from "@/public/Images/cooking.png"
 import heart from "@/public/Images/heart.png"
 import info from "@/public/Images/info.png";
 import heart_filled from "@/public/Images/heart_filled.png";
+import snap from  "@/public/Images/snap.png";
 
 
 
@@ -52,13 +53,8 @@ const Recipe = () => {
         setMealDetails(data.meals)
     }
 
-    useEffect(() => {
-        handleAPI();
-    } , [id])
-
 
     const handleLike = async(value : string | null) => {
-        
         const res = await fetch(`/api/add_rating` , {
             method : "POST",
             headers : {
@@ -73,8 +69,6 @@ const Recipe = () => {
 
         setRawHeart(false)
         setFilledHeart(true)
-
-        // console.log("Recipe counter updated successfully")
     }
 
 
@@ -89,7 +83,7 @@ const Recipe = () => {
         }
 
         const data = await res.json()
-        setRating(data.result)
+        setRating(data.result.Counter)
     }
 
 
@@ -135,7 +129,8 @@ const Recipe = () => {
 
     useEffect(() => {
         get_rating();
-    } , [rating])
+        handleAPI();
+    } , [])
 
 
     useEffect(() => {
@@ -149,20 +144,29 @@ const Recipe = () => {
             setRawHeart(true)
             setFilledHeart(false)
         }
-
-    } , [rating])   
+    
+    })   
 
 
 
     return (
 
-    <div className="w-full flex justify-center flex-col items-center mt-20 mb-20">
+    <div className="w-full flex justify-center flex-col items-center xl:my-20 mm:my-10">
+
+        <div className='xl:w-[65%] mm:w-full flex justify-center items-center text-center mb-10'>
+            <p className="xl:text-5xl mm:text-3xl font-Capra">{name}</p>
+        </div>
+
         <div className="xl:w-[80%] mm:w-[90%] bg-white xl:p-10 mm:p-2 flex xl:flex-row mm:flex-col rounded-xl">
+
+
             {/* Left Section */}
             <div className="xl:w-[40%] mm:w-full flex flex-col">
+
                 <div className='w-full flex justify-between items-center'>
-                    <div className='xl:w-[65%] mm:w-[75%]'>
-                        <p className="xl:text-5xl mm:text-2xl font-Capra">{name}</p>
+                    <div className='xl:w-[65%] mm:w-[75%] flex items-center'>
+                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[5%] mm:w-[15%] p-1 xl:ml-3" />
+                        <p className="xl:text-3xl mm:text-2xl font-Capra mm:ml-1 xl:ml-0">Snaps</p>
                     </div>
 
                     {rawHeart && (
@@ -175,7 +179,6 @@ const Recipe = () => {
                             <p className='font-Poppins text-[20px] p-2 hidden bg-amber-50 rounded-4xl' ref={ratingDiv}>{rating}</p>
                         </div>
                     )}
-
                 </div>
 
                 <div className="w-[60%] mt-12 flex">
@@ -195,7 +198,7 @@ const Recipe = () => {
             {/* Ingredients Section */}
             <div className="xl:w-[50%] mm:w-[90%] flex flex-col xl:mt-0 mm:mt-15">
                 <div className="w-full flex flex-row xl:ml-15 mm:ml-0 items-center">
-                <Image src={ing} alt="Ingredients" className="object-contain xl:w-[5%] mm:w-[15%]  p-1 xl:ml-3 mmLpl-3" />
+                    <Image src={ing} alt="Ingredients" className="object-contain xl:w-[5%] mm:w-[15%]  p-1 xl:ml-3 mmLpl-3" />
                     <p className="xl:text-3xl mm:text-2xl xl:ml-0 mm:ml-2 font-Capra">Ingredients</p>
                 </div>
 
@@ -255,14 +258,14 @@ const Recipe = () => {
             <div className='w-full p-2 xl:mt-10 mm:mt-4 pl-4 flex'>
                 <p className='font-Mogra xl:text-2xl mm:text-[17px]'>Category -</p>
                 {mealDetails.map((meal) => (
-                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] ml-5'>{meal.strCategory}</p>
+                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{meal.strCategory}</p>
                 ))}
             </div>
 
             <div className='w-full p-2 xl:mt-5 mm:mt-2 pl-4 flex'>
                 <p className='font-Mogra xl:text-2xl mm:text-[17px]'>Area -</p>
                 {mealDetails.map((meal) => (
-                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] ml-5'>{meal.strArea}</p>
+                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{meal.strArea}</p>
                 ))}
             </div>
 

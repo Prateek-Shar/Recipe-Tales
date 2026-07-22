@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 
-const likedSchema = new mongoose.Schema({
+const Liked_Schema = new mongoose.Schema({
     Recipe_name : {type : String , required : true},
     Counter : {type : Number , required : true}
 })
 
-const sch = mongoose.models.Liked || mongoose.model("Liked", likedSchema);
+if(mongoose.models.Liked_Schema) {
+    delete mongoose.models.Liked_Schema
+}
 
-export default sch;
+const Liked = mongoose.model("Liked_Recipes", Liked_Schema);
+
+export default Liked;
