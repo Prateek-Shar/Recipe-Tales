@@ -72,7 +72,7 @@ const blog_recipes = () => {
                     <div className="w-full flex xl:flex-row mm:flex-col xl:justify-evenly mm:items-center xl:items-start mt-20">
                         <div className="xl:w-[40%] mm:w-[90%] flex flex-col justify-center">
                             <div className="xl:w-full flex xl:ml-0 mm:ml-1 items-center mm:mb-3 xl:mb-0">
-                                <Image src={ing} alt="ing" className="mm:h-10 mm:w-12 xl:w-12 xl:h-12" />    
+                                <Image src={ing} alt="ing" className="mm:h-10 mm:w-11 xl:w-12 xl:h-12" />    
                                 <p className="font-Mogra text-3xl xl:ml-5 mm:ml-3">Ingredients</p>
                             </div>
 
@@ -80,7 +80,7 @@ const blog_recipes = () => {
                                 <div key={index} className="xl:mt-5 mm:mt-2">
                                     {md.Ingredient.map((ingredient, idx) => (
                                         <div className="w-full flex nth-last-[1]:mb-5 xl:mt-4 mm:mt-3">
-                                            <Image src={ut} alt="Ing Icon" className="xl:p-1 mm:p-2 mm:h-10 mm:w-9 xl:h-9 xl:w-10"/>
+                                            <Image src={ut} alt="Ing Icon" className="xl:p-1 mm:p-2 mm:h-10 mm:w-10 xl:h-9 xl:w-10"/>
                                             <p key={idx} className="font-Poppins p-2 xl:ml-3 mm:ml-0 xl:text-[20px] mm:text-[16px] bg-[#fffbeb] w-[90%] rounded-2xl">{ingredient}</p>
                                         </div>
                                     ))}

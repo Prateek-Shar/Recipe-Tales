@@ -1,5 +1,6 @@
 import Connect from "@/middleware/mongo_connect";
 import sch from "@/Schema/likedRecipe";
+import { message } from "antd";
 
 
 export const GET = async(req : Request) => {
@@ -17,11 +18,20 @@ export const GET = async(req : Request) => {
             })
         }
 
-        const check = await sch.findOne({"Recipe_name" : Recipe_name}).select("Counter");
+        const check = await sch.findOne({"Recipe_name" : Recipe_name}).select("-_id -Recipe_name -__v");
+
+        console.log(`DB response : ${check}`);
+
+        if(!check) {
+            return new Response(JSON.stringify({result : 0 , message : "No such recipe found"}) , {
+                status : 200
+            })
+        }
 
         return new Response(JSON.stringify({result : check , message : "Fetched rating successfully"}) , {
             status : 200
         })
+
 
     }
 
