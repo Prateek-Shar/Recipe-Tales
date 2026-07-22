@@ -16,7 +16,7 @@ const all_recipe = () => {
 
                 <div className="xl:w-[60%] mm:w-[90%] flex items-center flex-col xl:my-10 mm:my-10">
                     <p className="font-Capra xl:text-3xl text-stone-200 mm:text-[18px] text-shadow-lg text-center">Explore our complete collection of delicious recipes, from quick snacks and comforting meals to desserts and refreshing beverages. Find the perfect dish for every occasion.</p>
-                    <Image src={arr} alt="scroll down" className="animate-bounce mt-8 mm:w-5 mm:h-5 xl:w-10 xl:h-10" />
+                    <Image src={arr} alt="scroll down" loading="eager" className="animate-bounce mt-8 mm:w-5 mm:h-5 xl:w-10 xl:h-10" />
                 </div>
 
             </div>
