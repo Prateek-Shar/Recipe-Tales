@@ -19,8 +19,8 @@ interface ing_det {
 }
 
 interface step {
-    stepCount : number | null
-    setStepCount : React.Dispatch<React.SetStateAction<number>>
+    stepCount? : number | null
+    setStepCount? : React.Dispatch<React.SetStateAction<number>>
 }
 
 
@@ -69,7 +69,7 @@ const Cards = ({stepCount , setStepCount} : step) => {
 
             {showStats && (
                 recipeDetails[0] ? (
-                <div className="xl:w-[55%] mm:w-full bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] xl:pb-15 mm:pb-0 hover:cursor-pointer">
+                <div className="xl:w-[55%] mm:w-full bg-white flex flex-col justify-center items-center rounded-2xl border-2 border-[#e5e0dc] xl:pb-10 mm:pb-0 hover:cursor-pointer">
                     <div className="w-full xl:h-140 mm:h-100 bg-[url(/Images/no_img.jpg)] bg-cover bg-center rounded-t-2xl" />
                     
                     <div className="w-full mt-8">
@@ -129,7 +129,7 @@ const Cards = ({stepCount , setStepCount} : step) => {
             <div className="xl:w-[40%] mm:w-full flex flex-col justify-between xl:mt-0 mm:mt-5">
 
                 {recipeDetails[1] ? (
-                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl xl:pb-5 mm:pb-0 hover:cursor-pointer">
+                <div className="w-full border-2 border-[#e5e0dc] rounded-2xl xl:pb-0` mm:pb-0 hover:cursor-pointer">
                     <div className="w-full flex h-50">
                         <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-t-2xl" style={{backgroundImage : "url('/Images/no_img.jpg')"}} />
                     </div>
@@ -233,7 +233,7 @@ const Cards = ({stepCount , setStepCount} : step) => {
             )}
 
             <div className="xl:hidden mm:flex justify-end items-center w-full mt-6">
-                <div className="w-[28%] flex p-2" onClick={ () => setStepCount(prev => prev + 1)}>
+                <div className="w-[28%] flex p-2" onClick={ () => setStepCount?.(prev => prev + 1)}>
                     <p className="text-[16px] font-Poppins">Next</p>
                     <Image src={front} className="object-contain w-[40%] ml-1 p-1" alt="Next Bt" />
                 </div>

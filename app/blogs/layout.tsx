@@ -49,7 +49,7 @@ const Layout = ({children , cards , cardsTwo} : {children:React.ReactNode , card
                 {children}
             </div>
 
-            <div className="w-full flex justify-center items-center flex-col">
+            <div className="w-full xl:hidden mm:flex justify-center items-center flex-col">
                 {firstDiv && (
                     <div className="w-[75%] xl:flex mt-15 mb-20">
                         <Cards stepCount={stepNum} setStepCount={setStepNum} />
@@ -61,6 +61,17 @@ const Layout = ({children , cards , cardsTwo} : {children:React.ReactNode , card
                         <CardsTwo OnBack={reset}/>
                     </div>
                 )}
+            </div>
+
+            <div className="w-full xl:flex mm:hidden justify-center items-center flex-col">
+                <div className="w-[75%] xl:flex mt-15 mb-20">
+                    <Cards />
+                </div>
+
+        
+                <div className="w-[85%]  mt-5 mb-35" ref={Second_card}>
+                    <CardsTwo />
+                </div>
             </div>
         </>
            
