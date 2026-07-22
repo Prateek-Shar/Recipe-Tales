@@ -19,15 +19,15 @@ export const POST = async(request : Request) => {
             })
         }
 
-        const data = await Liked.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})
+        const check = await Liked.find({"Recipe_name" : Recipe_name});
 
-        if(!data) {
-            return new Response(JSON.stringify({message : "Did Not Find Recipe"}) , {status : 401})
+        if(!check) {
+            await Liked.create({"Recipe_name" : Recipe_name , "Counter" : 1})
+            return new Response(JSON.stringify({"message" : "New Entry"}) , {status : 200})
         }
-
-        return new Response(JSON.stringify({message : "Updated counter" , result : data}) , {
-            status : 200
-        })
+      
+        await Liked.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})        
+        return new Response(JSON.stringify({message : "Recipe counter incremented"}) , {status : 200})
     
     }
 

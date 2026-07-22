@@ -165,8 +165,8 @@ const Recipe = () => {
 
                 <div className='w-full flex justify-between items-center'>
                     <div className='xl:w-[65%] mm:w-[75%] flex items-center'>
-                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[5%] mm:w-[15%] p-1 xl:ml-3" />
-                        <p className="xl:text-3xl mm:text-2xl font-Capra mm:ml-1 xl:ml-0">Snaps</p>
+                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[15%] mm:w-[15%] p-1 xl:ml-0" />
+                        <p className="xl:text-4xl mm:text-2xl font-Capra mm:ml-1 xl:ml-1">Snaps</p>
                     </div>
 
                     {rawHeart && (
@@ -181,9 +181,9 @@ const Recipe = () => {
                     )}
                 </div>
 
-                <div className="w-[60%] mt-12 flex">
+                <div className="xl:w-[60%] mm:w-[70%] xl:h-64 mm:h-50 xl:mt-12 mm:mt-5 flex relative">
                     {mealDetails.map((md) => (
-                        <Image key={md.idMeal} src={md.strMealThumb} alt="Meal" className='' height={170} width={170} loading='eager' />
+                        <Image key={md.idMeal} src={md.strMealThumb} alt="Meal" fill className='object-cover' loading='eager' />
                     ))}
                 </div>
             </div>
@@ -197,20 +197,20 @@ const Recipe = () => {
 
             {/* Ingredients Section */}
             <div className="xl:w-[50%] mm:w-[90%] flex flex-col xl:mt-0 mm:mt-15">
-                <div className="w-full flex flex-row xl:ml-15 mm:ml-0 items-center">
-                    <Image src={ing} alt="Ingredients" className="object-contain xl:w-[5%] mm:w-[15%]  p-1 xl:ml-3 mmLpl-3" />
-                    <p className="xl:text-3xl mm:text-2xl xl:ml-0 mm:ml-2 font-Capra">Ingredients</p>
+                <div className="w-full flex flex-row xl:ml-10 mm:ml-0 items-center">
+                    <Image src={ing} alt="Ingredients" className="object-contain xl:w-[7%] mm:w-[15%] p-1 xl:ml-3 mmLpl-3" />
+                    <p className="xl:text-3xl mm:text-2xl xl:ml-3 mm:ml-2 font-Capra">Ingredients</p>
                 </div>
 
                 <div className="w-full flex xl:mt-10 mm:mt-6 xl:ml-15 mm:ml-2 flex-col">
                     {ingredients.map((item, index) => (
                     <div key={index} className="flex items-center mb-3">
-                        <div className="xl:w-[3%] mm:w-[8%]">
+                        <div className="xl:w-[4%] mm:w-[8%]">
                             <Image src={uten} alt="steps" />
                         </div>
 
                         <div className="w-full ml-5 bg-amber-50 p-2 rounded-lg">
-                            <p className="font-medium xl:text-[16px] mm:text-[14px] text-gray-700 flex justify-between">
+                            <p className="font-medium xl:text-[18px] mm:text-[14px] text-gray-700 flex justify-between">
                                 {item.ingredient}
                                 {item.measure && (
                                 <span className="text-gray-500 ml-2">{item.measure}</span>
@@ -225,9 +225,9 @@ const Recipe = () => {
 
       {/* Preparation Section */}
         <div className="xl:w-[80%] mm:w-[90%] bg-white flex flex-col mt-10 rounded-xl">
-            <div className="w-full flex xl:ml-5 mm:ml-1 mt-5 mb-4 items-center">
+            <div className="w-full flex xl:ml-2 mm:ml-1 mt-5 mb-4 items-center">
                 <Image src={cook} alt="Prepare" className="object-contain xl:w-[3%] mm:w-[14%] xl:ml-3 mm:ml-0 p-0.5" />
-                <p className="font-Capra xl:text-4xl mm:text-2xl xl:ml-0 mm:ml-2">Preparation</p>
+                <p className="font-Capra xl:text-4xl mm:text-2xl xl:ml-3 mm:ml-2">Preparation</p>
             </div>
 
             <div className="w-full flex justify-center">
@@ -250,8 +250,8 @@ const Recipe = () => {
 
 
         <div className='xl:w-[80%] mm:w-[90%] bg-white mt-10 rounded-xl'>
-            <div className='w-full p-2 mt-4 flex'>
-                <Image src={info} alt="other details" className="object-contain xl:w-[3%] mm:w-[11%] xl:ml-3 mm:ml-0 p-0.5" />
+            <div className='w-full p-2 mt-4 flex items-center'>
+                <Image src={info} alt="other details" className="object-contain xl:w-[2.5%] mm:w-[11%] xl:ml-3 mm:ml-0 p-0.5" />
                 <p className='font-Capra xl:text-4xl mm:text-2xl ml-2'>Other Details</p>
             </div>
 
@@ -265,7 +265,7 @@ const Recipe = () => {
             <div className='w-full p-2 xl:mt-5 mm:mt-2 pl-4 flex'>
                 <p className='font-Mogra xl:text-2xl mm:text-[17px]'>Area -</p>
                 {mealDetails.map((meal) => (
-                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{meal.strArea}</p>
+                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{meal.strArea || "NA"}</p>
                 ))}
             </div>
 
