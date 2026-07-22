@@ -1,5 +1,6 @@
 import Liked from '@/Schema/likedRecipe'
 import Connect from '@/middleware/mongo_connect'
+import { message } from 'antd';
 
 
 export const POST = async(request : Request) => {
@@ -18,19 +19,11 @@ export const POST = async(request : Request) => {
             })
         }
 
-        const check = await Liked.findOne({"Recipe_name" : Recipe_name})
-
-        if(!check) {
-
-            const data = await Liked.create({"Recipe_name" : Recipe_name , Counter : 1})
-
-            return new Response(JSON.stringify({message : "Created Field Updated counter" , result : data}) , {
-                status : 200
-            })
-        }
-
-        
         const data = await Liked.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})
+
+        if(!data) {
+            return new Response(JSON.stringify({message : "Did Not Find Recipe"}) , {status : 401})
+        }
 
         return new Response(JSON.stringify({message : "Updated counter" , result : data}) , {
             status : 200
