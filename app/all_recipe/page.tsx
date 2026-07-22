@@ -8,7 +8,7 @@ const all_recipe = () => {
 
         <div className="w-full">
 
-            <div className="w-full flex flex-col items-center justify-evenly backdrop-blur-lg bg-[url(/Images/all_recipe.png)] bg-no-repeat bg-cover">
+            <div className="w-full flex flex-col items-center justify-evenly backdrop-blur-lg bg-[url(/Images/all_recipe.png)] bg-no-repeat bg-cover bg-center">
                 
                 <div className="xl:w-[30%] mm:w-[90%] xl:mt-25 mm:mt-20">
                     <p className="font-Capra xl:text-4xl mm:text-3xl text-stone-200 text-shadow-lg text-center">Discover Every Recipe in One Place</p>
