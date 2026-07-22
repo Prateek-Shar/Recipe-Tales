@@ -8,20 +8,26 @@ const Layout = ({children , cards , cardsTwo} : {children:React.ReactNode , card
 
     const [stepNum , setStepNum] = useState<number>(1)
     const [firstDiv , setFirstDiv] = useState<boolean>(true)
+    const [secondDiv , setSecondtDiv] = useState<boolean>(false)
 
     const Second_card = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if(stepNum == 2) {
             setFirstDiv(false)
+            setSecondtDiv(true)
+        }
 
-            if(Second_card.current) {
-                Second_card.current.classList.add("flex")
-                Second_card.current.classList.remove("hidden")
-            }
-            
+        else {
+            setFirstDiv(true)
+            setSecondtDiv(false)
         }
     } , [stepNum])
+
+
+    const reset = () => {
+        setStepNum(prev => prev - 1);
+    }
 
     return (
         <>
@@ -50,9 +56,11 @@ const Layout = ({children , cards , cardsTwo} : {children:React.ReactNode , card
                     </div>
                 )}
 
-                <div className="w-[85%] hidden mt-5 mb-35" ref={Second_card}>
-                    <CardsTwo />
-                </div>
+                {secondDiv && (
+                    <div className="w-[85%]  mt-5 mb-35" ref={Second_card}>
+                        <CardsTwo OnBack={reset}/>
+                    </div>
+                )}
             </div>
         </>
            

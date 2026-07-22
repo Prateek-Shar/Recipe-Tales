@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect , useState } from "react";
 import no_img from "@/public/Images/no_img.jpg"
 import exp_recipe from "@/public/Images/explore_recipe.png"
+import back from "@/public/Images/back.png"
 import { Skeleton } from "antd";
 import { useRouter } from "next/navigation";
 
@@ -18,8 +19,11 @@ interface ing_det {
     Cook_Time : number | null
 }
 
+interface route {
+    OnBack : () => void
+}
 
-const CardsTwo = () => {
+const CardsTwo = ({OnBack} : route) => {
 
     const route = useRouter()
 
@@ -48,6 +52,10 @@ const CardsTwo = () => {
     const handleClickToMoreRecipes = () => {
         route.push("/all_recipe")
     }
+
+    // const handleClickToBack = () => {
+    //     route.push("/blogs")
+    // }
 
     useEffect(() => {
         handleAPI()
@@ -231,26 +239,31 @@ const CardsTwo = () => {
 
                     </div>
 
+                    <div className="w-full xl:hidden mm:flex items-center" onClick={OnBack}>
+                        <Image src={back} alt="Go Back" className="object-contain w-[6%]" />
+                        <p className="font-Poppins ml-2 text-[14px]">Go Back</p>
+                    </div>
+
+                    <div className="w-full flex justify-center xl:mt-30 mm:mt-10">
+
+                        <button className="xl:w-[15%] mm:w-[80%] bg-[#ca6441] rounded-2xl flex" onClick={handleClickToMoreRecipes}>
+                            <div className="w-[10%] ml-2 flex justify-center items-center">
+                                <Image src={exp_recipe} alt="Explore Recipe" width={100} height={100} />
+                            </div>
+
+                            <div className="w-[88%] ml-2 p-3">
+                                <div className="text-[16px] font-Poppins text-white">Explore More Recipes</div>
+                            </div>  
+                        </button>
+
+                    </div>
 
                 </div>
 
             )}
 
 
-            <div className="w-full flex justify-center xl:mt-30 mm:mt-10">
 
-                <button className="xl:w-[15%] mm:w-[80%] bg-[#ca6441] rounded-2xl flex" onClick={handleClickToMoreRecipes}>
-                    <div className="w-[10%] ml-2 flex justify-center items-center">
-                        <Image src={exp_recipe} alt="Explore Recipe" width={100} height={100} />
-                    </div>
-
-                    <div className="w-[88%] ml-2 p-3">
-                        <div className="text-[16px] font-Poppins text-white">Explore More Recipes</div>
-                    </div>  
-                </button>
-
-            </div>
-            
         </div>
     )
 } 

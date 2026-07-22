@@ -6,6 +6,7 @@ import clock from "@/public/Images/blog_clock.png";
 import { SetStateAction, useEffect, useState } from "react";
 import no_img from "@/public/Images/no_img.jpg"
 import next from "@/public/Images/next.png";
+import front from "@/public/Images/front.png";
 import { Skeleton } from "antd";
 
 
@@ -231,10 +232,12 @@ const Cards = ({stepCount , setStepCount} : step) => {
             </div>
             )}
 
-            <div className="xl:hidden mm:flex mm:w-[10%] mt-6">
-                <Image src={next} className="" alt="Next BT" onClick={ () => setStepCount(prev => prev + 1)} />
+            <div className="xl:hidden mm:flex justify-end items-center w-full mt-6">
+                <div className="w-[28%] flex p-2" onClick={ () => setStepCount(prev => prev + 1)}>
+                    <p className="text-[16px] font-Poppins">Next</p>
+                    <Image src={front} className="object-contain w-[40%] ml-1 p-1" alt="Next Bt" />
+                </div>
             </div>
-
             
         </div>
     )

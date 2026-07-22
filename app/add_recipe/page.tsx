@@ -352,26 +352,6 @@ const Page = () =>  {
 
                 </div>
 
-                    
-                {/* <div className="w-[60%] border-[#e7e1da] border-2 flex flex-col justify-center items-center rounded-2xl mt-10">
-                    <div className="w-full py-2 pl-11 mt-2">
-                        <p className="font-Mogra text-3xl">Snaps</p>
-                    </div>
-
-                    <div className="w-[70%] py-5 flex justify-center">
-                        <Dragger {...props} >
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                            <p className="ant-upload-hint">
-                                Support for a single or bulk upload. Strictly prohibited from uploading company data or
-                                other banned files.
-                            </p>
-                        </Dragger>  
-                    </div>
-                </div> */}
-
 
                 <div className="xl:w-[60%] mm:w-[90%] bg-white flex flex-col mt-10 border-2 xl:px-10 xl:py-5 mm:py-2 mm:px-3 border-[#e7e1da] rounded-[10px]">
                     
