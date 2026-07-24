@@ -10,6 +10,7 @@ import heart from "@/public/Images/heart.png"
 import info from "@/public/Images/info.png";
 import heart_filled from "@/public/Images/heart_filled.png";
 import snap from  "@/public/Images/snap.png";
+import steps from "@/public/Images/steps.png";
 
 
 
@@ -237,10 +238,10 @@ const Recipe = () => {
                         {meal.strInstructions
                         .split(/(?<=\.)\s+(?=[A-Z])/)
                         .map((sentence, index) => (
-                            <span key={index}>
-                            {sentence}
-                            <br />
-                            </span>
+                            <div className='flex items-start p-2'>
+                            <Image src={steps} alt="Ing Icon" className="xl:h-8 xl:w-8 mm:w-6 mm:h-6"/>
+                            <span key={index} className='ml-3'>{sentence}<br /></span>
+                            </div>
                         ))}
                         </p>
                     ))}
