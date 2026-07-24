@@ -6,7 +6,6 @@ import Buttons from "@/components/BannerComp/buttons";
 import Catagory_Cards from "@/components/Catagory/catagoryCards";
 import RecipeCards from "@/components/recipeCards/cards";
 import email from "@/public/Images/email.png";
-import arrow from "@/public/Images/arrow.png"
 import { useRef, useState } from "react";
 import Check from "@/public/Images/check.png"
 import construction from "@/public/Images/under_construction.png"
@@ -87,8 +86,8 @@ export default function Home() {
         </div>
 
         <div className="xl:w-[30%] mm:w-[80%] flex justify-center items-center mt-5">
-          <Image src={construction} className="xl:w-8 xl:h-8 mm:h-5 mm:w-5" alt="Not Working" />
-          <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2">Currently Not Working . Working on it</p>
+          <Image src={construction} className="object-contain xl:w-[5%] mm:w-[8%]" alt="Not Working" />
+          <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2 pt-1">Currently Not Working . Working on it</p>
         </div>
 
       </div>
@@ -157,8 +156,10 @@ export default function Home() {
           </div>
 
           <div className="xl:w-[30%] mm:w-[80%] flex justify-center items-center mt-8">
-            <Image src={construction} className="xl:w-8 xl:h-8 mm:h-5 mm:w-5" alt="Not Working" />
-            <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2">Currently Not Working . Working on it</p>
+            <Image src={construction} className="object-contain xl:w-[5%] mm:w-[8%]" alt="Not Working" />
+            <div className="flex items-center justify-center">
+            <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2 pt-1">Currently Not Working . Working on it</p>
+            </div>
           </div>
         </div>
 
