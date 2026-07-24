@@ -86,7 +86,7 @@ export default function Home() {
           <Catagory_Cards />
         </div>
 
-        <div className="xl:w-[30%] mm:w-[70%] flex justify-center items-center mt-5">
+        <div className="xl:w-[30%] mm:w-[80%] flex justify-center items-center mt-5">
           <Image src={construction} className="xl:w-8 xl:h-8 mm:h-5 mm:w-5" alt="Not Working" />
           <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2">Currently Not Working . Working on it</p>
         </div>
@@ -108,7 +108,7 @@ export default function Home() {
 
           {renderMsgDiv && (
             <div className="w-full flex justify-center items-center fixed mm:top-2">
-              <div className="xl:w-[8%] mm:w-[35%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
+              <div className="xl:w-[8%] mm:w-[38%] ml:w-[35%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
                   <div className="w-[10%] flex items-center">
                       <Image src={Check} width={50} height={50} alt="Check Image"/>
                   </div>
@@ -156,7 +156,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="xl:w-[30%] mm:w-[70%] flex justify-center items-center mt-8">
+          <div className="xl:w-[30%] mm:w-[80%] flex justify-center items-center mt-8">
             <Image src={construction} className="xl:w-8 xl:h-8 mm:h-5 mm:w-5" alt="Not Working" />
             <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2">Currently Not Working . Working on it</p>
           </div>

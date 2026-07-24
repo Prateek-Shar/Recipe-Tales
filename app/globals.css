@@ -6,6 +6,7 @@ body {
 
 @theme {
   --breakpoint-mm : 375px;
+  --breakpoint-ml: 425px;
 }
 
 @font-face {
