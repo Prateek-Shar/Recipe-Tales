@@ -95,7 +95,7 @@ export default function Home() {
 
       <div className="w-full flex flex-col">
 
-        <div className="w-full flex xl:absolute justify-between items-center mt-20">
+        <div className="w-full flex justify-between items-center mt-20">
           <div className="xl:w-[40%] mm:w-full ml-3">
             <div className="w-full">
               <p className="p-1 xl:text-3xl mm:text-2xl font-Capra">Featured Recipes</p>
@@ -107,8 +107,8 @@ export default function Home() {
           </div>
 
           {renderMsgDiv && (
-            <div className="xl:w-[8%] mm:w-full flex justify-center items-center mm:fixed mm:top-2">
-              <div className="xl:w-full mm:w-[35%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
+            <div className="w-full flex justify-center items-center fixed mm:top-2">
+              <div className="xl:w-[8%] mm:w-[35%] bg-[#f2f1ff] flex p-2 border-2 border-[#eeeeee] rounded-2xl">
                   <div className="w-[10%] flex items-center">
                       <Image src={Check} width={50} height={50} alt="Check Image"/>
                   </div>
