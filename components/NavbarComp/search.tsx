@@ -22,7 +22,6 @@ const SearchBar = () => {
     const recipeName = useRef<HTMLInputElement>(null)
     const searchBoxDiv =  useRef<HTMLInputElement>(null)
 
-    const api_db = process.env.NEXT_PUBLIC_SEARCH_API;
     
     const [searchPlaceholder , setSearchPlaceholder] = useState<string>("Search Recipes...")
 
@@ -32,27 +31,32 @@ const SearchBar = () => {
 
     const loaderDiv = useRef<HTMLDivElement>(null);
 
-    const handleSearch = async() => {
+    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-        if(loaderDiv.current) {
-            loaderDiv.current.style.borderBottomLeftRadius = "10px"
-            loaderDiv.current.style.borderBottomRightRadius = "10px"
-        } 
-
-        setLoader(true);
-
-        if(searchBoxDiv.current) {
-            searchBoxDiv.current.style.borderBottom = "none"
-            searchBoxDiv.current.style.borderBottomLeftRadius = "0px"
-            searchBoxDiv.current.style.borderBottomRightRadius = "0px"
+    const handleSearch = () => {
+        // Cancel the previous timer
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
         }
+    
+        setLoader(true);
+    
+        // Create a new timer
+        timerRef.current = setTimeout(() => {
+            Search();
+        }, 300);
+    };
 
+    
+    const Search = async () => {
 
-        const sv = searchBox.current?.value;    
-        
+        const api_db = process.env.NEXT_PUBLIC_SEARCH_API;
+        const sv = searchBox.current?.value.trim();  
+
         if(!sv) {
             setSearchPlaceholder("Search Recipes...")
             setSearchDiv(false)
+            setMealDet([])
             setLoader(false)
 
             if (searchBoxDiv.current) {
@@ -64,10 +68,10 @@ const SearchBar = () => {
             return;
         }
 
-        setSearchPlaceholder("Search Recipes...")
+        setLoader(true);
 
         try {
-            
+
             const formatted_api = api_db + sv;
 
             const response = await fetch(`${formatted_api}` , {
@@ -91,9 +95,21 @@ const SearchBar = () => {
         catch(error) {
             console.error("Error : " , error)
         }
+        
 
+        if(loaderDiv.current) {
+            loaderDiv.current.style.borderBottomLeftRadius = "10px"
+            loaderDiv.current.style.borderBottomRightRadius = "10px"
+        } 
+
+        if(searchBoxDiv.current) {
+            searchBoxDiv.current.style.borderBottom = "none"
+            searchBoxDiv.current.style.borderBottomLeftRadius = "0px"
+            searchBoxDiv.current.style.borderBottomRightRadius = "0px"
+        }
+
+        return;
     }
-
 
     const ResetSearch = () => {
         if (searchBoxDiv.current) {
