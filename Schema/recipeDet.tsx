@@ -4,7 +4,7 @@ const Details = new mongoose.Schema({
     Author_name : {type : String , required : true},
     Recipe_name : {type : String , required : true },
     Recipe_short_desc : {type : String , required : true}, 
-    Tags : {type : String , required : true},
+    Tags : {type : [String] , required : true},
     Blog : {type : String , required : true},
     Prep_Time : {type : Number, required : true},
     Cook_Time : {type : Number, required : true},
@@ -18,7 +18,7 @@ if(mongoose.models.Details) {
     delete mongoose.models.Details;
 }
 
-const Recipe = mongoose.model("User_Recipes", Details);
+const Recipe = mongoose.models.User_Recipes || mongoose.model("User_Recipes", Details)
 
 
 export default Recipe;

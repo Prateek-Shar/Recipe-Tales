@@ -14,15 +14,15 @@ import type { UploadProps } from 'antd';
 import { message, Upload } from 'antd';
 
 
-const form_data = {
-    Author_name : "",
-    Recipe_name : "",
-    Recipe_short_desc : "",
-    Prep_Time : "",
-    Cook_Time : "",
-    Servings : "",
-    Blog : "",
-    Tags : ""
+interface form_data {
+    Author_name : string,
+    Recipe_name : string,
+    Recipe_short_desc : string,
+    Prep_Time : string,
+    Cook_Time : string,
+    Servings : string,
+    Blog : string,
+    Tags : string[]
 }
 
 
@@ -44,12 +44,27 @@ const Page = () =>  {
 
     const url = process.env.NEXT_PUBLIC_CLOUDINARY_URL
 
-    const [form , setForm] = useState(form_data)
+    const [form , setForm] = useState<form_data>({
+        Author_name : "",
+        Recipe_name : "",
+        Recipe_short_desc : "",
+        Prep_Time : "",
+        Cook_Time : "",
+        Servings : "",
+        Blog : "",
+        Tags : [""]
+    })
 
-    const default_form = {...form_data}
 
     const EnterRecipe = async(e:React.FormEvent) => {
         e.preventDefault()
+
+        let tag_con : string = form.Tags.toString()
+        const Tag_data = tag_con.split(",").map(tag => tag.trim())
+
+        form.Tags = Tag_data
+        // console.log(Tag_data)
+        console.log(form.Tags)
 
         try {
 
@@ -63,7 +78,6 @@ const Page = () =>  {
 
             if(!res.ok) {
                 console.log("Data Not Sent");
-                setForm(form_data)
                 setErrorDiv(true)
 
                 setTimeout(() => {
@@ -76,7 +90,7 @@ const Page = () =>  {
             }
 
             const data = await res.json()
-            setForm(form_data)
+            // setForm(default_form)
             setSuccessDiv(true)
 
             setTimeout(() => {
@@ -116,6 +130,7 @@ const Page = () =>  {
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // e.target.value = e.target.value.split(",").join("");
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
@@ -152,35 +167,12 @@ const Page = () =>  {
         setInsCount([1]);
         setInstructions([""]);
 
-        setForm(default_form);
+        setForm({...form});
 
         setBlogContentPlaceholder("Share the story behind your recipe, cooking tips, or any interesting anecdotes related to the dish.");
         setTagsPlaceholder("E.g., Italian, Dessert, Quick Meals, Vegan");
     }
 
-    // const [messageApi, contextHolder] = message.useMessage();
-
-    // const props: UploadProps = {
-    //     name: 'file',
-    //     multiple: false,
-    //     action: url,
-    //     onChange(info) {
-    //       const { status } = info.file;
-    //       if (status !== 'uploading') {
-    //         console.log(info.file, info.fileList);
-    //       }
-    //       if (status === 'done') {
-    //         messageApi.success(`${info.file.name} file uploaded successfully.`);
-    //       } else if (status === 'error') {
-    //         messageApi.error(`${info.file.name} file upload failed.`);
-    //       }
-    //     },
-    //     onDrop(e) {
-    //         console.log('Dropped files', e.dataTransfer.files);
-    //     },
-    // };
-
-    // const { Dragger } = Upload;
 
     return (
 
@@ -360,7 +352,7 @@ const Page = () =>  {
                     </div>
 
                     <div className="w-full mt-5 flex border-2 border-[#e7e1da] rounded-[5px] items-center xl:mb-0 mm:mb-2">
-                        <textarea placeholder={blogContentPlaceholder} rows={8} className="py-2 px-2 w-full font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px]" name="Blog" value={form.Blog} onChange={handleChangeForTextareaBlog}/>
+                        <textarea placeholder={blogContentPlaceholder} rows={8} className="py-2 px-2 w-full font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px]" name="Blog" value={form.Blog} onChange={handleChangeForTextareaBlog} />
                     </div>
 
                 </div>
@@ -373,7 +365,7 @@ const Page = () =>  {
                     </div>
 
                     <div className="w-full flex mt-5 rounded-[5px] items-center border-2 border-[#e7e1da] xl:mb-0 mm:mb-2">
-                        <input placeholder={tagsPlaceholder} className="w-full pl-3 font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px] p-2"  name="Tags" onChange={handleChange} value={form.Tags}/>
+                        <input placeholder={tagsPlaceholder} className="w-full pl-3 font-Poppins outline-0 text-[#847062] text-[14px] bg-[#f9f8f5] rounded-[5px] p-2" name="Tags" onChange={handleChange} value={form.Tags} />
                     </div>
 
                 </div>

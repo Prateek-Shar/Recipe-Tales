@@ -1,6 +1,5 @@
 import Liked from '@/Schema/likedRecipe'
 import Connect from '@/middleware/mongo_connect'
-import { message } from 'antd';
 
 
 export const POST = async(request : Request) => {
