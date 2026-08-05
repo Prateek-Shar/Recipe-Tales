@@ -1,6 +1,7 @@
 "use client"
 
 import { useSearchParams , useRouter } from "next/navigation";
+import { connection } from 'next/server'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Skeleton } from "antd";
@@ -12,9 +13,11 @@ interface data {
     _id : string
 }
 
-const Category_recipe = () => {
+const Category_recipe = async() => {
 
     const route = useRouter()
+
+    await connection()
 
     const [recipeData , setRecipeData] = useState<data[]>([])
     const [count , setCount] = useState<number>(0)
