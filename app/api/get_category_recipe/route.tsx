@@ -16,7 +16,7 @@ export const GET = async(request : Request) => {
             })
         }
 
-        const res = await Recipe.find({ Tags : {$in : [category]} });
+        const res = await Recipe.find({ Tags : {$in : [category]} }).select("Author_name Recipe_name Tags Servings Cook_Time");
         const count = await Recipe.countDocuments({ Tags : {$in : [category]} });
         console.log("DB response : " , res)
         // console.log("Count response from db : " , count)

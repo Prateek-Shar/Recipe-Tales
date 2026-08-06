@@ -113,7 +113,7 @@ const blog_recipes = () => {
                             <p className="text-3xl font-Mogra ml-2">Blogs</p>
                         </div>
 
-                        <p className="font-Poppins xl:text-2xl mm:text-[16px] p-2 mt-5">{mealDet?.Blog}</p>
+                        <p className="font-Poppins xl:text-[20px] mm:text-[16px] p-2 mt-5">{mealDet?.Blog}</p>
                     </div> 
                     </>
                 )}

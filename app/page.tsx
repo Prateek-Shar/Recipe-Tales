@@ -58,6 +58,20 @@ export default function Home() {
   }
 
 
+  const sendRandomRecipe = async() => {
+    const res = await fetch(`/api/add_demo_recipe` , {
+      method : "POST"
+    })
+
+    if(!res.ok) {
+      console.info("Api Hit Un-expectedly")
+      return;
+    }
+
+    console.info("Api ran successfully")
+  }
+
+
 
   return (
 
@@ -126,6 +140,8 @@ export default function Home() {
         </div>
 
       </div>
+
+      <button onClick={sendRandomRecipe} className="fixed top-2 right-2 bg-amber-500">Add Random Reciipe</button>
 
       <div className="w-full bg-[#f2f1ff] flex flex-col mt-10">
         <div className="w-full flex justify-center xl:mt-10 xl:mb-5 mm:my-5">
