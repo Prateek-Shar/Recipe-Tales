@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface MealDet {
     Recipe_name : string,
-    Tags : string,
+    Tags : string[],
     Author_name : string,
     _id : string
     // Likes : Number
@@ -76,9 +76,9 @@ const all_recipe_table = () => {
                             <tbody key={index}>
                                 <tr key={md._id} className="flex nth-last-[]:border-b-0 justify-between items-center">
                                     <td className="xl:w-[30%] mm:w-[40%] font-Poppins p-4 hover:cursor-pointer text-center" onClick={ () => {renderRecipe(md.Recipe_name)} }>{md.Recipe_name || "NA"}</td>
-                
-                                    <td className="xl:w-[30%] mm:w-[40%] font-Poppins p-4 text-center">{md.Tags || "NA"}</td>
-                
+
+                                    <td className=" xl:w-[30%] mm:w-[40%] font-Poppins p-4 text-center"> {md.Tags.join(" , ")} </td>
+                                    
                                     <td className="w-[30%] font-Poppins p-4 xl:flex mm:hidden flex justify-center">{md.Author_name || "NA"}</td>
                                 </tr>
                             </tbody>
