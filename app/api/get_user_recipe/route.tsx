@@ -9,7 +9,6 @@ export const GET = async(req : Request) => {
         const { searchParams } = new URL(req.url);
         const meal_name = searchParams.get("recipe_name");
 
-        // console.log("Meal name : " , meal_name)
 
         if(!meal_name) {
             return new Response(JSON.stringify({msg : "Meal not recieved from frontend"}) , {status : 404})
@@ -18,8 +17,6 @@ export const GET = async(req : Request) => {
         try {
 
             const details = await Recipe.findOne({"Recipe_name" : meal_name}).select("-_id -Recipe_short_desc -__v")
-
-            // console.log("DB response : " , details);
 
             if(!details) {
                 return new Response(JSON.stringify({msg : "No such meal found in DB"}) , {status : 404})

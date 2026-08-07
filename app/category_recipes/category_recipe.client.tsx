@@ -56,8 +56,6 @@ const Category_recipe = () => {
         setShowStats(true)
         setRecipeData(res.data.recipe_data)
         setCount(res.data.cou);
-        // console.log("Api ran")
-        // console.log(typeof recipeData)
     }
 
     const renderRecipe = (value : string) => {
@@ -67,10 +65,6 @@ const Category_recipe = () => {
     useEffect(() => {
         handleData()
     } ,[])
-
-    useEffect(() => {
-        console.log("Data : " , recipeData)
-    })
 
     const handleRecipe = (value : string) => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
@@ -101,10 +95,6 @@ const Category_recipe = () => {
         tl.to(boxOneBt.current , {rotateY : 180 , duration : 2})
             .to(boxOneBt.current , {x : 70 , duration : 1})
     } , [viewRecipeBt])
-
-    useEffect(() => {
-        console.log("Hovered status : " , hovered)
-    } , [hovered])
 
 
     return (
