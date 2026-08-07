@@ -54,6 +54,8 @@ const Category_recipe = () => {
         }
     
         setShowSkeleton(false)
+        setShowStats(true)
+        setShowLength(true)
         setRecipeData(res.data.recipe_data)
         setCount(res.data.cou);
     }
@@ -64,7 +66,7 @@ const Category_recipe = () => {
 
     useEffect(() => {
         handleData()
-    } ,[])
+    } ,[count])
 
     const handleRecipe = (value : string) => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
@@ -95,18 +97,6 @@ const Category_recipe = () => {
         tl.to(boxOneBt.current , {rotateY : 180 , duration : 2})
             .to(boxOneBt.current , {x : 70 , duration : 1})
     } , [viewRecipeBt])
-
-    useEffect(() => {
-        if (count > 0) {
-            setShowLength(true)
-            setShowStats(false)
-        }
-
-        else {
-            setShowLength(true)
-            setShowStats(true)
-        }
-    } , [count])
 
 
 
@@ -162,338 +152,343 @@ const Category_recipe = () => {
             </div>
 
             {showSkeleton && (
-                <div className="w-[80%] my-10">
-                    <Skeleton paragraph={{rows : 10}} active />
+                <div className="w-full flex justify-center items-center my-10">
+                    <div className="w-[80%]">
+                        <Skeleton paragraph={{rows : 10}} active />
+                    </div>
                 </div>
             )}
 
             {showStats && (
-                <div className="w-full flex justify-center items-center flex-col">
-                    <div className="w-[90%] flex xl:flex-row mm:flex-col justify-evenly items-center my-10">
-                        {recipeData[0] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl" key={recipeData[0]._id} ref={box1} onMouseEnter={ ()=>{setHovered(true)} } onMouseLeave={ ()=>{setHovered(false)} }>
+                recipeData.length > 0 ? (
+                    <div className="w-full flex justify-center items-center flex-col" autoCapitalize="a">
+                        <div className="w-[90%] flex xl:flex-row mm:flex-col justify-evenly items-center my-10">
+                            {recipeData[0] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl" key={recipeData[0]._id} ref={box1} onMouseEnter={ ()=>{setHovered(true)} } onMouseLeave={ ()=>{setHovered(false)} }>
 
-                            {boxOneData && (
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[0].Recipe_name)} }>{recipeData[0].Recipe_name || "NA"}</p>
+                                {boxOneData && (
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[0].Recipe_name)} }>{recipeData[0].Recipe_name || "NA"}</p>
+                                </div>
+                                )}
+            
+                                {boxOneData && (
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[0].Author_name || "NA"}</p>
+                                </div>
+                                )}
+
+                                {boxOneData && (
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[0].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[0].Servings} person</p>
+                                    </div>
+                                </div>
+                                )}
+
+                                {viewRecipeBt && (
+                                <div className="w-[50%] flex hover:cursor-pointer  rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[0].Recipe_name)} } ref={boxOneBt}>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[16px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div>
+                                )}
                             </div>
+                            ) : (null
                             )}
-        
-                            {boxOneData && (
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[0].Author_name || "NA"}</p>
+
+
+                            {/* Recipe 2 */}
+                            {recipeData[1] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[1]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[1].Recipe_name)} }>{recipeData[1].Recipe_name || "NA"}</p>
+                                </div>
+            
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[1].Author_name || "NA"}</p>
+                                </div>
+
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[1].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[1].Servings} person</p>
+                                    </div>
+                                </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[1].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
                             </div>
+                            ) : (null
                             )}
 
-                            {boxOneData && (
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[0].Cook_Time} mins</p>
+                            {/* Recipe 3 */}
+                            {recipeData[2] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[2]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[2].Recipe_name)} }>{recipeData[2].Recipe_name || "NA"}</p>
+                                </div>
+            
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[2].Author_name || "NA"}</p>
                                 </div>
 
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[0].Servings} person</p>
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[2].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[2].Servings} person</p>
+                                    </div>
                                 </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[2].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
                             </div>
+                            ) : (null
                             )}
 
-                            {viewRecipeBt && (
-                            <div className="w-[50%] flex hover:cursor-pointer  rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[0].Recipe_name)} } ref={boxOneBt}>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[16px] font-Poppins">View Recipe</p>
+
+                            {/* Recipe 4 */}
+                            {recipeData[3] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[3]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[3].Recipe_name)} }>{recipeData[3].Recipe_name || "NA"}</p>
+                                </div>
+            
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[3].Author_name || "NA"}</p>
                                 </div>
 
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[3].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[3].Servings} person</p>
+                                    </div>
                                 </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[3].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
                             </div>
+                            ) : (null
                             )}
                         </div>
-                        ) : (null
-                        )}
 
+                        <div className="w-[90%] flex justify-evenly items-center xl:mt-10 mm:mt-0">
+                            {recipeData[4] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl" key={recipeData[4]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[0].Recipe_name)} }>{recipeData[4].Recipe_name || "NA"}</p>
+                                </div>
 
-                        {/* Recipe 2 */}
-                        {recipeData[1] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[1]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[1].Recipe_name)} }>{recipeData[1].Recipe_name || "NA"}</p>
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[4].Author_name || "NA"}</p>
+                                </div>
+
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[4].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[4].Servings} person</p>
+                                    </div>
+                                </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[4].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
                             </div>
-        
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[1].Author_name || "NA"}</p>
+                            ) : (null
+                            )}
+
+
+                            {/* Recipe 2 */}
+                            {recipeData[5] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[1]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[1].Recipe_name)} }>{recipeData[5].Recipe_name || "NA"}</p>
+                                </div>
+
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[5].Author_name || "NA"}</p>
+                                </div>
+
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[5].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[5].Servings} person</p>
+                                    </div>
+                                </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[5].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
                             </div>
+                            ) : (null
+                            )}
 
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[1].Cook_Time} mins</p>
+                            {/* Recipe 3 */}
+                            {recipeData[6] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[6]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[6].Recipe_name)} }>{recipeData[6].Recipe_name || "NA"}</p>
                                 </div>
 
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[1].Servings} person</p>
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[6].Author_name || "NA"}</p>
                                 </div>
+
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[6].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[6].Servings} person</p>
+                                    </div>
+                                </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[6].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
                             </div>
+                            ) : (null
+                            )}
 
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[1].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
+
+                            {/* Recipe 4 */}
+                            {recipeData[7] ? (
+                            <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[7]._id}>
+                                <div className="flex p-2 justify-normal items-center ml-1">
+                                    <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
+                                    <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[7].Recipe_name)} }>{recipeData[7].Recipe_name || "NA"}</p>
                                 </div>
 
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
+                                <div className="flex p-2 justify-normal items-center">
+                                    <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
+                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[7].Author_name || "NA"}</p>
                                 </div>
-                            </div> */}
+
+                                <div className="flex p-2 ml-1">
+                                    <div className="flex items-center justify-normal">
+                                        <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[7].Cook_Time} mins</p>
+                                    </div>
+
+                                    <div className="flex">
+                                        <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
+                                        <p className="font-Poppins ml-2">{recipeData[7].Servings} person</p>
+                                    </div>
+                                </div>
+
+                                {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[7].Recipe_name)} }>
+                                    <div className="w-[75%] flex items-center">
+                                        <p className="text-[15px] font-Poppins">View Recipe</p>
+                                    </div>
+
+                                    <div className="w-[10%] flex items-center">
+                                        <Image src={next} alt="next page" className="" />
+                                    </div>
+                                </div> */}
+                            </div>
+                            ) : (null
+                            )}
                         </div>
-                        ) : (null
-                        )}
 
-                        {/* Recipe 3 */}
-                        {recipeData[2] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[2]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[2].Recipe_name)} }>{recipeData[2].Recipe_name || "NA"}</p>
-                            </div>
-        
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[2].Author_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[2].Cook_Time} mins</p>
-                                </div>
-
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[2].Servings} person</p>
-                                </div>
-                            </div>
-
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[2].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
-                                </div>
-
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
-                                </div>
-                            </div> */}
+                        <div className="w-full p-2 flex justify-end items-center my-15">
+                            <Pagination defaultCurrent={1} total={50} />
                         </div>
-                        ) : (null
-                        )}
-
-
-                        {/* Recipe 4 */}
-                        {recipeData[3] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[3]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[3].Recipe_name)} }>{recipeData[3].Recipe_name || "NA"}</p>
-                            </div>
-        
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[3].Author_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[3].Cook_Time} mins</p>
-                                </div>
-
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[3].Servings} person</p>
-                                </div>
-                            </div>
-
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[3].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
-                                </div>
-
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
-                                </div>
-                            </div> */}
-                        </div>
-                        ) : (null
-                        )}
                     </div>
 
-                    <div className="w-[90%] flex justify-evenly items-center xl:mt-10 mm:mt-0">
-                        {recipeData[4] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl" key={recipeData[4]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[0].Recipe_name)} }>{recipeData[4].Recipe_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[4].Author_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[4].Cook_Time} mins</p>
-                                </div>
-
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[4].Servings} person</p>
-                                </div>
-                            </div>
-
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[4].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
-                                </div>
-
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
-                                </div>
-                            </div> */}
-                        </div>
-                        ) : (null
-                        )}
-
-
-                        {/* Recipe 2 */}
-                        {recipeData[5] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[1]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[1].Recipe_name)} }>{recipeData[5].Recipe_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[5].Author_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[5].Cook_Time} mins</p>
-                                </div>
-
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[5].Servings} person</p>
-                                </div>
-                            </div>
-
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[5].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
-                                </div>
-
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
-                                </div>
-                            </div> */}
-                        </div>
-                        ) : (null
-                        )}
-
-                        {/* Recipe 3 */}
-                        {recipeData[6] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[6]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[6].Recipe_name)} }>{recipeData[6].Recipe_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[6].Author_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[6].Cook_Time} mins</p>
-                                </div>
-
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[6].Servings} person</p>
-                                </div>
-                            </div>
-
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[6].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
-                                </div>
-
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
-                                </div>
-                            </div> */}
-                        </div>
-                        ) : (null
-                        )}
-
-
-                        {/* Recipe 4 */}
-                        {recipeData[7] ? (
-                        <div className="xl:w-[20%] mm:w-[90%] flex flex-col bg-[#dee2e6] py-2 rounded-3xl xl:mt-0 mm:mt-10" key={recipeData[7]._id}>
-                            <div className="flex p-2 justify-normal items-center ml-1">
-                                <Image src={dish} alt="Cook" className="object-contain w-[7%]"/>
-                                <p className="font-Poppins hover:cursor-pointer text-center ml-2" onClick={ ()=>{renderRecipe(recipeData[7].Recipe_name)} }>{recipeData[7].Recipe_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 justify-normal items-center">
-                                <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[7].Author_name || "NA"}</p>
-                            </div>
-
-                            <div className="flex p-2 ml-1">
-                                <div className="flex items-center justify-normal">
-                                    <Image src={Cook} alt="Cook Time" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[7].Cook_Time} mins</p>
-                                </div>
-
-                                <div className="flex">
-                                    <Image src={serve} alt="Servings" className="object-contain w-[12%]" />
-                                    <p className="font-Poppins ml-2">{recipeData[7].Servings} person</p>
-                                </div>
-                            </div>
-
-                            {/* <div className="w-[40%] flex hover:cursor-pointer hover:bg-[#f2f1ff] rounded-[20px] p-2 ml-2" onClick={ ()=>{handleRecipe(recipeData[7].Recipe_name)} }>
-                                <div className="w-[75%] flex items-center">
-                                    <p className="text-[15px] font-Poppins">View Recipe</p>
-                                </div>
-
-                                <div className="w-[10%] flex items-center">
-                                    <Image src={next} alt="next page" className="" />
-                                </div>
-                            </div> */}
-                        </div>
-                        ) : (null
-                        )}
-                    </div>
-
-                   
-                    <div className="w-full p-2 flex justify-end items-center my-15">
-                        <Pagination defaultCurrent={1} total={50} />
-                    </div>
-
-                </div>
+                ) : (
+                    null
+                )
             )}
 
         </div>
