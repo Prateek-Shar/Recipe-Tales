@@ -97,7 +97,7 @@ const Category_recipe = () => {
     } , [viewRecipeBt])
 
     useEffect(() => {
-        if (count == 0) {
+        if (count > 0) {
             setShowLength(true)
             setShowStats(false)
         }
