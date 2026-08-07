@@ -9,7 +9,9 @@ import Cook from "@/public/Images/cook_time.png";
 import serve from "@/public/Images/servings_table.png";
 import cap from "@/public/Images/cap.png";
 import dish from "@/public/Images/dish.png"
-import next from "@/public/Images/next.png";   
+import next from "@/public/Images/next.png"; 
+import no from "@/public/Images/no_recipe.png";  
+import exp_recipe from "@/public/Images/explore_recipe.png"
 import gsap from "gsap";
 
 interface data {
@@ -72,6 +74,10 @@ const Category_recipe = () => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
     }
 
+    const handleClickToMoreRecipes = () => {
+        route.push("/all_recipe")
+    }
+
     useEffect(() => {
         if (!hovered || !box1.current) return;
     
@@ -101,7 +107,7 @@ const Category_recipe = () => {
 
 
     return (
-        <>
+        <div className="min-h-screen">
         
         <div className="xl:w-full mm:w-screen bg-[url(/Images/banner_img.png)] xl:h-[500px] bg-cover bg-no-repeat py-1 flex justify-evenly items-center flex-col ">
 
@@ -125,12 +131,14 @@ const Category_recipe = () => {
         </div>
 
 
-        <div className="w-full">
+        <div className="w-full flex-1">
 
             {showStats && (
-                <div className="xl:flex mm:hidden p-2 my-5">
-                    <p className="font-Capra text-2xl">{category} Collection</p>
-                </div>
+                recipeData.length > 0 ? (
+                    <div className="xl:flex mm:hidden p-2 my-5">
+                        <p className="font-Capra text-2xl">{category} Collection</p>
+                    </div>
+                ) : (null)
             )}
 
             {showLength && (
@@ -139,17 +147,40 @@ const Category_recipe = () => {
                         <p className="font-Capra xl:text-2xl mm:text-[18px]">Showing {count} recipes from {category} Collection</p>
                     </div>
                 ) : (
-                <div className="xl:hidden mm:flex p-2 my-10 flex-col justify-center items-center">
-                    <p className="font-Mogra xl:text-2xl mm:text-[18px]">No recipes found in this category.</p>
-                    <p className="font-Poppins xl:text-2xl mm:text-[18px] text-center mt-5">We're still cooking up something delicious! Check back later or explore other categories.</p>
+
+                <div className="w-full flex p-2 my-10 flex-col">
+                    <div className="flex flex-col justify-center items-center">
+                        <p className="font-Mogra xl:text-2xl mm:text-[18px]">No recipes found in this category.</p>
+                        <p className="font-Poppins xl:text-2xl mm:text-[18px] text-center mt-5">We're still cooking up something delicious! Check back later or explore other categories.</p>
+                        <Image src={no} alt="No Recipe Found" className="object-contain mm:w-[20%] xl:w-[5%] mt-5" />
+                    </div>
+                    
+
+
+                    <div className="w-full mt-10 flex flex-col justify-center items-center">
+                        <p className="font-Poppins text-[16px]">Can't find what you are looking for?</p> 
+                        <button className="xl:w-[13%] mm:w-[65%] bg-[#ca6441] rounded-2xl flex mt-5" onClick={handleClickToMoreRecipes}>
+                            <div className="w-[10%] ml-2 flex justify-center items-center">
+                                <Image src={exp_recipe} alt="Explore Recipe" width={100} height={100} />
+                            </div>
+
+                            <div className="w-[88%] ml-2 p-3">
+                                <div className="text-[16px] font-Poppins text-white">Explore More Recipes</div>
+                            </div>  
+                        </button>
+                    </div>
                 </div>
                 )
             )}
 
+            {showStats && (
+                recipeData.length > 0 ? (
+                <div className="xl:flex mm:hidden p-2">
+                    <p className="font-Capra text-2xl">Browse all recipes in this collection - </p>
+                </div>
+                ) : (null)
+            )}
 
-            <div className="xl:flex mm:hidden p-2">
-                <p className="font-Capra text-2xl">Browse all recipes in this collection - </p>
-            </div>
 
             {showSkeleton && (
                 <div className="w-full flex justify-center items-center my-10">
@@ -492,7 +523,7 @@ const Category_recipe = () => {
             )}
 
         </div>
-        </>
+        </div>
     )}
     
 
