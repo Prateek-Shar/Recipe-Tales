@@ -97,7 +97,7 @@ const Catagory_Cards = () => {
 
                 {moreCategories && (
                 <div className="flex flex-col">
-                    <div className="w-full flex justify-evenly items-center">
+                    <div className="w-full flex justify-evenly items-center mt-5">
                         <div className="w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer" onClick={() => { Search_category("High Protein")} }>
                             <div className="w-full xl:p-4 mm:p-0 flex justify-center xl:mt-0 mm:mt-2">
                                 <Image src={protein} alt="breakfast" className="object-contain mm:w-[35%]"/>
@@ -139,7 +139,7 @@ const Catagory_Cards = () => {
                         </div>
                     </div>
 
-                    <div className="w-full flex justify-evenly items-center">
+                    <div className="w-full flex justify-evenly items-center mt-5">
                         <div className="w-[20%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer" onClick={() => { Search_category("South Indian")} }>
                             <div className="w-full xl:p-4 xl:mt-0 mm:p-1 flex justify-center mm:mt-2">
                                 <Image src={dosa} alt="Dosa" className="object-contain w-[42%]"/>
