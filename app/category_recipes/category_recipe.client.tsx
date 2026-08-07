@@ -31,6 +31,7 @@ const Category_recipe = () => {
     const [count , setCount] = useState<number>(0)
 
     const [showStats , setShowStats] = useState<boolean>(false)
+    const [showLength , setShowLength] = useState<boolean>(false)
     const [showSkeleton , setShowSkeleton] = useState<boolean>(true) 
 
     const [hovered , setHovered] = useState<boolean>(false)
@@ -51,9 +52,8 @@ const Category_recipe = () => {
             console.log("Api hit un-expectedly")
             return;
         }
-
+    
         setShowSkeleton(false)
-        setShowStats(true)
         setRecipeData(res.data.recipe_data)
         setCount(res.data.cou);
     }
@@ -96,6 +96,19 @@ const Category_recipe = () => {
             .to(boxOneBt.current , {x : 70 , duration : 1})
     } , [viewRecipeBt])
 
+    useEffect(() => {
+        if (count == 0) {
+            setShowLength(true)
+            setShowStats(false)
+        }
+
+        else {
+            setShowLength(true)
+            setShowStats(true)
+        }
+    } , [count])
+
+
 
     return (
         <>
@@ -130,11 +143,19 @@ const Category_recipe = () => {
                 </div>
             )}
 
-            {showStats && (
-                <div className="xl:hidden mm:flex p-2 my-5">
-                    <p className="font-Capra xl:text-2xl mm:text-[18px]">Showing {count} recipes from {category} Collection</p>
+            {showLength && (
+                recipeData.length > 0 ? (
+                    <div className="xl:hidden mm:flex p-2 my-5">
+                        <p className="font-Capra xl:text-2xl mm:text-[18px]">Showing {count} recipes from {category} Collection</p>
+                    </div>
+                ) : (
+                <div className="xl:hidden mm:flex p-2 my-10 flex-col justify-center items-center">
+                    <p className="font-Mogra xl:text-2xl mm:text-[18px]">No recipes found in this category.</p>
+                    <p className="font-Poppins xl:text-2xl mm:text-[18px] text-center mt-5">We're still cooking up something delicious! Check back later or explore other categories.</p>
                 </div>
+                )
             )}
+
 
             <div className="xl:flex mm:hidden p-2">
                 <p className="font-Capra text-2xl">Browse all recipes in this collection - </p>
@@ -467,14 +488,14 @@ const Category_recipe = () => {
                         )}
                     </div>
 
+                   
                     <div className="w-full p-2 flex justify-end items-center my-15">
                         <Pagination defaultCurrent={1} total={50} />
                     </div>
 
                 </div>
-
-
             )}
+
         </div>
         </>
     )}
