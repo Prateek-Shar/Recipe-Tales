@@ -8,10 +8,7 @@ import close from "@/public/Images/close.png";
 import add from "@/public/Images/add.png";
 import { useState , useEffect } from "react";
 import "@/app/globals.css"
-import { InboxOutlined } from '@ant-design/icons';
-import cloudinary from "@/middleware/cloudinary_connect";
-import type { UploadProps } from 'antd';
-import { message, Upload } from 'antd';
+
 
 
 interface form_data {
@@ -44,6 +41,8 @@ const Page = () =>  {
 
     const url = process.env.NEXT_PUBLIC_CLOUDINARY_URL
 
+    const address_url = process.env.NEXT_PUBLIC_ADDRESS;
+
     const [form , setForm] = useState<form_data>({
         Author_name : "",
         Recipe_name : "",
@@ -63,12 +62,10 @@ const Page = () =>  {
         const Tag_data = tag_con.split(",").map(tag => tag.trim())
 
         form.Tags = Tag_data
-        // console.log(Tag_data)
-        console.log(form.Tags)
 
         try {
 
-            const res = await fetch("api/add_recipe" , {
+            const res = await fetch(`${address_url}/api/add_recipe` , {
                 method : "POST",
                 headers: {
                     "Content-Type": "application/json"

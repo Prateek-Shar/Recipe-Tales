@@ -43,12 +43,14 @@ const Category_recipe = () => {
     const boxOneBt = useRef<HTMLDivElement>(null)
 
     const box1 = useRef<HTMLDivElement>(null);
+
+    const add = process.env.NEXT_PUBLIC_ADDRESS;
  
     const search_params = useSearchParams()
     const category = search_params.get("Category")
 
     const handleData = async() => {
-        const res = await axios.get(`/api/get_category_recipe?category=${category}`)
+        const res = await axios.get(`${add}/api/get_category_recipe?category=${category}`)
 
         if (!res) {
             console.log("Api hit un-expectedly")

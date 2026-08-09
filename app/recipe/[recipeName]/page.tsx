@@ -37,7 +37,9 @@ const Recipe = () => {
     const [rating , setRating] = useState<number>(0)
 
     const api_db = process.env.NEXT_PUBLIC_SEARCH_API
-    const formatted_api = `${api_db}${name}`    
+    const add = process.env.NEXT_PUBLIC_ADDRESS;
+
+    const formatted_api = `${add}${api_db}${name}`    
 
     const [mealDetails, setMealDetails] = useState<Meal_Det[]>([])
 

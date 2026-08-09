@@ -30,12 +30,14 @@ const blog_recipes = () => {
     const [mealDet , setMealDet] = useState<Meal_det | null>(null)
     const search_para = useSearchParams()
 
+    const add = process.env.NEXT_PUBLIC_ADDRESS;
+
     const Meal_name = search_para.get("Meal_name")
     Meal_name?.trim()
 
     const get_recipe_det = async() => {
 
-        const res = await fetch(`/api/get_user_recipe?recipe_name=${Meal_name}` , {
+        const res = await fetch(`${add}/api/get_user_recipe?recipe_name=${Meal_name}` , {
             method : "get",
         })
 

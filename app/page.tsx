@@ -21,6 +21,8 @@ export default function Home() {
 
   const subscribeText = useRef<HTMLInputElement>(null)
 
+  const add = process.env.NEXT_PUBLIC_ADDRESS;
+
   const handleAlert = () => {
     setRenderMsgDiv(true)
 
@@ -54,12 +56,11 @@ export default function Home() {
       setSuccessSubscribe(false)
     } , 2000)
 
-
   }
 
 
   const sendRandomRecipe = async() => {
-    const res = await fetch(`/api/add_demo_recipe` , {
+    const res = await fetch(`${add}/api/add_demo_recipe` , {
       method : "POST"
     })
 

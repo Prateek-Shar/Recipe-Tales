@@ -23,6 +23,8 @@ const all_recipe_table = () => {
 
     const pageSize = 5;
 
+    const add = process.env.NEXT_PUBLIC_ADDRESS;
+
     const start = (currentPage - 1) * pageSize + 1;
     const end = Math.min(currentPage * pageSize, totalRecipes);
 
@@ -30,7 +32,7 @@ const all_recipe_table = () => {
 
     const recipe_Det = async(value : number) => {
 
-        const res = await fetch(`/api/get_all_recipe?page=${value}` , {
+        const res = await fetch(`${add}/api/get_all_recipe?page=${value}` , {
             method : "get"
         })
 
