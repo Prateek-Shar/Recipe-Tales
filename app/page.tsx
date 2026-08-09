@@ -99,11 +99,6 @@ export default function Home() {
           <Catagory_Cards />
         </div>
 
-        {/* <div className="xl:w-[30%] mm:w-[80%] flex justify-center items-center mt-5">
-          <Image src={construction} className="object-contain xl:w-[5%] mm:w-[8%]" alt="Not Working" />
-          <p className="font-Capra mm:text-[13px] xl:text-[16px] ml-2 pt-1">Categories coming soon</p>
-        </div> */}
-
       </div>
 
       <div className="w-full flex flex-col">
