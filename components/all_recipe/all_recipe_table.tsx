@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "antd";
 import { useRouter } from "next/navigation";
+import { Pagination } from "antd"
 
 interface MealDet {
     Recipe_name : string,
     Tags : string[],
     Author_name : string,
     _id : string
-    // Likes : Number
 }
 
 const all_recipe_table = () => {
@@ -18,11 +18,19 @@ const all_recipe_table = () => {
     const [showSkeleton , setShowSkeleton] = useState<boolean>(true)
     const [showStats , setShowStats] = useState<boolean>(false);
 
+    const [currentPage , setCurrentPage] = useState<number>(1)
+    const [totalRecipes , setTotalRecipes] = useState<number>(0)
+
+    const pageSize = 5;
+
+    const start = (currentPage - 1) * pageSize + 1;
+    const end = Math.min(currentPage * pageSize, totalRecipes);
+
     const route = useRouter()
 
-    const recipe_Det = async() => {
+    const recipe_Det = async(value : number) => {
 
-        const res = await fetch("/api/get_all_recipe" , {
+        const res = await fetch(`/api/get_all_recipe?page=${value}` , {
             method : "get"
         })
 
@@ -32,18 +40,33 @@ const all_recipe_table = () => {
 
         const data = await res.json()
         setMealDet(data.det)
+        setTotalRecipes(data.count)
         setShowSkeleton(false)
         setShowStats(true);
     }
 
     useEffect(() => {
-        recipe_Det()
-    } , [])
+        recipe_Det(currentPage)
+        console.log("Current page : " , currentPage)
+    } , [currentPage])
 
     const renderRecipe = (value : string) => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
     }   
 
+    const get_recipe_acc_page = async(value : number) => {
+        const res = await fetch(`/api/get_all_recipe?page=${value}` , {
+            method : "get"
+        })
+
+        if(!res.ok) {
+            console.log("Something Broke")
+        }
+
+        const data = await res.json()
+        setMealDet(data.det)
+        setCurrentPage(value)
+    }
 
 
     return (
@@ -57,6 +80,7 @@ const all_recipe_table = () => {
 
         {showStats && (
             mealDet.length > 0 ? (
+                <div className="w-full flex flex-col justify-center items-center">
                 <table className="border-gray-200 border-2 xl:w-[70%] mm:w-[90%] rounded-2xl flex flex-col border-collapse" bgcolor="#f2f1ff">
 
                     <thead>
@@ -86,6 +110,18 @@ const all_recipe_table = () => {
                     })}
     
                 </table>
+                
+                <div className="xl:w-[70%] mm:w-full flex xl:flex-row mm:flex-col justify-between items-center py-1 my-10">
+                    <div className="flex">
+                        <p className="font-Poppins text-gray-500 xl:text-[16px] mm:text-[15px]">Showing {start} - {end} out of {totalRecipes} results</p>
+                    </div>
+
+                    <div className="flex justify-center items-center xl:mt-0 mm:mt-10">
+                        <Pagination current={currentPage} total={totalRecipes} onChange={(page) => {setCurrentPage(page); get_recipe_acc_page(page); }} pageSize={5} />    
+                    </div>
+                </div>
+                
+                </div>
             ) : (
                 <div className="w-[80%]">
                     <p className="text-5xl">No Results Found</p>
