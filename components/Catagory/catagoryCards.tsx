@@ -53,7 +53,7 @@ const Catagory_Cards = () => {
                     </div>
                 </div>
 
-                <div className="xl:hidden mm:flex flex-col mm:w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer">
+                <div className="xl:hidden mm:flex flex-col mm:w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer" onClick={() => { Search_category("Lunch")} }>
                     <div className="w-full xl:p-4 mm:p-1 flex justify-center xl:mt-0 mm:mt-2">
                         <Image src={lunch} alt="breakfast" className="object-contain w-[40%]"/>
                     </div>
@@ -63,7 +63,7 @@ const Catagory_Cards = () => {
                     </div>
                 </div>
 
-                <div className="xl:hidden mm:flex flex-col mm:w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer">
+                <div className="xl:hidden mm:flex flex-col mm:w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer" onClick={() => { Search_category("Dinner")} }>
                     <div className="w-full xl:p-4 xl:mt-0 mm:p-1 flex justify-center mm:mt-2">
                         <Image src={dinner} alt="breakfast" className="object-contain w-[42%]"/>
                     </div>
@@ -73,7 +73,7 @@ const Catagory_Cards = () => {
                     </div>
                 </div>
 
-                <div className="xl:hidden mm:flex flex-col mm:w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer">
+                <div className="xl:hidden mm:flex flex-col mm:w-[18%] bg-[#f2f1ff] border-2 border-[#eeeeee] rounded-4xl hover:cursor-pointer" onClick={() => { Search_category("Deserts")} }>
                     <div className="w-full xl:p-4 mm:p-0 flex justify-center xl:mt-0 mm:mt-2">
                         <Image src={deserts} alt="breakfast" className="object-contain mm:w-[40%]"/>
                     </div>
