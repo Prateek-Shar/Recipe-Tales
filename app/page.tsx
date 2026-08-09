@@ -6,7 +6,7 @@ import Buttons from "@/components/BannerComp/buttons";
 import Catagory_Cards from "@/components/Catagory/catagoryCards";
 import RecipeCards from "@/components/recipeCards/cards";
 import email from "@/public/Images/email.png";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Check from "@/public/Images/check.png"
 import construction from "@/public/Images/under_construction.png"
 import prohib from "@/public/Images/prohibition.png";
@@ -17,11 +17,15 @@ export default function Home() {
 
   const [renderMsgDiv , setRenderMsgDiv] = useState(false)
   const [renderErrorDiv , setRenderErrorDiv] = useState(false)
+
   const [successSubscribe , setSuccessSubscribe] = useState(false)  
+  const [toggle , setToggle] = useState<boolean>(false)
 
   const subscribeText = useRef<HTMLInputElement>(null)
 
   const add = process.env.NEXT_PUBLIC_ADDRESS;
+  const local_add = process.env.NEXT_PUBLIC_LOCAL_ADDRESS
+  // const production_add = process.env.NEXT_PUBLC_PRODUCTON_ADDRESS;
 
   const handleAlert = () => {
     setRenderMsgDiv(true)
@@ -72,6 +76,22 @@ export default function Home() {
     console.info("Api ran successfully")
   }
 
+  useEffect(() => {
+
+    console.log(`add : ${add}`)
+    console.log(`local : ${local_add}`)
+
+    if(add == local_add) {
+      setToggle(true)
+      console.info("Running on local address")
+    }
+
+    else {
+      setToggle(false)
+      console.info("Running on production address")
+    }
+
+  } , [])
 
 
   return (
@@ -136,8 +156,10 @@ export default function Home() {
         </div>
 
       </div>
-
-      <button onClick={sendRandomRecipe} className="fixed top-2 right-2 bg-amber-500">Add Random Reciipe</button>
+      
+      {toggle && (
+        <button onClick={sendRandomRecipe} className="fixed top-2 right-2 bg-amber-500">Add Random Reciipe</button>
+      )}
 
       <div className="w-full bg-[#f2f1ff] flex flex-col mt-10">
         <div className="w-full flex justify-center xl:mt-10 xl:mb-5 mm:my-5">
