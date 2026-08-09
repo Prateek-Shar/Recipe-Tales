@@ -25,7 +25,6 @@ export default function Home() {
 
   const add = process.env.NEXT_PUBLIC_ADDRESS;
   const local_add = process.env.NEXT_PUBLIC_LOCAL_ADDRESS
-  // const production_add = process.env.NEXT_PUBLC_PRODUCTON_ADDRESS;
 
   const handleAlert = () => {
     setRenderMsgDiv(true)
@@ -77,9 +76,6 @@ export default function Home() {
   }
 
   useEffect(() => {
-
-    console.log(`add : ${add}`)
-    console.log(`local : ${local_add}`)
 
     if(add == local_add) {
       setToggle(true)
