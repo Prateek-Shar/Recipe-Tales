@@ -27,11 +27,9 @@ const Cards = ({stepCount , setStepCount} : step) => {
 
     const [recipeDetails , setRecipeDetails] = useState<ing_det[]>([])
 
-    const add = process.env.NEXT_PUBLIC_ADDRESS;
-
     const handleAPI = async() => {
 
-        const res = await fetch(`${add}/api/get_recipe` , {
+        const res = await fetch(`/api/get_recipe` , {
             method : "GET"
         })
 

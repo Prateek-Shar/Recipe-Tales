@@ -39,9 +39,6 @@ const Page = () =>  {
     const [blogContentPlaceholder , setBlogContentPlaceholder] = useState<string>("Share the story behind your recipe, cooking tips, or any interesting anecdotes related to the dish.");
     const [tagsPlaceholder , setTagsPlaceholder] = useState<string>("E.g., Italian, Dessert, Quick Meals, Vegan");
 
-    const url = process.env.NEXT_PUBLIC_CLOUDINARY_URL
-
-    const address_url = process.env.NEXT_PUBLIC_ADDRESS;
 
     const [form , setForm] = useState<form_data>({
         Author_name : "",
@@ -65,7 +62,7 @@ const Page = () =>  {
 
         try {
 
-            const res = await fetch(`${address_url}/api/add_recipe` , {
+            const res = await fetch(`/api/add_recipe` , {
                 method : "POST",
                 headers: {
                     "Content-Type": "application/json"
