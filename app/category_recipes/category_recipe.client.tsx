@@ -42,6 +42,12 @@ const Category_recipe = () => {
 
     const [boxOneData , setBoxOneData] = useState<boolean>(true)
     const [viewRecipeBt , setViewRecipeBt] = useState<boolean>(false)
+
+    const pageSize = 7
+
+    const start = (currentPage - 1) * pageSize + 1;
+    const end = Math.min(currentPage * pageSize, count);
+
     const boxOneBt = useRef<HTMLDivElement>(null)
 
     const box1 = useRef<HTMLDivElement>(null);
@@ -49,7 +55,7 @@ const Category_recipe = () => {
     const search_params = useSearchParams()
     const category = search_params.get("Category")
 
-    const handleData = async(page : number) => {
+    const handleCategoryRecipe = async(page : number) => {
         const res = await axios.get(`api/get_category_recipe?category=${category}&pageNo=${page}`)
 
         if (!res) {
@@ -104,7 +110,7 @@ const Category_recipe = () => {
 
 
     useEffect(() => {
-        handleData(currentPage)
+        handleCategoryRecipe(currentPage)
     } ,[count])
 
     return (
@@ -145,7 +151,7 @@ const Category_recipe = () => {
             {showLength && (
                 recipeData.length > 0 ? (
                     <div className="xl:hidden mm:flex p-2 my-5">
-                        <p className="font-Capra xl:text-2xl mm:text-[18px]">Showing {count} recipes from {category} Collection</p>
+                        <p className="font-Capra xl:text-2xl mm:text-[18px]">Showing {start} to {end} results from {category} Collection</p>
                     </div>
                 ) : (
 
@@ -208,7 +214,7 @@ const Category_recipe = () => {
                                 {boxOneData && (
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[0].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[0].Author_name || "NA"}</p>
                                 </div>
                                 )}
 
@@ -252,7 +258,7 @@ const Category_recipe = () => {
             
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[1].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[1].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -290,7 +296,7 @@ const Category_recipe = () => {
             
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[2].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[2].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -329,7 +335,7 @@ const Category_recipe = () => {
             
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[3].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[3].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -368,7 +374,7 @@ const Category_recipe = () => {
 
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[4].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[4].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -407,7 +413,7 @@ const Category_recipe = () => {
 
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[5].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[5].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -445,7 +451,7 @@ const Category_recipe = () => {
 
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[6].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[6].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -484,7 +490,7 @@ const Category_recipe = () => {
 
                                 <div className="flex p-2 justify-normal items-center">
                                     <Image src={cap} alt="Cook" className="object-contain w-[8%]"/>
-                                    <p className="font-Poppins xl:flex mm:hidden flex justify-center ml-2">{recipeData[7].Author_name || "NA"}</p>
+                                    <p className="font-Poppins ml-2">{recipeData[7].Author_name || "NA"}</p>
                                 </div>
 
                                 <div className="flex p-2 ml-1">
@@ -514,7 +520,7 @@ const Category_recipe = () => {
                         </div>
 
                         <div className="w-full p-2 flex justify-end items-center my-15">
-                            <Pagination defaultCurrent={1} current={currentPage} total={count} />
+                            <Pagination defaultCurrent={1} current={currentPage} onChange={ (page) => {setCurrentPage(page) , handleCategoryRecipe(page)} } total={count} />
                         </div>
                     </div>
 

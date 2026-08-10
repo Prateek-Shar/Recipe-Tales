@@ -25,6 +25,8 @@ export const GET = async(request : Request) => {
         const res = await Recipe.find({ Tags : {$in : [category]} }).select("Author_name Recipe_name Tags Servings Cook_Time").skip(skip_doc).limit(limit);
         const count = await Recipe.countDocuments({ Tags : {$in : [category]} });
 
+        console.log(res)
+        
         if (!res) {
             console.log("Category not found in DB")
             return new Response(JSON.stringify({"message" : "Category not found in DB"}) , {
