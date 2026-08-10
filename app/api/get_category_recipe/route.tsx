@@ -1,7 +1,9 @@
 import Connect from "@/middleware/mongo_connect";
 import Recipe from "@/Schema/recipeDet";
 
-export const GET = async(request : Request) => {    
+export const GET = async(request : Request) => {  
+
+    const limit = 6
 
     try {
 
@@ -9,14 +11,18 @@ export const GET = async(request : Request) => {
 
         const { searchParams } = new URL(request.url);
         const category = searchParams.get("category");
+        
+        const page = Number(searchParams.get("pageNo"))
+        const skip_doc = (page - 1) * limit
+
+        // console.log("Skip value " , skip_doc)
+        // console.log("Page No. " , page)
 
         if(!category) {
-            return new Response(JSON.stringify({"message" : "Category not found in URL"}) , {
-                status : 401
-            })
+            return new Response(JSON.stringify({"message" : "Category not found in URL"}) , { status : 401 })
         }
 
-        const res = await Recipe.find({ Tags : {$in : [category]} }).select("Author_name Recipe_name Tags Servings Cook_Time");
+        const res = await Recipe.find({ Tags : {$in : [category]} }).select("Author_name Recipe_name Tags Servings Cook_Time").skip(skip_doc).limit(limit);
         const count = await Recipe.countDocuments({ Tags : {$in : [category]} });
 
         if (!res) {

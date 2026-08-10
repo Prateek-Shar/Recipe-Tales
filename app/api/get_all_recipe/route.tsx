@@ -4,40 +4,37 @@ import Recipe from "@/Schema/recipeDet";
 
 export const GET = async(req : Request) => {
 
-    const { searchParams } = new URL(req.url)
-    const page = searchParams.get("page")
-
+    const limit = 5 
 
     try {
 
-        if(!page) {
-            return new Response(JSON.stringify({msg : "No Page number recieved from frontend"}) , {status : 401})
-        }
-
-        const skip_doc = (Number(page) -1) * 5 
-
         await Connect();
 
-        try {
+        const { searchParams } = new URL(req.url)
+        const page = Number(searchParams.get("pageNo"))
+        
+        const skip_doc = (page - 1) * limit 
 
-            const details = await Recipe.find().select("Recipe_name Tags Author_name _id").skip(skip_doc).limit(5)
-            const total_count = await Recipe.find().countDocuments()
+        console.log("Skip value " , skip_doc)
+        console.log("Page No. " , page)
 
-            console.log(details)
+        const details = await Recipe.find().select("Recipe_name Tags Author_name _id").skip(skip_doc).limit(limit)
+        const total_count = await Recipe.find().countDocuments()
 
-            return new Response(JSON.stringify({det : details , count : total_count}) , {status : 200})
+        if(!details) {
+            return new Response(JSON.stringify({"message" : "Recipes Not Found"}) , {
+                status : 404
+            })
         }
 
-        catch(error) {
+        console.log(details)
 
-            console.log("Error : " , error)
-
-            return new Response(JSON.stringify({message : "Internal Server Error"}) , {status : 500})
-        }
+        return new Response(JSON.stringify({det : details , count : total_count}) , {status : 200})
 
     }
 
-    catch {
-        console.log("API Broke")
+    catch(error) {
+        console.log("API Broke : " , error)
+        return new Response(JSON.stringify({"message" : "Internal Server error"}) , {status : 500})
     }
 }

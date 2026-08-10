@@ -30,15 +30,16 @@ const all_recipe_table = () => {
 
     const recipe_Det = async(value : number) => {
 
-        const res = await fetch(`/api/get_all_recipe?page=${value}` , {
+        const res = await fetch(`/api/get_all_recipe?pageNo=${value}` , {
             method : "get"
         })
 
         if(!res.ok) {
-            console.log("Something Broke")
+            console.error("Something Broke")
         }
 
         const data = await res.json()
+
         setMealDet(data.det)
         setTotalRecipes(data.count)
         setShowSkeleton(false)
@@ -49,23 +50,12 @@ const all_recipe_table = () => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
     }   
 
-    const get_recipe_acc_page = async(value : number) => {
-        const res = await fetch(`/api/get_all_recipe?page=${value}` , {
-            method : "get"
-        })
-
-        if(!res.ok) {
-            console.log("Something Broke")
-        }
-
-        const data = await res.json()
-        setMealDet(data.det)
-        setCurrentPage(value)
-    }
 
     useEffect(() => {
         recipe_Det(currentPage)
     } , [currentPage])
+
+
 
     return (
         <>
@@ -115,7 +105,7 @@ const all_recipe_table = () => {
                     </div>
 
                     <div className="flex justify-center items-center xl:mt-0 mm:mt-10">
-                        <Pagination current={currentPage} total={totalRecipes} onChange={(page) => {setCurrentPage(page); get_recipe_acc_page(page); }} pageSize={5} />    
+                        <Pagination defaultCurrent={1} current={currentPage} total={totalRecipes} onChange={(page) => {setCurrentPage(page); recipe_Det(page); }} pageSize={5} />    
                     </div>
                 </div>
                 

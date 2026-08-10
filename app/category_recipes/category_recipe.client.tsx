@@ -36,6 +36,8 @@ const Category_recipe = () => {
     const [showLength , setShowLength] = useState<boolean>(false)
     const [showSkeleton , setShowSkeleton] = useState<boolean>(true) 
 
+    const [currentPage , setCurrentPage] = useState<number>(1)
+
     const [hovered , setHovered] = useState<boolean>(false)
 
     const [boxOneData , setBoxOneData] = useState<boolean>(true)
@@ -47,8 +49,8 @@ const Category_recipe = () => {
     const search_params = useSearchParams()
     const category = search_params.get("Category")
 
-    const handleData = async() => {
-        const res = await axios.get(`/api/get_category_recipe?category=${category}`)
+    const handleData = async(page : number) => {
+        const res = await axios.get(`api/get_category_recipe?category=${category}&pageNo=${page}`)
 
         if (!res) {
             console.log("Api hit un-expectedly")
@@ -65,10 +67,6 @@ const Category_recipe = () => {
     const renderRecipe = (value : string) => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
     }   
-
-    useEffect(() => {
-        handleData()
-    } ,[count])
 
     const handleRecipe = (value : string) => {
         route.push(`/blog_recipe/blog_recipes?Meal_name=${value}`)
@@ -105,6 +103,9 @@ const Category_recipe = () => {
     } , [viewRecipeBt])
 
 
+    useEffect(() => {
+        handleData(currentPage)
+    } ,[count])
 
     return (
         <div className="min-h-screen">
@@ -513,14 +514,14 @@ const Category_recipe = () => {
                         </div>
 
                         <div className="w-full p-2 flex justify-end items-center my-15">
-                            <Pagination defaultCurrent={1} total={50} />
+                            <Pagination defaultCurrent={1} current={currentPage} total={count} />
                         </div>
                     </div>
 
                 ) : (
                     null
                 )
-            )}
+            )}  
 
         </div>
         </div>
