@@ -9,14 +9,14 @@ const error_page = () => {
         <div className="w-full h-screen flex flex-col justify-center items-center bg-[#e4e9ec]">
             
             <div className="w-[40%] flex justify-center">
-                <Image src={not} alt="Not Found Image" />
+                <Image src={not} alt="Not Found Image" loading="eager"/>
             </div>
 
-            <div className="w-[50%] flex justify-center mt-5">
-                <h1 className="font-Capra text-4xl">Requested resource was not found</h1>
+            <div className="flex">
+                <h1 className="font-Capra text-4xl mt-5">Requested resource was not found</h1>
             </div>
 
-        </div>
+        </div>  
 
     )
 }
