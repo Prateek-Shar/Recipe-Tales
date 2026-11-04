@@ -36,23 +36,27 @@ const Recipe = () => {
     const [rawHeart , setRawHeart] = useState(true);
     const [rating , setRating] = useState<number>(0)
 
-    const api_db = process.env.NEXT_PUBLIC_SEARCH_API
+    const api_db = process.env.NEXT_PUBLIC_SEARCH_RECIPE_BY_ID_API
 
-    const formatted_api = `${api_db}${name}`    
+    const formatted_api = `${api_db}${id}`    
+
+    console.log("API : " , formatted_api)
 
     const [mealDetails, setMealDetails] = useState<Meal_Det[]>([])
 
     const ratingDiv = useRef<HTMLDivElement>(null)
 
     const handleAPI = async () => {
-        const res = await fetch(`${formatted_api}`)
+        const res = await fetch(`/api/get_random_recipe_detail?id=${id}`)
+
         if (!res.ok) {
             console.error("Something broke up")
             return
         }
 
+        // console.log("api ran")
         const data = await res.json()
-        setMealDetails(data.meals)
+        setMealDetails(data.meal)
     }
 
 
@@ -148,6 +152,10 @@ const Recipe = () => {
         }
     
     })   
+
+    useEffect(() => {
+        console.log("Meal Details : " , mealDetails)
+    })
 
 
 
@@ -266,9 +274,9 @@ const Recipe = () => {
 
             <div className='w-full p-2 xl:mt-5 mm:mt-2 pl-4 flex'>
                 <p className='font-Mogra xl:text-2xl mm:text-[17px]'>Area -</p>
-                {mealDetails.map((meal) => (
-                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{meal.strArea || "NA"}</p>
-                ))}
+                {/* {mealDetails.map((meal) => ( */}
+                    <p key={mealDetails.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{mealDetails.strArea || "NA"}</p>
+                {/* ))} */}
             </div>
 
             <div className='w-full p-2 xl:mt-5 mm:mt-2 flex pl-4 mb-5'>
