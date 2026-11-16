@@ -91,12 +91,13 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
 
 
     const handleToRecipe = (Meal_name : string , id : string) => {
-        router.push(`/recipe/recipeName?Meal_name=${Meal_name}&id=${id}`)
+        router.push(`/recipe/${encodeURIComponent(Meal_name)}?Meal_id=${id}`)
     }
 
 
-    const handleCopy = (Meal_name : string) => {
-        const req_url = `https://recipe-tales.vercel.app/recipe/recipeName?Meal_name=${Meal_name}`
+    const handleCopy = (Meal_name : string , id : string) => {
+        const req_url = `https://recipe-tales.vercel.app/recipe/${Meal_name}?Meal_id=${id}`
+        // const req_url = `http://localhost:3000/recipe/${Meal_name}?Meal_id=${id}`
         navigator.clipboard.writeText(req_url)
     }   
 
@@ -137,7 +138,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                             </div>
                         </div>
 
-                        <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
+                        <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal , rm.idMeal) , setMsgDiv()} }>
                             <Image src={share} alt="share" />
                         </div>
                     </div>
@@ -181,7 +182,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                             </div>
                         </div>
 
-                        <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
+                        <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal , rm.idMeal) , setMsgDiv()} }>
                             <Image src={share} alt="share" />
                         </div>
                     </div>
@@ -226,7 +227,7 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
                                     </div>
                                 </div>
 
-                                <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal) , setMsgDiv()} }>
+                                <div className="xl:w-[8%] mm:w-[10%] bg-[#f4faeb] rounded-full p-2 shadow-2xs mr-2 hover:cursor-pointer" onClick={ ()=> {handleCopy(rm.strMeal , rm.idMeal) , setMsgDiv()} }>
                                     <Image src={share} alt="share" />
                                 </div>
                             </div>

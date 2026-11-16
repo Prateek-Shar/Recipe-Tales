@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const Liked_Schema = new mongoose.Schema({
-    Recipe_name : {type : String , required : true},
+    // Recipe_name : {type : String , required : true},
+    Recipe_id : {type : Number , required : true},
     Counter : {type : Number , required : true}
 })
 

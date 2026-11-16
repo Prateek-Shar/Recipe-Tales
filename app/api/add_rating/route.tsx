@@ -10,22 +10,22 @@ export const POST = async(request : Request) => {
 
         const body = await request.json()
 
-        const { Recipe_name } = body
+        const { meal_id } = body
 
-        if(!Recipe_name) {
-            return new Response(JSON.stringify({message : `Body is null`}) , {
+        if(!meal_id) {
+            return new Response(JSON.stringify({message : `Didn't recieve id from frontend`}) , {
                 status : 401
             })
         }
 
-        const check = await Liked.findOne({"Recipe_name" : Recipe_name});
+        const check = await Liked.findOne({"Recipe_id" : meal_id});
 
         if(!check) {
-            const data = await Liked.create({"Recipe_name" : Recipe_name , "Counter" : 1})
+            const data = await Liked.create({"Recipe_id" : meal_id , "Counter" : 1})
             return new Response(JSON.stringify({"message" : "New Entry"}) , {status : 200})
         }
       
-        await Liked.findOneAndUpdate({"Recipe_name" : Recipe_name} , {$inc : {Counter : 1}}, {new : true})        
+        await Liked.findOneAndUpdate({"Recipe_id" : meal_id} , {$inc : {Counter : 1}}, {new : true})        
         return new Response(JSON.stringify({message : "Recipe counter incremented"}) , {status : 200})
     
     }

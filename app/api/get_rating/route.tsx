@@ -9,17 +9,17 @@ export const GET = async(req : Request) => {
         await Connect();
 
         const { searchParams } = new URL(req.url);
-        const Recipe_name = searchParams.get("Recipe_name");
+        const id = searchParams.get("meal_id");
 
-        if(!Recipe_name) {
+        if(!id) {
             return new Response(JSON.stringify({message : `Body is null`}) , {
                 status : 401
             })
         }
 
-        const check = await sch.findOne({"Recipe_name" : Recipe_name}).select("-_id -Recipe_name -__v");
+        const check = await sch.findOne({"Recipe_id" : id}).select("-_id -Recipe_name -__v");
 
-        console.log(`DB response : ${check}`);
+        // console.log(`DB response : ${check}`);
 
         if(!check) {
             return new Response(JSON.stringify({result : 0 , message : "No such recipe found"}) , {

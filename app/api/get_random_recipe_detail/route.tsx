@@ -19,15 +19,18 @@ export const GET = async(req : Request) => {
 
         const meal_det = await fetch(`${uri}${id}`);
 
-        console.log("Details : " , meal_det)
+        const data = await meal_det.json();
+        console.log("data : " , data)
 
-        if(!meal_det.ok) {
+        // console.info("Meal : "  , meal_det)
+
+        if(!meal_det) {
             return new Response(JSON.stringify({msg : "Not able to retrieve data"}) , {
                 status : 401
             })
         }
 
-        return new Response(JSON.stringify({msg : "Data retrieval successful" , meal : meal_det}) , {
+        return new Response(JSON.stringify({msg : "Data retrieval successful" , meal : data}) , {
             status : 200
         })
     

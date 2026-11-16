@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import ing from "@/public/Images/ingredients.png"
 import uten from "@/public/Images/utensils.png"
@@ -11,6 +12,8 @@ import info from "@/public/Images/info.png";
 import heart_filled from "@/public/Images/heart_filled.png";
 import snap from  "@/public/Images/snap.png";
 import steps from "@/public/Images/steps.png";
+import gsap from 'gsap'
+import { count } from 'console'
 
 
 
@@ -19,8 +22,9 @@ interface Meal_Det {
   strInstructions: string;
   strCategory : string;
   strArea : string;
-  strYoutube : string
-  idMeal : string
+  strYoutube : string;
+  idMeal : string;
+  strMealThumb : string;
 }
 
 
@@ -28,11 +32,22 @@ interface Meal_Det {
 
 const Recipe = () => {
 
+    const tl = gsap
+
+    const filledHeartDiv = useRef<HTMLDivElement>(null)
+
+    const params = useParams()
+
+    const name = params.recipeName
+    const formatted_name = decodeURIComponent(name as string)
+
     const searchParams = useSearchParams()
-    const name = searchParams.get("Meal_name")
-    const id = searchParams.get("id")
+    const id = searchParams.get("Meal_id")
+
+    console.log("Formatted Name : " , formatted_name)
 
     const [filledHeart , setFilledHeart] = useState(false)
+    const [ratingCount , setRatingCount] = useState<boolean>(false)
     const [rawHeart , setRawHeart] = useState(true);
     const [rating , setRating] = useState<number>(0)
 
@@ -40,9 +55,9 @@ const Recipe = () => {
 
     const formatted_api = `${api_db}${id}`    
 
-    console.log("API : " , formatted_api)
+    // console.log("API : " , formatted_api)
 
-    const [mealDetails, setMealDetails] = useState<Meal_Det[]>([])
+    const [mealDetails, setMealDetails] = useState<Meal_Det | null >(null)
 
     const ratingDiv = useRef<HTMLDivElement>(null)
 
@@ -56,7 +71,12 @@ const Recipe = () => {
 
         // console.log("api ran")
         const data = await res.json()
-        setMealDetails(data.meal)
+
+        // console.log("Complete response:", data);
+        // console.log("Meal object:", data.meal);
+        // console.log("Source:", data.meal?.strSource);
+
+        setMealDetails(data.meal.meals[0])
     }
 
 
@@ -66,7 +86,7 @@ const Recipe = () => {
             headers : {
                 "Content-type" : "application/json" 
             }, 
-            body : JSON.stringify({"Recipe_name" : value})
+            body : JSON.stringify({"meal_id" : value})
         })
 
         if(!res.ok) {
@@ -79,7 +99,7 @@ const Recipe = () => {
 
 
     const get_rating = async() => {
-        const res = await fetch(`/api/get_rating?Recipe_name=${name}` , {
+        const res = await fetch(`/api/get_rating?meal_id=${id}` , {
             method : "GET"
         })
 
@@ -93,12 +113,11 @@ const Recipe = () => {
     }
 
 
-    const Like = (value : string | null) => {
-        handleLike(value);
-    }
+    // const Like = (value : string | null) => {
+    //     handleLike(value);
+    // }
 
-    const currentMeal = mealDetails[0]
-
+    const currentMeal = mealDetails
 
     const ingredients = currentMeal
         ? Object.entries(currentMeal)
@@ -113,23 +132,26 @@ const Recipe = () => {
     : []
 
 
-    const handleClickToLink = (value : string) => {
+    const handleClickToLink = (value : string | null) => {
+        if(!value) {
+            return
+        }
         window.open(value)
     }
 
     const showRating = () => {
-        if (ratingDiv.current) {
-            ratingDiv.current.style.display = "flex"
-            ratingDiv.current.classList.add("addAnim")
+        setRatingCount(true)
+        // setFilledHeart(true)
+        // setRawHeart(false)
+        if (ratingDiv.current && ratingCount) {
+            gsap.to(ratingDiv.current , {
+                x : -20 , duration : 2
+            })
         }
-
-        
     }
 
     const disableRating = () => {
-        if (ratingDiv.current) {
-            ratingDiv.current.style.display = "none"
-        }
+        setRatingCount(false)   
     }
 
 
@@ -151,12 +173,11 @@ const Recipe = () => {
             setFilledHeart(false)
         }
     
-    })   
+    } , [rating])   
 
     useEffect(() => {
-        console.log("Meal Details : " , mealDetails)
-    })
-
+        console.log("Meal Details : " , rating)
+    } , [mealDetails])
 
 
     return (
@@ -164,7 +185,7 @@ const Recipe = () => {
     <div className="w-full flex justify-center flex-col items-center xl:my-20 mm:my-10">
 
         <div className='xl:w-[65%] mm:w-full flex justify-center items-center text-center mb-10'>
-            <p className="xl:text-5xl mm:text-3xl font-Capra">{name}</p>
+            <p className="xl:text-5xl mm:text-3xl font-Capra">{formatted_name}</p>
         </div>
 
         <div className="xl:w-[80%] mm:w-[90%] bg-white xl:p-10 mm:p-2 flex xl:flex-row mm:flex-col rounded-xl">
@@ -173,28 +194,39 @@ const Recipe = () => {
             {/* Left Section */}
             <div className="xl:w-[40%] mm:w-full flex flex-col">
 
-                <div className='w-full flex justify-between items-center'>
-                    <div className='xl:w-[65%] mm:w-[75%] flex items-center'>
-                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[15%] mm:w-[15%] p-1 xl:ml-0" />
+                <div className='w-full flex justify-between'>
+                    <div className='flex items-center'>
+                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[10%] mm:w-[15%] p-1 xl:ml-0" />
                         <p className="xl:text-4xl mm:text-2xl font-Capra mm:ml-1 xl:ml-1">Snaps</p>
                     </div>
 
-                    {rawHeart && (
-                        <Image src={heart} alt='Raw heart' className='xl:w-[4.5%] mm:w-[7%] hover:cursor-pointer' onClick={() => { Like(name); }} />
-                    )}
+                    <div className='flex items-center'>
+                        {rawHeart && (
+                            <Image src={heart} alt='Raw heart' className='xl:w-8 mm:w-[7%] hover:cursor-pointer' onClick={() => { handleLike(id); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
+                        )}
 
-                    {filledHeart && (
-                        <div className='xl:w-[7%] mm:w-[10%] mm:h-8 flex justify-center items-center relative'>
-                            <Image src={heart_filled} alt='Filled Heart' className='hover:cursor-pointer object-cover xl:p-0' fill  onClick={ ()=> { Like(name); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
-                            <p className='font-Poppins text-[20px] p-2 hidden bg-amber-50 rounded-4xl' ref={ratingDiv}>{rating}</p>
-                        </div>
-                    )}
+                        {filledHeart && (
+                            <Image src={heart_filled} alt='Filled Heart' className='hover:cursor-pointer w-10 xl:p-0' onClick={ ()=> { handleLike(id); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
+                        )}
+
+                        {ratingCount && (
+                            <p className='font-Poppins text-[20px] p-2 bg-amber-50 rounded-4xl' ref={ratingDiv}>{rating}</p>
+                        )}
+                    </div>
                 </div>
 
                 <div className="xl:w-[60%] mm:w-[70%] xl:h-64 mm:h-50 xl:mt-12 mm:mt-5 flex relative">
-                    {mealDetails.map((md) => (
-                        <Image key={md.idMeal} src={md.strMealThumb} alt="Meal" fill className='object-cover' loading='eager' />
-                    ))}
+                    {mealDetails?.strSource ? (
+                        <Image
+                            key={mealDetails?.idMeal}
+                            src={mealDetails?.strMealThumb}
+                            alt={formatted_name || "recipe"}    
+                            fill
+                            className="object-cover"
+                        />
+                    ) : (
+                        <p className=''>Image Not Available</p>
+                    )}
                 </div>
             </div>
             
@@ -242,18 +274,17 @@ const Recipe = () => {
 
             <div className="w-full flex justify-center">
                 <div className='w-[97%] mt-2 mb-5'> 
-                    {mealDetails.map((meal) => (  
-                    <p key={meal.idMeal} className="font-Poppins p-2 pl-0 xl:text-[16px] mm:text-[14px]">
-                        {meal.strInstructions
-                        .split(/(?<=\.)\s+(?=[A-Z])/)
+                    {/* {mealDetails.map((meal) => (   */}
+                    <p key={mealDetails?.idMeal} className="font-Poppins p-2 pl-0 xl:text-[16px] mm:text-[14px]">
+                        {mealDetails?.strInstructions?.split(/(?<=\.)\s+(?=[A-Z])/)
                         .map((sentence, index) => (
-                            <div className='flex items-start p-2'>
+                            <div className='flex items-center p-2'>
                             <Image src={steps} alt="Ing Icon" className="xl:h-8 xl:w-8 mm:w-6 mm:h-6"/>
-                            <span key={index} className='ml-3'>{sentence}<br /></span>
+                            <span key={index} className='ml-3'>{sentence}<br/></span>
                             </div>
                         ))}
                         </p>
-                    ))}
+                    {/* ))} */}
                 </div> 
             </div>
         </div>
@@ -267,25 +298,23 @@ const Recipe = () => {
 
             <div className='w-full p-2 xl:mt-10 mm:mt-4 pl-4 flex'>
                 <p className='font-Mogra xl:text-2xl mm:text-[17px]'>Category -</p>
-                {mealDetails.map((meal) => (
-                    <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{meal.strCategory}</p>
-                ))}
+                {/* {mealDetails.map((meal) => ( */}
+                    <p key={mealDetails?.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{mealDetails?.strCategory}</p>
+                {/* ))} */}
             </div>
 
             <div className='w-full p-2 xl:mt-5 mm:mt-2 pl-4 flex'>
                 <p className='font-Mogra xl:text-2xl mm:text-[17px]'>Area -</p>
-                {/* {mealDetails.map((meal) => ( */}
-                    <p key={mealDetails.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{mealDetails.strArea || "NA"}</p>
-                {/* ))} */}
+                <p key={mealDetails?.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-3'>{mealDetails?.strArea || "NA"}</p>
             </div>
 
             <div className='w-full p-2 xl:mt-5 mm:mt-2 flex pl-4 mb-5'>
-                {mealDetails.map((meal) => (
-                    <div className='w-full flex xl:flex-row mm:flex-col' key={meal.idMeal}>  
+                {/* {mealDetails.map((meal) => ( */}
+                    <div className='w-full flex xl:flex-row mm:flex-col' key={mealDetails?.idMeal}>  
                         <p className='font-Mogra xl:text-2xl mm:text-[17px]'>YT Link :</p>
-                        <p key={meal.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-0 text-blue-500 hover:cursor-pointer'  onClick={() => {handleClickToLink(meal.strYoutube); }}>{meal.strYoutube || `NA` }</p>
+                        <p key={mealDetails?.idMeal} className='font-Poppins xl:text-[20px] mm:text-[15px] xl:ml-5 mm:ml-0 text-blue-500 hover:cursor-pointer'  onClick={() => {handleClickToLink(mealDetails?.strYoutube ?? null); }}>{mealDetails?.strYoutube || `NA` }</p>
                     </div>
-                ))}
+                {/* ))} */}
             </div>
         </div>
 
