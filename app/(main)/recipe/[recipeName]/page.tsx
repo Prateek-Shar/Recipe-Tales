@@ -197,14 +197,14 @@ const Recipe = () => {
             <div className="xl:w-[40%] mm:w-full flex flex-col">
 
                 <div className='w-full flex justify-between'>
-                    <div className='flex items-center'>
-                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[10%] mm:w-[15%] p-1 xl:ml-0" />
+                    <div className='flex items-center xl:mt-0 mm:mt-2'>
+                        <Image src={snap} alt="Ingredients" className="object-contain xl:w-[10%] mm:w-[12%] p-1 xl:ml-0" />
                         <p className="xl:text-4xl mm:text-2xl font-Capra mm:ml-1 xl:ml-1">Snaps</p>
                     </div>
 
                     <div className='flex items-center'>
                         {rawHeart && (
-                            <Image src={heart} alt='Raw heart' className='xl:w-8 mm:w-[7%] hover:cursor-pointer' onClick={() => { handleLike(id); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
+                            <Image src={heart} alt='Raw heart' className='xl:w-8 mm:w-6 hover:cursor-pointer mm:mr-2 xl:mr-0' onClick={() => { handleLike(id); }} onMouseEnter={showRating} onMouseLeave={disableRating}/>
                         )}
 
                         {filledHeart && (
@@ -242,7 +242,7 @@ const Recipe = () => {
             {/* Ingredients Section */}
             <div className="xl:w-[50%] mm:w-[90%] flex flex-col xl:mt-0 mm:mt-15">
                 <div className="w-full flex flex-row xl:ml-10 mm:ml-0 items-center">
-                    <Image src={ing} alt="Ingredients" className="object-contain xl:w-[7%] mm:w-[15%] p-1 xl:ml-3 mmLpl-3" />
+                    <Image src={ing} alt="Ingredients" className="object-contain xl:w-[7%] mm:w-[12%] p-1 xl:ml-3 mmLpl-3" />
                     <p className="xl:text-3xl mm:text-2xl xl:ml-3 mm:ml-2 font-Capra">Ingredients</p>
                 </div>
 
@@ -270,7 +270,7 @@ const Recipe = () => {
       {/* Preparation Section */}
         <div className="xl:w-[80%] mm:w-[90%] bg-white flex flex-col mt-10 rounded-xl">
             <div className="w-full flex xl:ml-2 mm:ml-1 mt-5 mb-4 items-center">
-                <Image src={cook} alt="Prepare" className="object-contain xl:w-[3%] mm:w-[14%] xl:ml-3 mm:ml-0 p-0.5" />
+                <Image src={cook} alt="Prepare" className="object-contain xl:w-[3%] mm:w-[10%] xl:ml-3 mm:ml-1 p-0.5" />
                 <p className="font-Capra xl:text-4xl mm:text-2xl xl:ml-3 mm:ml-2">Preparation</p>
             </div>
 
