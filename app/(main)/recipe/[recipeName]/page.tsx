@@ -179,7 +179,9 @@ const Recipe = () => {
         console.log("Meal Details : " , rating)
     } , [mealDetails])
 
-
+    // const clean_txt = mealDetails?.strInstructions.replaceAll("/\d+/g" , "")
+    // console.log("Clean txt : " , clean_txt)
+    
     return (
 
     <div className="w-full flex justify-center flex-col items-center xl:my-20 mm:my-10">
@@ -275,15 +277,26 @@ const Recipe = () => {
             <div className="w-full flex justify-center">
                 <div className='w-[97%] mt-2 mb-5'> 
                     {/* {mealDetails.map((meal) => (   */}
-                    <p key={mealDetails?.idMeal} className="font-Poppins p-2 pl-0 xl:text-[16px] mm:text-[14px]">
-                        {mealDetails?.strInstructions?.split(/(?<=\.)\s+(?=[A-Z])/)
-                        .map((sentence, index) => (
-                            <div className='flex items-center p-2'>
-                            <Image src={steps} alt="Ing Icon" className="xl:h-8 xl:w-8 mm:w-6 mm:h-6"/>
-                            <span key={index} className='ml-3'>{sentence}<br/></span>
-                            </div>
-                        ))}
-                        </p>
+                    <div className="font-Poppins">
+                        {mealDetails?.strInstructions
+                            ?.split(/(?<=\.)\s+(?=[A-Z])/)
+                            .map((sentence, index) => (
+                                <div
+                                    key={index}
+                                    className="flex items-center p-2"
+                                >
+                                    <Image
+                                        src={steps}
+                                        alt="Ing Icon"
+                                        className="xl:h-8 xl:w-8 mm:w-6 mm:h-6"
+                                    />
+
+                                    <span className="ml-3">
+                                        {sentence.replace(/\d+|\./g, "").trim()}
+                                    </span>
+                                </div>
+                            ))}
+                    </div>     
                     {/* ))} */}
                 </div> 
             </div>
