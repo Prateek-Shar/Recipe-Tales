@@ -23,7 +23,7 @@ export default function Home() {
 
   const subscribeText = useRef<HTMLInputElement>(null)
 
-  const add = process.env.NEXT_PUBLIC_ADDRESS;
+  const add = process.env.NEXT_PUBLIC_LOCAL_ADDRESS;
   const local_add = process.env.NEXT_PUBLIC_LOCAL_ADDRESS
 
   const handleAlert = () => {
@@ -84,7 +84,7 @@ export default function Home() {
 
     else {
       setToggle(false)
-      console.info("Running on production address")
+      // console.info("Running on production address")
     }
 
   } , [])
