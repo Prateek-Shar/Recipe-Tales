@@ -31,9 +31,15 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     const [randomMealTwo , setRandomMealTwo] = useState<MealInfo[]>([])
     const [randomMealThree , setRandomMealThree] = useState<MealInfo[]>([])
 
+    
+    const [skeletonOne , setSkeletonOne] = useState<boolean>(true)
+    const [recipeOne , setRecipeOne] = useState<boolean>(false)
 
-    const [recipeOne , setRecipeOne] = useState(false)
-    const [skeletonOne , setSkeletonOne] = useState(true)
+    const [skeletonTwo , setSkeletonTwo ] = useState<boolean>(true)
+    const [recipeTwo , setRecipeTwo] = useState<boolean>(false)
+
+    const [skeletonThree , setSkeletonThree] = useState<boolean>(true)
+    const [recipeThree , setRecipeThree] = useState<boolean>(false)
 
     const handleAPI = async() => {
 
@@ -47,10 +53,10 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     
         const data = await res.json()
         setRandomMeal(data.meals)
+        setSkeletonOne(false)
+        setRecipeOne(true)
 
         
-
-
         const response2 = await fetch(`${Random_meal}` , {
         method : "GET"
         })
@@ -61,8 +67,9 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     
         const data2 = await response2.json()
         setRandomMealTwo(data2.meals)
+        setSkeletonTwo(false)
+        setRecipeTwo(true)
 
-        
 
 
         const response3 = await fetch(`${Random_meal}` , {
@@ -75,6 +82,8 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     
         const data3 = await response3.json()
         setRandomMealThree(data3.meals)
+        setSkeletonThree(false)
+        setRecipeThree(true)
 
     }
 
@@ -84,10 +93,10 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
     } , [])    
 
 
-    setTimeout(() => {
-        setRecipeOne(true)
-        setSkeletonOne(false)
-    } , 3000)
+    // setTimeout(() => {
+    //     setRecipeOne(true)
+    //     setSkeletonOne(false)
+    // } , 3000)
 
 
     const handleToRecipe = (Meal_name : string , id : string) => {
@@ -153,13 +162,13 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
 
             {/* Recipe 2 */}
             <div className="xl:w-[25%] mm:w-[90%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee] my-10">
-                {skeletonOne && (
+                {skeletonTwo && (
                     <div className="w-full p-10">
                         <Skeleton active />
                     </div>
                 )}
 
-                {recipeOne && (
+                {recipeTwo && (
                 <>
                 {randomMealTwo.map((rm) => (
                 <div className="w-full flex flex-col" key={rm.idMeal}>
@@ -195,13 +204,13 @@ const RecipeCards:React.FC<info> = ({setMsgDiv}) => {
             {/* Recipe 3 */}
             <div className="xl:w-[25%] mm:w-[90%] bg-white shadow-2xl flex flex-col rounded-3xl border-2 border-[#eeeeee]">
 
-                {skeletonOne && (
+                {skeletonThree && (
                     <div className="w-full p-10">
                         <Skeleton active />
                     </div>
                 )}
 
-                {recipeOne && (
+                {recipeThree && (
                 <>
                     {randomMealThree.map((rm) => (
                         <div className="w-full flex flex-col" key={rm.idMeal}>
